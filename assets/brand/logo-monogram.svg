@@ -1,15 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Bazzana Motor Garden">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-label="Bazzana Motor Garden">
     <title>Bazzana — Monogram</title>
-    <!-- Versione compatta per favicon/splash: solo scudo + B -->
-    <path d="M 30 30 L 170 30 L 190 100 L 170 170 L 30 170 L 10 100 Z"
-          fill="#000000" stroke="#ffffff" stroke-width="4" stroke-linejoin="round"/>
-    <path d="M 40 42 L 160 42 L 178 100 L 160 158 L 40 158 L 22 100 Z"
-          fill="none" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
-    <text x="100" y="118" text-anchor="middle"
-          font-family="'Bebas Neue', 'Impact', sans-serif"
-          font-size="78" font-weight="900" fill="#ffffff" letter-spacing="2">B</text>
-    <!-- Tricolore sottile sotto la B -->
-    <line x1="55" y1="135" x2="85" y2="135" stroke="#CE2B37" stroke-width="3" stroke-linecap="round"/>
-    <line x1="85" y1="135" x2="115" y2="135" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-    <line x1="115" y1="135" x2="145" y2="135" stroke="#009246" stroke-width="3" stroke-linecap="round"/>
+    <rect width="220" height="220" fill="#000000" rx="8"/>
+    <path d="M 35 40 L 185 40 L 205 110 L 185 180 L 35 180 L 15 110 Z"
+          fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M 48 54 L 172 54 L 188 110 L 172 166 L 48 166 L 32 110 Z"
+          fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round"/>
+    <text x="110" y="128" text-anchor="middle"
+          font-family="'Impact', 'Arial Black', 'Bebas Neue', sans-serif"
+          font-size="86" font-weight="900" fill="#ffffff"
+          letter-spacing="2" font-style="italic"
+          dominant-baseline="middle">B</text>
+    <line x1="65" y1="146" x2="108" y2="146" stroke="#CE2B37" stroke-width="3" stroke-linecap="round"/>
+    <line x1="112" y1="146" x2="155" y2="146" stroke="#009246" stroke-width="3" stroke-linecap="round"/>
 </svg>
