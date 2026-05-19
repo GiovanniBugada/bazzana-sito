@@ -22,11 +22,33 @@
   gap: 2rem;
 }
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: inherit;
+}
+.brand img,
+.brand__logo {
+  height: 38px;
+  width: auto;
+  display: block;
+  transition: transform var(--dur) var(--ease-out);
+}
+.site-header.is-scrolled .brand img,
+.site-header.is-scrolled .brand__logo {
+  height: 32px;
+}
+.brand:hover img,
+.brand:hover .brand__logo {
+  transform: scale(1.04);
+}
+/* Variante testuale (fallback se manca logo) */
+.brand--text {
   font-family: var(--font-display);
   font-weight: 460;
   font-size: 1.25rem;
   letter-spacing: -0.02em;
-  display: inline-flex;
   align-items: baseline;
   gap: 0.5rem;
 }

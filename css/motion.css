@@ -1,6 +1,6 @@
 /* Motion & micro-interactions */
 
-/* —— Loader iniziale —— */
+/* —— Loader cinematografico con logo che si compone (ricostruzione) —— */
 .loader {
   position: fixed;
   inset: 0;
@@ -10,48 +10,186 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.6rem;
-  transition: transform var(--dur-page) var(--ease-in-out);
+  gap: 2.4rem;
+  transition: transform var(--dur-page) var(--ease-in-out),
+              opacity var(--dur) var(--ease-in-out);
+  overflow: hidden;
 }
 .loader.is-done {
   transform: translateY(-100%);
+  opacity: 0;
   pointer-events: none;
 }
-.loader__brand {
-  font-family: var(--font-display);
-  font-weight: 380;
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  letter-spacing: -0.04em;
-  color: var(--c-ivory);
-  display: flex;
-  align-items: baseline;
-  gap: 0.6rem;
+
+/* Griglia di sfondo che pulsa */
+.loader::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(244,241,234,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244,241,234,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  opacity: 0;
+  animation: loader-grid 3.6s var(--ease-out) 200ms forwards;
 }
-.loader__brand .sep {
+@keyframes loader-grid {
+  0% { opacity: 0; transform: scale(1.1); }
+  40% { opacity: 0.5; }
+  100% { opacity: 0.28; transform: scale(1); }
+}
+
+/* Glow arancione sotto al logo */
+.loader::after {
+  content: "";
+  position: absolute;
+  width: 80%;
+  height: 50%;
+  background: radial-gradient(ellipse at center,
+    rgba(242,101,34,0.18) 0%,
+    rgba(242,101,34,0) 60%);
+  filter: blur(40px);
+  opacity: 0;
+  animation: loader-glow 2200ms var(--ease-out) 100ms forwards;
+  pointer-events: none;
+}
+@keyframes loader-glow { to { opacity: 1; } }
+
+/* Logo container con mask-reveal cinematico */
+.loader__logo {
+  position: relative;
+  z-index: 2;
+  width: min(480px, 82vw);
+  display: flex;
+  justify-content: center;
+}
+.loader__logo-stage {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.loader__logo img {
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 6px 24px rgba(0,0,0,0.45));
+}
+/* Due tendine che si aprono dal centro */
+.loader__logo-stage::before,
+.loader__logo-stage::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 50%;
+  background: var(--c-ink);
+  z-index: 2;
+  animation: loader-curtain 800ms var(--ease-in-out) 350ms forwards;
+}
+.loader__logo-stage::before { left: 0; animation-name: loader-curtain-left; }
+.loader__logo-stage::after { right: 0; animation-name: loader-curtain-right; }
+@keyframes loader-curtain-left { to { transform: translateX(-100%); } }
+@keyframes loader-curtain-right { to { transform: translateX(100%); } }
+
+/* Tagline sotto */
+.loader__tagline {
+  position: relative;
+  z-index: 2;
   font-family: var(--font-mono);
-  font-size: 0.9rem;
-  letter-spacing: 0.2em;
-  color: var(--c-stihl);
-  transform: translateY(-0.6em);
+  font-size: 0.74rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(244,241,234,0.55);
+  opacity: 0;
+  transform: translateY(8px);
+  animation: loader-fade-up 600ms var(--ease-out) 1250ms forwards;
+}
+@keyframes loader-fade-up { to { opacity: 1; transform: none; } }
+
+/* Linea tricolore decorativa */
+.loader__line {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 200px;
+  height: 2px;
+  border-radius: 1px;
+  overflow: hidden;
+  opacity: 0;
+  animation: loader-fade-up 600ms var(--ease-out) 1100ms forwards;
+}
+.loader__line span {
+  flex: 1;
+  height: 100%;
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: loader-line-draw 600ms var(--ease-out) forwards;
+}
+.loader__line span:nth-child(1) { background: #CE2B37; animation-delay: 1150ms; }
+.loader__line span:nth-child(2) { background: #ffffff; animation-delay: 1250ms; }
+.loader__line span:nth-child(3) { background: #009246; animation-delay: 1350ms; }
+@keyframes loader-line-draw { to { transform: scaleX(1); } }
+
+/* Barra di progresso + percentuale */
+.loader__bar-wrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  opacity: 0;
+  animation: loader-fade-up 500ms var(--ease-out) 800ms forwards;
 }
 .loader__bar {
-  width: min(360px, 70vw);
-  height: 2px;
-  background: var(--c-line);
+  width: min(340px, 72vw);
+  height: 1px;
+  background: rgba(244,241,234,0.10);
   overflow: hidden;
   position: relative;
+  border-radius: 1px;
 }
 .loader__bar::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--c-stihl);
+  background: linear-gradient(90deg, var(--c-stihl), var(--c-ivory), var(--c-forest));
+  transform: scaleX(0);
   transform-origin: left;
-  animation: load 1.4s var(--ease-in-out) forwards;
+  animation: loader-bar 2200ms var(--ease-out) forwards;
+  box-shadow: 0 0 12px rgba(242,101,34,0.35);
 }
-@keyframes load {
+@keyframes loader-bar {
   0% { transform: scaleX(0); }
   100% { transform: scaleX(1); }
+}
+.loader__pct {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  color: rgba(244,241,234,0.55);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader::before,
+  .loader::after,
+  .loader__logo-stage::before,
+  .loader__logo-stage::after,
+  .loader__line span,
+  .loader__tagline,
+  .loader__bar-wrap,
+  .loader__bar::after {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+  .loader__line span { transform: scaleX(1); }
+  .loader__bar::after { transform: scaleX(1); }
 }
 
 /* —— Page transition mask —— */

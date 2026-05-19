@@ -7,18 +7,49 @@
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ——— Loader ——— */
+  /* ——— Loader cinematografico con counter % ——— */
   const loader = document.querySelector('.loader');
   if (loader) {
-    window.addEventListener('load', () => {
-      const min = reduced ? 200 : 1400;
-      setTimeout(() => {
+    document.body.style.overflow = 'hidden';
+    const pct = loader.querySelector('.loader__pct');
+    const min = reduced ? 200 : 2200;
+    // Counter % animato
+    if (pct && !reduced) {
+      const start = performance.now();
+      const animatePct = (now) => {
+        const p = Math.min(1, (now - start) / min);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const v = Math.round(eased * 100);
+        pct.textContent = v.toString().padStart(3, '0') + '%';
+        if (p < 1) requestAnimationFrame(animatePct);
+      };
+      requestAnimationFrame(animatePct);
+    } else if (pct) {
+      pct.textContent = '100%';
+    }
+    // Hide loader: aspetta load OR timer minimo
+    let doneTimer = false, doneLoad = document.readyState === 'complete';
+    const tryHide = () => {
+      if (doneTimer && doneLoad) {
         loader.classList.add('is-done');
+        document.body.style.overflow = '';
         document.body.classList.add('is-loaded');
         const hero = document.querySelector('.hero');
         if (hero) hero.classList.add('is-loaded');
-      }, min);
-    });
+      }
+    };
+    setTimeout(() => { doneTimer = true; tryHide(); }, min);
+    if (!doneLoad) {
+      window.addEventListener('load', () => { doneLoad = true; tryHide(); }, { once: true });
+    } else {
+      tryHide();
+    }
+    // Failsafe 4s
+    setTimeout(() => {
+      loader.classList.add('is-done');
+      document.body.style.overflow = '';
+      document.body.classList.add('is-loaded');
+    }, 4000);
   }
 
   /* ——— Header scroll state ——— */
@@ -177,6 +208,77 @@
           }
         });
       });
+    });
+  }
+
+  /* ——— Cinematic init (spotlight, count-up, reveal-clip, color-invert, scroll-scale) ——— */
+  function observeAndAdd(selector, cls, threshold) {
+    const items = document.querySelectorAll(selector);
+    if (!items.length) return;
+    if (reduced || !('IntersectionObserver' in window)) {
+      items.forEach(el => el.classList.add(cls));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add(cls);
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: threshold || 0.2 });
+    items.forEach(el => io.observe(el));
+    // Safety net 1500ms
+    setTimeout(() => {
+      items.forEach(el => { if (!el.classList.contains(cls)) el.classList.add(cls); });
+    }, 1500);
+  }
+  observeAndAdd('.scroll-scale-img', 'is-in', 0.25);
+  observeAndAdd('.color-invert-reveal', 'is-inverted', 0.4);
+  observeAndAdd('.reveal-clip', 'is-revealed', 0.18);
+
+  // Num ticker count-up
+  const tickers = document.querySelectorAll('.num-ticker');
+  if (tickers.length && 'IntersectionObserver' in window) {
+    if (reduced) {
+      tickers.forEach(el => {
+        const t = parseFloat(el.getAttribute('data-target') || el.textContent) || 0;
+        el.textContent = t;
+      });
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          if (!en.isIntersecting) return;
+          const el = en.target;
+          io.unobserve(el);
+          const target = parseFloat(el.getAttribute('data-target') || el.textContent) || 0;
+          const duration = parseInt(el.getAttribute('data-duration') || '1400', 10);
+          const prefix = el.getAttribute('data-prefix') || '';
+          const suffix = el.getAttribute('data-suffix') || '';
+          const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+          const start = performance.now();
+          const tick = (now) => {
+            const p = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - p, 3);
+            const v = target * eased;
+            el.textContent = prefix + v.toFixed(decimals) + suffix;
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        });
+      }, { threshold: 0.3 });
+      tickers.forEach(el => io.observe(el));
+    }
+  }
+
+  // Spotlight cursor (radial glow on mouse move)
+  if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.spotlight-section').forEach(sec => {
+      sec.addEventListener('mousemove', (e) => {
+        const r = sec.getBoundingClientRect();
+        sec.style.setProperty('--mouse-x', ((e.clientX - r.left) / r.width * 100) + '%');
+        sec.style.setProperty('--mouse-y', ((e.clientY - r.top) / r.height * 100) + '%');
+      }, { passive: true });
     });
   }
 

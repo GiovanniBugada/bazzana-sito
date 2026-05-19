@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 220" role="img" aria-label="Bazzana Motor Garden">
+    <title>Bazzana Motor Garden — Logo</title>
+    <!-- Sfondo trasparente, scudo esagonale con doppio bordo -->
+    <defs>
+        <linearGradient id="bzn-shadow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#000"/>
+            <stop offset="100%" stop-color="#222"/>
+        </linearGradient>
+    </defs>
+
+    <!-- Scudo esagonale esterno (bianco) -->
+    <path d="M 80 30 L 620 30 L 670 110 L 620 190 L 80 190 L 30 110 Z"
+          fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- Scudo esagonale interno (bianco, distanza ridotta) -->
+    <path d="M 95 45 L 605 45 L 650 110 L 605 175 L 95 175 L 50 110 Z"
+          fill="none" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+
+    <!-- BAZZANA - testo principale bianco bold -->
+    <text x="350" y="105" text-anchor="middle"
+          font-family="'Bebas Neue', 'Impact', 'Arial Black', sans-serif"
+          font-size="64" font-weight="900" fill="#ffffff" letter-spacing="3"
+          dominant-baseline="middle">BAZZANA</text>
+
+    <!-- Linea decorativa: tricolore (rosso-bianco-verde sotto BAZZANA) -->
+    <line x1="195" y1="125" x2="270" y2="125" stroke="#CE2B37" stroke-width="3" stroke-linecap="round"/>
+    <line x1="270" y1="125" x2="430" y2="125" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+    <line x1="430" y1="125" x2="505" y2="125" stroke="#009246" stroke-width="3" stroke-linecap="round"/>
+
+    <!-- MOTOR GARDEN — tricolore -->
+    <text x="350" y="160" text-anchor="middle"
+          font-family="'Bebas Neue', 'Impact', 'Arial Black', sans-serif"
+          font-size="24" font-weight="700" letter-spacing="4"
+          dominant-baseline="middle">
+        <tspan fill="#CE2B37">MOTOR</tspan>
+        <tspan dx="14" fill="#009246">GARDEN</tspan>
+    </text>
+</svg>

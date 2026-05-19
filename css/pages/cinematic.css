@@ -1,0 +1,326 @@
+/* =========================================================
+   Cinematic scroll — animazioni MSI/sondaven adattate al
+   design system bazzana_v2 (tokens.css)
+   ========================================================= */
+
+/* —— 1. Image swap card (hover crossfade) —— */
+.img-swap {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-2);
+  isolation: isolate;
+}
+.img-swap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-page) var(--ease-out);
+}
+.img-swap__a { position: relative; z-index: 1; }
+.img-swap__b {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: 2;
+  transform: scale(1.05);
+}
+@media (hover: hover) and (pointer: fine) {
+  .img-swap:hover .img-swap__a { opacity: 0; transform: scale(1.02); }
+  .img-swap:hover .img-swap__b { opacity: 1; transform: scale(1); }
+}
+
+/* —— 2. Sticky narrative (MSI) —— */
+.sticky-narrative {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  padding: var(--space-7) 0;
+  width: var(--container);
+  margin-inline: auto;
+}
+.sticky-narrative__text {
+  position: sticky;
+  top: 14vh;
+  align-self: start;
+  height: fit-content;
+}
+.sticky-narrative__text h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: 1.02;
+  font-weight: 380;
+  letter-spacing: -0.03em;
+  margin: 0 0 var(--space-3);
+}
+.sticky-narrative__text p {
+  font-size: var(--fs-lead);
+  color: var(--c-fg-muted);
+  line-height: 1.65;
+  margin: 0 0 var(--space-3);
+  max-width: 42ch;
+}
+.sticky-narrative__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.sticky-narrative__item {
+  border-radius: var(--radius-2);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: var(--c-ink-2);
+}
+.sticky-narrative__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-page) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .sticky-narrative__item:hover img { transform: scale(1.04); }
+}
+@media (max-width: 900px) {
+  .sticky-narrative {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    padding: var(--space-5) 0;
+  }
+  .sticky-narrative__text { position: relative; top: auto; }
+  .sticky-narrative__items { gap: var(--space-4); }
+}
+
+/* —— 3. Number ticker (sondaven count-up) —— */
+.num-ticker {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* —— 4. Color invert reveal (dark→light scrolling) —— */
+.color-invert-reveal {
+  position: relative;
+  overflow: hidden;
+  background: var(--c-ink);
+  color: var(--c-ivory);
+}
+.color-invert-reveal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--c-ivory);
+  transform: scaleX(0);
+  transform-origin: left center;
+  z-index: 0;
+  transition: transform 1100ms var(--ease-in-out);
+}
+.color-invert-reveal.is-inverted {
+  color: var(--c-ink);
+}
+.color-invert-reveal.is-inverted::before { transform: scaleX(1); }
+.color-invert-reveal > * { position: relative; z-index: 1; }
+
+/* —— 5. Depth card (MSI: hover con overlay che sale) —— */
+.depth-card {
+  position: relative;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  isolation: isolate;
+}
+.depth-card__base {
+  position: relative;
+  overflow: hidden;
+  background: var(--c-ink-2);
+  border-radius: var(--radius-2);
+  transition: transform 600ms var(--ease-out);
+}
+.depth-card__base img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  transition: transform 800ms var(--ease-out), filter var(--dur) var(--ease-out);
+  filter: saturate(0.9) contrast(1.04);
+}
+.depth-card__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.6rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.86), transparent 60%);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 400ms ease, transform 600ms var(--ease-out);
+  pointer-events: none;
+}
+.depth-card__title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 460;
+  letter-spacing: -0.02em;
+  color: var(--c-ivory);
+  margin: 0 0 0.3rem;
+}
+.depth-card__desc {
+  font-family: var(--font-body);
+  color: rgba(244,241,234,0.82);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  margin: 0;
+}
+.depth-card__badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--c-stihl);
+  color: var(--c-ink);
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transform: translateY(-6px);
+  opacity: 0;
+  transition: opacity 400ms ease 80ms, transform 500ms var(--ease-out) 80ms;
+}
+@media (hover: hover) and (pointer: fine) {
+  .depth-card:hover .depth-card__base { transform: translateY(-4px); }
+  .depth-card:hover .depth-card__base img { transform: scale(1.06); filter: saturate(1.05) contrast(1.05); }
+  .depth-card:hover .depth-card__overlay { opacity: 1; transform: translateY(0); }
+  .depth-card:hover .depth-card__badge { opacity: 1; transform: translateY(0); }
+}
+
+/* —— 6. Scroll-driven image scale (MSI) —— */
+.scroll-scale-img {
+  transform-origin: center;
+  transform: scale(0.86);
+  transition: transform 1100ms var(--ease-out);
+  will-change: transform;
+}
+.scroll-scale-img.is-in { transform: scale(1); }
+
+/* —— 7. Marquee infinito brand strip —— */
+.brand-marquee {
+  overflow: hidden;
+  width: 100%;
+  background: var(--c-ink);
+  border-block: 1px solid var(--c-line);
+  padding: 1.4rem 0;
+}
+.brand-marquee__track {
+  display: flex;
+  gap: 3.2rem;
+  width: max-content;
+  animation: brand-marquee-scroll 34s linear infinite;
+  will-change: transform;
+}
+.brand-marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.4vw, 1.8rem);
+  font-weight: 420;
+  letter-spacing: -0.02em;
+  color: var(--c-ivory);
+  opacity: 0.78;
+  white-space: nowrap;
+}
+.brand-marquee__dot {
+  width: 6px; height: 6px;
+  background: var(--c-stihl);
+  border-radius: 50%;
+}
+@keyframes brand-marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* —— 8. Spotlight cursor (mouse-follow radial glow) —— */
+.spotlight-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--c-ink);
+  isolation: isolate;
+}
+.spotlight-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    520px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(242,101,34,0.18),
+    transparent 60%
+  );
+  pointer-events: none;
+  transition: background 80ms linear;
+  z-index: 0;
+}
+.spotlight-section > * { position: relative; z-index: 1; }
+
+/* —— 9. Reveal clip-path —— */
+.reveal-clip {
+  clip-path: inset(100% 0 0 0);
+  transform: translateY(28px);
+  opacity: 0;
+  transition: clip-path 1000ms var(--ease-out),
+              transform 1000ms var(--ease-out),
+              opacity 600ms ease;
+}
+.reveal-clip.is-revealed {
+  clip-path: inset(0 0 0 0);
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* —— 10. Stat block grande —— */
+.stat-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: left;
+}
+.stat-block__value {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1;
+  color: var(--c-stihl);
+  margin: 0;
+  font-weight: 380;
+  letter-spacing: -0.04em;
+}
+.stat-block__label {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-fg-muted);
+  margin: 0;
+}
+.stat-block__desc {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--c-fg-muted);
+  line-height: 1.5;
+  margin: 0.3rem 0 0;
+  max-width: 28ch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .img-swap img,
+  .depth-card__base,
+  .depth-card__base img,
+  .depth-card__overlay,
+  .depth-card__badge,
+  .scroll-scale-img,
+  .color-invert-reveal::before,
+  .reveal-clip,
+  .spotlight-section::before { transition: none; }
+  .scroll-scale-img,
+  .reveal-clip { transform: none; opacity: 1; clip-path: none; }
+  .brand-marquee__track { animation: none; }
+}
