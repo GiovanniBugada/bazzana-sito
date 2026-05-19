@@ -518,24 +518,4 @@
     el.textContent = new Date().getFullYear();
   });
 
-  /* ——— Suono ambientale (opzionale) ——— */
-  const soundBtn = document.querySelector('.sound-toggle');
-  if (soundBtn) {
-    let audio = null;
-    soundBtn.addEventListener('click', () => {
-      if (!audio) {
-        audio = new Audio('https://cdn.freesound.org/previews/467/467900_5121236-lq.mp3');
-        audio.loop = true;
-        audio.volume = 0.18;
-      }
-      if (audio.paused) {
-        audio.play().catch(() => {});
-        soundBtn.textContent = 'Audio ON';
-      } else {
-        audio.pause();
-        soundBtn.textContent = 'Audio';
-      }
-    });
-  }
-
 })();

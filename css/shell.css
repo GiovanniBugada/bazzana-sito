@@ -296,25 +296,3 @@
   z-index: 10000;
 }
 .skip-link:focus { top: 0; }
-
-/* —— Sound toggle —— */
-.sound-toggle {
-  position: fixed;
-  bottom: 1.4rem;
-  right: 1.4rem;
-  width: 56px; height: 56px;
-  background: var(--c-ink);
-  border: 1px solid var(--c-line-strong);
-  border-radius: 50%;
-  color: var(--c-ivory);
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  z-index: var(--z-header);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background var(--dur) var(--ease-out);
-}
-.sound-toggle:hover { background: var(--c-stihl); color: var(--c-ink); }
