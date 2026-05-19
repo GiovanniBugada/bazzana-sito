@@ -266,6 +266,125 @@
 }
 
 /* =========================================================
+   FASE 5 — PAGE TRANSITION CURTAIN orizzontale arancione
+   ========================================================= */
+.page-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 9995;
+  background: var(--c-stihl);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page-curtain__logo {
+  opacity: 0;
+  width: min(280px, 60vw);
+  filter: brightness(0) invert(1);
+}
+.page-curtain.is-entering {
+  animation: curtain-enter 800ms cubic-bezier(0.86, 0, 0.07, 1) forwards;
+}
+.page-curtain.is-entering .page-curtain__logo {
+  animation: curtain-logo-show 600ms ease 250ms forwards;
+}
+.page-curtain.is-leaving {
+  transform: scaleY(1);
+  transform-origin: top;
+  animation: curtain-leave 800ms cubic-bezier(0.86, 0, 0.07, 1) forwards;
+}
+@keyframes curtain-enter {
+  0%   { transform: scaleY(0); transform-origin: bottom; }
+  100% { transform: scaleY(1); transform-origin: bottom; }
+}
+@keyframes curtain-leave {
+  0%   { transform: scaleY(1); transform-origin: top; }
+  100% { transform: scaleY(0); transform-origin: top; }
+}
+@keyframes curtain-logo-show {
+  0%   { opacity: 0; transform: translateY(20px); }
+  50%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-curtain { display: none !important; }
+}
+
+/* =========================================================
+   FASE 8 — RESPONSIVE FINE-TUNING
+   ========================================================= */
+@media (max-width: 600px) {
+  /* Hero title piu' contenuto */
+  .hero__title { font-size: clamp(2.4rem, 11vw, 4rem); line-height: 0.96; }
+  .hero__sub { font-size: 1rem; }
+  .hero__ctas { flex-direction: column; align-items: stretch; }
+  .hero__ctas .btn { width: 100%; text-align: center; }
+  .hero__eyebrows { font-size: 0.7rem; flex-wrap: wrap; gap: 0.5rem; }
+
+  /* Stats grid 1 colonna */
+  .cinema-stats__inner { grid-template-columns: 1fr; gap: 1.6rem; }
+
+  /* Pinned showcase: stack verticale completo, no sticky */
+  .scroll-showcase { min-height: auto !important; }
+  .scroll-showcase__sticky {
+    position: relative !important;
+    height: auto !important;
+    grid-template-columns: 1fr !important;
+    padding: 2.5rem 1rem !important;
+    gap: 2rem !important;
+  }
+  .scroll-showcase__step {
+    position: relative !important;
+    opacity: 1 !important;
+    transform: none !important;
+    margin-bottom: 2rem;
+  }
+  .scroll-showcase__chainsaw {
+    width: min(70vw, 320px) !important;
+    transform: none !important;
+  }
+  .scroll-showcase__progress { display: none; }
+
+  /* Cookie banner stack verticale */
+  .cookie-banner__inner { flex-direction: column; align-items: stretch; gap: 1rem; }
+  .cookie-banner__actions { flex-direction: column; }
+
+  /* Rotating stamp piu' piccolo */
+  .rotating-stamp__circle { width: 140px; height: 140px; }
+  .rotating-stamp__circle::before { inset: 30px; }
+  .rotating-stamp__center { inset: 30px; font-size: 0.66rem; }
+}
+
+@media (max-width: 768px) {
+  /* Section padding ridotto */
+  section, .section { padding-inline: clamp(1rem, 4vw, 2rem); }
+  /* Card grid 1 colonna */
+  .cat-group__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem; }
+  /* Footer FAB piu' piccolo (gia' presente) */
+}
+
+@media (min-width: 1441px) {
+  /* Wide screen container piu' generoso */
+  :root { --container: min(1480px, 92vw); }
+}
+
+/* Tap target minimi su touch device */
+@media (hover: none), (pointer: coarse) {
+  .btn, .wl-btn, .fab-stack__btn, .chip {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  /* Active state piu' visibile su touch */
+  .btn:active, .chip:active, .depth-card:active {
+    transform: scale(0.97);
+    transition: transform 120ms ease;
+  }
+}
+
+/* =========================================================
    HEADLINE SHIFT (h2 sale quando entra in viewport)
    ========================================================= */
 .headline-shift {

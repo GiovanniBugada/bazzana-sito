@@ -217,6 +217,38 @@
     }
   }
 
+  /* ——— PAGE TRANSITION CURTAIN orizzontale ——— */
+  function initPageCurtain() {
+    if (reduced) return;
+    // Crea overlay curtain
+    const curtain = document.createElement('div');
+    curtain.className = 'page-curtain';
+    curtain.setAttribute('aria-hidden', 'true');
+    const logo = document.createElement('img');
+    logo.src = 'assets/brand/logo-bazzana.png';
+    logo.alt = '';
+    logo.className = 'page-curtain__logo';
+    curtain.appendChild(logo);
+    document.body.appendChild(curtain);
+
+    // Entry animation on first load (gia' visualizzata dal loader, salto)
+
+    // Click su link interno -> curtain leave -> navigazione -> reveal
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('#')) return;
+      if (a.target === '_blank') return;
+      if (href.startsWith('http') && !href.includes(location.host)) return;
+      if (href.startsWith('mailto:') || href.startsWith('tel:') || href.includes('wa.me')) return;
+      e.preventDefault();
+      curtain.classList.add('is-entering');
+      setTimeout(() => { window.location.href = href; }, 750);
+    });
+  }
+
   /* ——— OBSERVERS section-entrance + headline-shift ——— */
   function initEntranceObservers() {
     if (reduced || !('IntersectionObserver' in window)) {
@@ -238,6 +270,7 @@
   function init() {
     initFabStack();
     initEntranceObservers();
+    initPageCurtain();
     updateWishlistBadge();
     injectWishlistButtons();
     initCatalogSearch();
