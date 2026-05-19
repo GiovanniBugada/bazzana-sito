@@ -84,48 +84,7 @@
     });
   }
 
-  /* ——— Custom cursor ——— */
-  if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    const cursor = document.createElement('div');
-    cursor.className = 'cursor';
-    const label = document.createElement('span');
-    label.className = 'cursor__label';
-    cursor.appendChild(label);
-    document.body.appendChild(cursor);
-
-    let x = window.innerWidth / 2, y = window.innerHeight / 2;
-    let tx = x, ty = y;
-
-    window.addEventListener('mousemove', e => {
-      x = e.clientX; y = e.clientY;
-    });
-
-    const animate = () => {
-      tx += (x - tx) * 0.22;
-      ty += (y - ty) * 0.22;
-      cursor.style.transform = `translate(${tx}px, ${ty}px) translate(-50%, -50%)`;
-      requestAnimationFrame(animate);
-    };
-    animate();
-
-    const hoverables = 'a, button, .cat-card, .card, .chip, [data-cursor]';
-    document.addEventListener('mouseover', e => {
-      const t = e.target.closest(hoverables);
-      if (t) {
-        cursor.classList.add('is-hover');
-        const lbl = t.getAttribute('data-cursor');
-        if (lbl) label.textContent = lbl;
-        else label.textContent = '';
-      }
-    });
-    document.addEventListener('mouseout', e => {
-      const t = e.target.closest(hoverables);
-      if (t) {
-        cursor.classList.remove('is-hover');
-        label.textContent = '';
-      }
-    });
-  }
+  /* Custom cursor disattivato: usiamo cursore nativo OS per consistency */
 
   /* ——— Reveal on scroll ——— */
   const revealEls = document.querySelectorAll('.reveal, .reveal-mask');
@@ -386,38 +345,8 @@
   observeAndAdd('.section-divider-anim', 'is-in', 0.4);
   observeAndAdd('.zoom-mask', 'is-in', 0.3);
 
-  /* ——— MAGNETIC BUTTONS (CTA che si attraggono al cursore) ——— */
-  if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    document.querySelectorAll('[data-magnetic], .cta-magnetic').forEach(el => {
-      el.addEventListener('mousemove', e => {
-        const r = el.getBoundingClientRect();
-        const x = (e.clientX - r.left - r.width / 2) * 0.18;
-        const y = (e.clientY - r.top - r.height / 2) * 0.18;
-        el.style.transform = `translate(${x}px, ${y}px)`;
-      });
-      el.addEventListener('mouseleave', () => {
-        el.style.transform = '';
-      });
-    });
-  }
-
-  /* ——— 3D TILT cards (inclina su mouse) ——— */
-  if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    document.querySelectorAll('.tilt-card').forEach(card => {
-      const inner = card.querySelector('.tilt-card__inner') || card;
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        const rotY = x * 12;
-        const rotX = -y * 8;
-        inner.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(0)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        inner.style.transform = '';
-      });
-    });
-  }
+  /* MAGNETIC + 3D TILT disattivati: visivamente troppo invasivi su CTA / cat-card.
+     Per riabilitarli, vedi commit 4554641. */
 
   /* ——— WORD-BY-WORD reveal (titoli) ——— */
   document.querySelectorAll('.word-reveal').forEach(el => {
@@ -464,33 +393,8 @@
     }
   }
 
-  /* ——— CURSOR TRAIL (puntino che segue il mouse con lerp) ——— */
-  if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    const trail = document.createElement('div');
-    trail.className = 'cursor-trail';
-    document.body.appendChild(trail);
-    let tx = 0, ty = 0, mx = 0, my = 0;
-    let visible = false;
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      if (!visible) { trail.classList.add('is-visible'); visible = true; }
-    });
-    const lerp = () => {
-      tx += (mx - tx) * 0.18;
-      ty += (my - ty) * 0.18;
-      trail.style.transform = `translate(${tx}px, ${ty}px) translate(-50%, -50%)`;
-      requestAnimationFrame(lerp);
-    };
-    lerp();
-  }
-
-  /* ——— GRAIN OVERLAY (film grain effect) ——— */
-  if (!reduced) {
-    const grain = document.createElement('div');
-    grain.className = 'grain-overlay';
-    grain.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(grain);
-  }
+  /* CURSOR TRAIL + GRAIN OVERLAY disattivati: visivamente troppo "rumorosi".
+     Per riabilitarli, vedi commit 4554641 / 479c86b. */
 
   // Parallax sottile per immagini con data-parallax-speed (sondaven style)
   if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
