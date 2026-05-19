@@ -324,3 +324,23 @@
   .reveal-clip { transform: none; opacity: 1; clip-path: none; }
   .brand-marquee__track { animation: none; }
 }
+
+/* —— Stats section (full-width container) —— */
+.cinema-stats {
+  padding: var(--space-6) 0;
+  border-block: 1px solid var(--c-line);
+}
+.cinema-stats__inner {
+  width: var(--container);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+@media (max-width: 900px) {
+  .cinema-stats__inner { grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+}
+@media (max-width: 500px) {
+  .cinema-stats__inner { grid-template-columns: 1fr; gap: var(--space-3); }
+  .cinema-stats { padding: var(--space-5) 0; }
+}

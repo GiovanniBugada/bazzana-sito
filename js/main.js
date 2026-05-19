@@ -282,6 +282,27 @@
     });
   }
 
+  // Parallax sottile per immagini con data-parallax-speed (sondaven style)
+  if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const parallaxEls = document.querySelectorAll('[data-parallax-speed]');
+    if (parallaxEls.length) {
+      let ticking = false;
+      const updateParallax = () => {
+        parallaxEls.forEach(el => {
+          const speed = parseFloat(el.getAttribute('data-parallax-speed')) || 0.3;
+          const r = el.getBoundingClientRect();
+          const center = r.top + r.height / 2 - window.innerHeight / 2;
+          el.style.transform = `translate3d(0, ${center * -speed}px, 0)`;
+        });
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) { requestAnimationFrame(updateParallax); ticking = true; }
+      }, { passive: true });
+      updateParallax();
+    }
+  }
+
   /* ——— Anno corrente in footer ——— */
   document.querySelectorAll('[data-year]').forEach(el => {
     el.textContent = new Date().getFullYear();
