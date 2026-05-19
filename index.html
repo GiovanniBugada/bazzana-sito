@@ -110,7 +110,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero__media">
-      <img src="assets/img/hero/facciata-esterna-rossa.jpg" alt="Facciata del negozio Motor Garden Bazzana a Cene, valle Seriana" fetchpriority="high" />
+      <img src="assets/img/hero/facciata-esterna-rossa.jpg" alt="Facciata del negozio Motor Garden Bazzana a Cene, valle Seriana" fetchpriority="high" data-parallax-speed="0.15" />
     </div>
     <div class="hero__inner">
       <div class="hero__eyebrows reveal" data-delay="1">
@@ -271,6 +271,36 @@
     </div>
   </section>
 
+  <!-- PINNED SCROLL SHOWCASE (MSI-style: motosega + 3 step cinematici) -->
+  <section class="scroll-showcase" aria-label="Cosa facciamo per te">
+    <div class="scroll-showcase__sticky">
+      <div class="scroll-showcase__visual">
+        <img class="scroll-showcase__chainsaw"
+             src="assets/img/prodotti/motosega-echo-dcs2500t.jpg"
+             alt="Motosega Echo DCS 2500T sul banco officina"
+             loading="lazy" width="540" height="540">
+      </div>
+      <div class="scroll-showcase__steps">
+        <div class="scroll-showcase__step is-active" data-step="0">
+          <p class="scroll-showcase__eyebrow">01 — Vendita</p>
+          <h2>Macchine che<br/><em class="serif-italic">durano nel tempo.</em></h2>
+          <p>Stihl, Echo, Oleo-Mac, Active, Honda. Selezioniamo solo marchi che reggono il lavoro vero — quelli che si comprano una volta e si tengono una vita.</p>
+        </div>
+        <div class="scroll-showcase__step" data-step="1">
+          <p class="scroll-showcase__eyebrow">02 — Officina</p>
+          <h2>Diagnosi precise,<br/><em class="serif-italic">ricambi originali.</em></h2>
+          <p>Centro assistenza autorizzato Stihl. Affilatura catene, tagliando motori, riparazioni in garanzia con tempi rapidi. Anche fuori marchio.</p>
+        </div>
+        <div class="scroll-showcase__step" data-step="2">
+          <p class="scroll-showcase__eyebrow">03 — Consulenza</p>
+          <h2>Ti suggeriamo<br/><em class="serif-italic">il modello giusto.</em></h2>
+          <p>Vieni in negozio: ti facciamo provare l'attrezzo, valutiamo le tue esigenze, ti consigliamo il modello adatto al tuo lavoro o al tuo giardino.</p>
+        </div>
+      </div>
+      <div class="scroll-showcase__progress" aria-hidden="true"></div>
+    </div>
+  </section>
+
   <!-- MARQUEE BRAND -->
   <div class="marquee reveal" aria-hidden="true">
     <div class="marquee__track">
@@ -338,6 +368,93 @@
         <span class="role">Microcar</span>
         <span class="desc">JS50, Myli, gamma elettrica. Design francese.</span>
       </div>
+    </div>
+  </section>
+
+  <!-- DOVE ARRIVIAMO — h-scroll sondaven gallery style -->
+  <section class="h-scroll-section">
+    <div class="h-scroll-section__head reveal">
+      <p class="eyebrow">Dove arriviamo</p>
+      <h2 style="margin-top:0.6rem;">Val Seriana,<br/><em class="serif-italic">bergamasca,</em> e oltre.</h2>
+    </div>
+    <div class="h-scroll-list">
+      <article class="h-scroll-card">
+        <span class="h-scroll-card__city">Cene</span>
+        <span class="h-scroll-card__dist">Sede principale</span>
+        <p class="h-scroll-card__note">Via U. Bellora 73 — showroom, officina, magazzino ricambi.</p>
+      </article>
+      <article class="h-scroll-card">
+        <span class="h-scroll-card__city">Albino</span>
+        <span class="h-scroll-card__dist">15 minuti</span>
+        <p class="h-scroll-card__note">Consegne e installazioni robot tagliaerba a domicilio.</p>
+      </article>
+      <article class="h-scroll-card">
+        <span class="h-scroll-card__city">Gazzaniga</span>
+        <span class="h-scroll-card__dist">10 minuti</span>
+        <p class="h-scroll-card__note">Assistenza in valle, sopralluoghi per impianti irrigazione.</p>
+      </article>
+      <article class="h-scroll-card">
+        <span class="h-scroll-card__city">Clusone</span>
+        <span class="h-scroll-card__dist">25 minuti</span>
+        <p class="h-scroll-card__note">Alta val Seriana — taglio bosco, manutenzione invernale.</p>
+      </article>
+      <article class="h-scroll-card">
+        <span class="h-scroll-card__city">Bergamo</span>
+        <span class="h-scroll-card__dist">35 minuti</span>
+        <p class="h-scroll-card__note">Capoluogo, hinterland, val Brembana e Val Imagna.</p>
+      </article>
+      <article class="h-scroll-card">
+        <span class="h-scroll-card__city">Val di Scalve</span>
+        <span class="h-scroll-card__dist">45 minuti</span>
+        <p class="h-scroll-card__note">Forestale, motoseghe professionali, taglialegna.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- FAQ ACCORDION (sondaven-style domande frequenti) -->
+  <section class="faq-section">
+    <div class="faq-section__head reveal">
+      <p class="eyebrow">Domande frequenti</p>
+      <h2 style="margin-top:0.6rem;">Tutto quello che<br/><em class="serif-italic">vuoi sapere.</em></h2>
+      <p>Se non trovi qui la tua risposta, scrivici su WhatsApp o vieni in negozio: siamo qui per questo.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Posso portare in officina anche macchine di altri marchi?</summary>
+        <div class="faq-item__answer">
+          Si'. Anche se siamo centro autorizzato Stihl, lavoriamo motoseghe, rasaerba, robot, decespugliatori e trattorini di qualsiasi marca. Diagnosi e preventivo gratuiti — paghi solo se decidi di farti riparare la macchina.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>I robot tagliaerba vengono installati a casa?</summary>
+        <div class="faq-item__answer">
+          Si', installazione completa chiavi in mano in tutta la Val Seriana e nel bergamasco. Sopralluogo gratuito, posa del cavo perimetrale, configurazione app, taratura del taglio e prove di funzionamento.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Quanto ci mette ad arrivare un ricambio Stihl?</summary>
+        <div class="faq-item__answer">
+          Mediamente 24-48 ore lavorative. Per i pezzi di consumo (catene, lame, filtri, olio) abbiamo sempre magazzino interno disponibile in pronta consegna.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Vendete anche microcar senza patente?</summary>
+        <div class="faq-item__answer">
+          Si', siamo concessionario Ligier. Microcar omologate L6e e L7e, nuove e usate, anche in versione elettrica. Possibile prova in negozio.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Accettate pagamenti rateali?</summary>
+        <div class="faq-item__answer">
+          Si', finanziamenti a tasso zero o agevolato in collaborazione con le finanziarie convenzionate Stihl e Ligier. Decisione in 24 ore.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Fate ritiro dell'usato?</summary>
+        <div class="faq-item__answer">
+          Si', valutiamo la tua macchina usata in conto vendita o permuta sull'acquisto di una nuova. Porta libretto, manuale e fai una foto del numero di serie per una stima preliminare.
+        </div>
+      </details>
     </div>
   </section>
 

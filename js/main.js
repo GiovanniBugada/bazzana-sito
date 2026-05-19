@@ -282,6 +282,55 @@
     });
   }
 
+  // Pinned scroll showcase (MSI-style oggetto che ruota + step cascata)
+  function initScrollShowcase() {
+    if (reduced) return;
+    const sections = document.querySelectorAll('.scroll-showcase');
+    if (!sections.length) return;
+    sections.forEach(sec => {
+      const visual = sec.querySelector('.scroll-showcase__chainsaw');
+      const visualParent = sec.querySelector('.scroll-showcase__visual');
+      const steps = sec.querySelectorAll('.scroll-showcase__step');
+      const dotsHost = sec.querySelector('.scroll-showcase__progress');
+      let dots = [];
+      if (dotsHost && !dotsHost.children.length && steps.length) {
+        for (let i = 0; i < steps.length; i++) {
+          const d = document.createElement('span');
+          d.className = 'scroll-showcase__dot';
+          if (i === 0) d.classList.add('is-active');
+          dotsHost.appendChild(d);
+        }
+      }
+      dots = dotsHost ? dotsHost.querySelectorAll('.scroll-showcase__dot') : [];
+      let ticking = false;
+      const update = () => {
+        const r = sec.getBoundingClientRect();
+        const total = r.height - window.innerHeight;
+        const progress = Math.max(0, Math.min(1, -r.top / Math.max(1, total)));
+        const rot = (-10 + progress * 20).toFixed(2);
+        const mid = Math.sin(progress * Math.PI);
+        const scale = (1 + mid * 0.14).toFixed(3);
+        const glow = (0.7 + mid * 0.5).toFixed(3);
+        if (visual) {
+          visual.style.setProperty('--showcase-rot', rot + 'deg');
+          visual.style.setProperty('--showcase-scale', scale);
+        }
+        if (visualParent) visualParent.style.setProperty('--showcase-glow', glow);
+        if (steps.length) {
+          const idx = Math.min(steps.length - 1, Math.floor(progress * steps.length));
+          steps.forEach((s, i) => s.classList.toggle('is-active', i === idx));
+          if (dots.length) dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+        }
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
+    });
+  }
+  initScrollShowcase();
+
   // Parallax sottile per immagini con data-parallax-speed (sondaven style)
   if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     const parallaxEls = document.querySelectorAll('[data-parallax-speed]');
