@@ -1,0 +1,190 @@
+/* Motion & micro-interactions */
+
+/* —— Loader iniziale —— */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--c-ink);
+  z-index: var(--z-loader);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  transition: transform var(--dur-page) var(--ease-in-out);
+}
+.loader.is-done {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+.loader__brand {
+  font-family: var(--font-display);
+  font-weight: 380;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  letter-spacing: -0.04em;
+  color: var(--c-ivory);
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.loader__brand .sep {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  color: var(--c-stihl);
+  transform: translateY(-0.6em);
+}
+.loader__bar {
+  width: min(360px, 70vw);
+  height: 2px;
+  background: var(--c-line);
+  overflow: hidden;
+  position: relative;
+}
+.loader__bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--c-stihl);
+  transform-origin: left;
+  animation: load 1.4s var(--ease-in-out) forwards;
+}
+@keyframes load {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+/* —— Page transition mask —— */
+.page-mask {
+  position: fixed;
+  inset: 0;
+  background: var(--c-ink);
+  z-index: var(--z-overlay);
+  transform-origin: top;
+  transform: scaleY(0);
+  pointer-events: none;
+}
+.page-mask.is-out {
+  transform-origin: bottom;
+  animation: maskOut 0.9s var(--ease-in-out) forwards;
+}
+.page-mask.is-in {
+  animation: maskIn 0.9s var(--ease-in-out) forwards;
+}
+@keyframes maskOut {
+  0% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+@keyframes maskIn {
+  0% { transform: scaleY(0); transform-origin: top; }
+  100% { transform: scaleY(1); transform-origin: top; }
+}
+
+/* —— Custom cursor —— */
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 10px; height: 10px;
+  background: var(--c-stihl);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  transform: translate(-50%, -50%);
+  transition: width var(--dur) var(--ease-elastic),
+              height var(--dur) var(--ease-elastic),
+              background var(--dur) var(--ease-out),
+              opacity 200ms;
+  mix-blend-mode: difference;
+}
+.cursor.is-hover {
+  width: 56px;
+  height: 56px;
+  background: var(--c-ivory);
+}
+.cursor__label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-ink);
+  opacity: 0;
+  transition: opacity 200ms;
+}
+.cursor.is-hover .cursor__label { opacity: 1; }
+@media (hover: none), (pointer: coarse) {
+  .cursor { display: none; }
+}
+
+/* —— Reveal on scroll —— */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+.reveal-mask {
+  display: inline-block;
+  overflow: hidden;
+}
+.reveal-mask > * {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 900ms var(--ease-out);
+}
+.reveal-mask.in > * {
+  transform: translateY(0);
+}
+
+/* Sequenza delay */
+.reveal[data-delay="1"] { transition-delay: 80ms; }
+.reveal[data-delay="2"] { transition-delay: 160ms; }
+.reveal[data-delay="3"] { transition-delay: 240ms; }
+.reveal[data-delay="4"] { transition-delay: 320ms; }
+.reveal[data-delay="5"] { transition-delay: 400ms; }
+.reveal[data-delay="6"] { transition-delay: 480ms; }
+
+/* —— Scroll indicator —— */
+.scroll-cue {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-ivory);
+  opacity: 0.7;
+}
+.scroll-cue__line {
+  width: 1px; height: 36px;
+  background: linear-gradient(to bottom, transparent, var(--c-stihl));
+  animation: cue 1.8s var(--ease-in-out) infinite;
+  transform-origin: top;
+}
+@keyframes cue {
+  0%, 100% { transform: scaleY(0.5); }
+  50% { transform: scaleY(1); }
+}
+
+/* —— Marker tipografico kinetic —— */
+.kin {
+  display: inline-block;
+  transition: transform 300ms var(--ease-out);
+}
+.kin:hover {
+  transform: translateY(-3px) rotate(-1deg);
+  color: var(--c-stihl);
+}

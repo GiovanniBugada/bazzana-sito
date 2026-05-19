@@ -1,0 +1,382 @@
+/* Componenti riutilizzabili */
+
+/* —— Pulsanti —— */
+.btn {
+  --btn-bg: var(--c-stihl);
+  --btn-fg: var(--c-ink);
+  --btn-border: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1.05rem 1.6rem;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: 1px solid var(--btn-border);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--dur) var(--ease-out),
+              color var(--dur) var(--ease-out),
+              transform var(--dur) var(--ease-out);
+}
+.btn::after {
+  content: "→";
+  font-family: var(--font-display);
+  font-weight: 380;
+  transition: transform var(--dur) var(--ease-out);
+}
+.btn:hover::after { transform: translateX(4px); }
+
+.btn--outline {
+  --btn-bg: transparent;
+  --btn-fg: var(--c-fg);
+  --btn-border: var(--c-line-strong);
+}
+.btn--outline:hover {
+  --btn-bg: var(--c-fg);
+  --btn-fg: var(--c-bg);
+}
+
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--c-fg);
+  --btn-border: transparent;
+  padding: 0.6rem 0;
+  border-radius: 0;
+  border-bottom: 1px solid currentColor;
+}
+.btn--ghost::after { display: none; }
+
+.btn--big {
+  padding: 1.4rem 2.2rem;
+  font-size: 1.1rem;
+}
+
+/* —— Eyebrow tag —— */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-fg-muted);
+}
+.tag::before {
+  content: "";
+  width: 6px; height: 6px;
+  background: var(--c-stihl);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* —— Card prodotto —— */
+.card {
+  position: relative;
+  overflow: hidden;
+  background: var(--c-ink-2);
+  color: var(--c-ivory);
+  transition: transform var(--dur) var(--ease-out);
+}
+.card__media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: #222;
+}
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease-out), filter var(--dur) var(--ease-out);
+  filter: saturate(0.92) contrast(1.05);
+}
+.card:hover .card__media img { transform: scale(1.04); filter: saturate(1) contrast(1.05); }
+.card__body {
+  padding: 1.4rem 1.4rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.card__brand {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-stihl);
+}
+.card__title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 480;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.card__meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  margin-top: 0.4rem;
+}
+.card__cta {
+  margin-top: 0.7rem;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--c-ivory);
+}
+.card__cta::after {
+  content: "→";
+  font-family: var(--font-display);
+  transition: transform var(--dur) var(--ease-out);
+}
+.card:hover .card__cta::after { transform: translateX(5px); }
+.card__num {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--c-ivory);
+  opacity: 0.7;
+  z-index: 2;
+  mix-blend-mode: difference;
+}
+
+/* Card "bento" grande (categoria) */
+.cat-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--c-ink-2);
+  color: var(--c-ivory);
+  aspect-ratio: 4/5;
+  isolation: isolate;
+}
+.cat-card__bg {
+  position: absolute; inset: 0;
+  background-position: center;
+  background-size: cover;
+  transition: transform 1.4s var(--ease-out), filter var(--dur) var(--ease-out);
+  filter: saturate(0.85) brightness(0.55) contrast(1.1);
+  z-index: 0;
+}
+.cat-card:hover .cat-card__bg {
+  transform: scale(1.06);
+  filter: saturate(1) brightness(0.65) contrast(1.05);
+}
+.cat-card__content {
+  position: relative;
+  z-index: 2;
+  padding: 1.6rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cat-card__num {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: var(--c-ivory);
+}
+.cat-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 380;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--c-ivory);
+}
+.cat-card__desc {
+  font-size: 0.95rem;
+  color: var(--c-ivory);
+  opacity: 0.78;
+  max-width: 28ch;
+  margin-top: 0.6rem;
+}
+.cat-card--tall { aspect-ratio: 3/5; }
+.cat-card--wide { aspect-ratio: 16/10; }
+
+/* —— Marquee dei brand —— */
+.marquee {
+  overflow: hidden;
+  border-block: 1px solid var(--c-line);
+  padding-block: 1.6rem;
+}
+.marquee__track {
+  display: flex;
+  gap: 4rem;
+  width: max-content;
+  animation: marq 38s linear infinite;
+}
+.marquee__item {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 380;
+  letter-spacing: -0.02em;
+  color: var(--c-ivory);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4rem;
+}
+.marquee__item::after {
+  content: "✦";
+  color: var(--c-stihl);
+  font-size: 0.7em;
+}
+@keyframes marq {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* —— Numero stacked timeline / officina —— */
+.step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2.4rem;
+  align-items: start;
+  padding-block: 2.2rem;
+  border-top: 1px solid var(--c-line);
+}
+.step__num {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 380;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--c-stihl);
+  min-width: 5ch;
+}
+.step__body { display: flex; flex-direction: column; gap: 0.6rem; }
+.step__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-weight: 460;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 700px) {
+  .step { grid-template-columns: 1fr; gap: 0.4rem; }
+}
+
+/* —— Image with treatment —— */
+.img-cinema {
+  filter: saturate(0.88) contrast(1.06);
+  transition: filter var(--dur) var(--ease-out);
+}
+.img-grain {
+  position: relative;
+}
+.img-grain::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  opacity: 0.18;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* —— Form input —— */
+.field { display: flex; flex-direction: column; gap: 0.5rem; }
+.field label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-fg-muted);
+}
+.field input, .field textarea {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--c-line-strong);
+  padding: 0.9rem 0;
+  color: var(--c-fg);
+  font-size: 1.05rem;
+  font-family: var(--font-body);
+  transition: border-color var(--dur) var(--ease-out);
+}
+.field input:focus, .field textarea:focus {
+  outline: none;
+  border-bottom-color: var(--c-stihl);
+}
+.field textarea { resize: vertical; min-height: 120px; }
+
+/* —— Coordinate / micro info —— */
+.coord {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  color: var(--c-fg-muted);
+  text-transform: uppercase;
+}
+.coord::before {
+  content: "";
+  width: 8px; height: 8px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* —— Filter chips —— */
+.chips {
+  display: flex; flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-bottom: 3rem;
+}
+.chip {
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--c-line-strong);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-fg);
+  background: transparent;
+  transition: all var(--dur) var(--ease-out);
+}
+.chip:hover, .chip.is-active {
+  background: var(--c-stihl);
+  border-color: var(--c-stihl);
+  color: var(--c-ink);
+}
+
+/* —— Spec table —— */
+.spec {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.4rem 2.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  margin-block: 2rem;
+}
+.spec dt {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--c-fg-muted);
+  padding-block: 0.7rem;
+  border-bottom: 1px solid var(--c-line);
+}
+.spec dd {
+  padding-block: 0.7rem;
+  border-bottom: 1px solid var(--c-line);
+  color: var(--c-fg);
+}

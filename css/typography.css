@@ -1,0 +1,105 @@
+/* Typography */
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: var(--c-fg);
+  background: var(--c-bg);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  color: var(--c-fg);
+}
+
+h1, .h1 { font-size: var(--fs-h1); }
+h2, .h2 { font-size: var(--fs-h2); }
+h3, .h3 { font-size: var(--fs-h3); font-weight: 450; line-height: 1.05; letter-spacing: -0.02em; }
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 380;
+  font-size: var(--fs-display);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+}
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.35;
+  letter-spacing: -0.012em;
+  color: var(--c-fg);
+  max-width: 28ch;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--c-fg-muted);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-stihl);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.eyebrow::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  display: inline-block;
+}
+
+.serif-italic {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 380;
+}
+
+p { max-width: 60ch; }
+p + p { margin-top: 1rem; }
+
+.text-muted { color: var(--c-fg-muted); }
+.text-ivory { color: var(--c-ivory); }
+.text-stihl { color: var(--c-stihl); }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+/* Underline animato per link inline */
+.link-u {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.18em;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size var(--dur) var(--ease-out);
+}
+.link-u:hover {
+  background-size: 0% 1px;
+  background-position: 100% 100%;
+}
+.link-u::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 100%;
+  bottom: 0;
+  height: 1px;
+  background: var(--c-stihl);
+  transition: right var(--dur) var(--ease-out);
+}
+.link-u:hover::after { right: 0; }
