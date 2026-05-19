@@ -341,6 +341,51 @@
   }
   initScrollShowcase();
 
+  /* ——— SCROLL PROGRESS BAR in alto ——— */
+  (() => {
+    const bar = document.createElement('div');
+    bar.className = 'scroll-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    const fill = document.createElement('div');
+    fill.className = 'scroll-progress__fill';
+    bar.appendChild(fill);
+    document.body.appendChild(bar);
+    let ticking = false;
+    const update = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const p = h > 0 ? (window.scrollY / h) * 100 : 0;
+      fill.style.width = p + '%';
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    update();
+  })();
+
+  /* ——— RIPPLE on click (CTA btn-ripple) ——— */
+  document.querySelectorAll('.btn-ripple, .btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      if (reduced) return;
+      const r = this.getBoundingClientRect();
+      const size = Math.max(r.width, r.height);
+      const w = document.createElement('span');
+      w.className = 'ripple-wave';
+      w.style.width = w.style.height = size + 'px';
+      w.style.left = (e.clientX - r.left - size/2) + 'px';
+      w.style.top = (e.clientY - r.top - size/2) + 'px';
+      this.classList.add('btn-ripple');
+      this.appendChild(w);
+      setTimeout(() => w.remove(), 700);
+    });
+  });
+
+  /* ——— Observers extra per le nuove classi ——— */
+  observeAndAdd('.section-fade', 'is-in', 0.18);
+  observeAndAdd('.stagger-fade', 'is-in', 0.2);
+  observeAndAdd('.section-divider-anim', 'is-in', 0.4);
+  observeAndAdd('.zoom-mask', 'is-in', 0.3);
+
   /* ——— MAGNETIC BUTTONS (CTA che si attraggono al cursore) ——— */
   if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     document.querySelectorAll('[data-magnetic], .cta-magnetic').forEach(el => {

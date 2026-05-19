@@ -110,8 +110,11 @@
 
 <main id="main">
 
-  <!-- HERO -->
+  <!-- HERO con blob decorativi + dots grid -->
   <section class="hero">
+    <div class="blob blob--top-left" aria-hidden="true"></div>
+    <div class="blob blob--bottom-right" aria-hidden="true"></div>
+    <div class="dots-bg" aria-hidden="true"></div>
     <div class="hero__media">
       <img class="img-filter-shift reveal-diagonal" src="assets/img/hero/facciata-esterna-rossa.jpg" alt="Facciata del negozio Motor Garden Bazzana a Cene, valle Seriana" fetchpriority="high" data-parallax-speed="0.15" />
     </div>
@@ -161,8 +164,15 @@
     </div>
   </section>
 
+  <!-- DIVIDER ANIMATO tra manifesto e stats -->
+  <div class="section-divider-anim" aria-hidden="true">
+    <svg viewBox="0 0 600 24" preserveAspectRatio="none">
+      <path d="M 0 12 L 280 12 M 320 12 L 600 12 M 290 4 L 310 20 M 290 20 L 310 4"/>
+    </svg>
+  </div>
+
   <!-- STATS COUNTER (sondaven-style KPI) -->
-  <section class="cinema-stats spotlight-section" aria-label="I nostri numeri">
+  <section class="cinema-stats spotlight-section stagger-fade" aria-label="I nostri numeri">
     <div class="cinema-stats__inner">
       <div class="stat-block reveal-clip">
         <p class="stat-block__value"><span class="num-ticker" data-target="10" data-suffix="+">0</span></p>
@@ -303,6 +313,29 @@
       <div class="scroll-showcase__progress" aria-hidden="true"></div>
     </div>
   </section>
+
+  <!-- IMG MARQUEE prodotti reali -->
+  <div class="img-marquee" aria-hidden="true">
+    <div class="img-marquee__track">
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/Active/Motoseghe/Professionali/65.65-300x300.png" alt=""></div>
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/Active/Tosaerba/Scocca in alluminio/RM4815-300x300.png" alt=""></div>
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/KREES/Robot rasaerba/KR101E.png" alt=""></div>
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/Active/Decespugliatori/Ad Asta Fissa/ST50.png" alt=""></div>
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/Active/Trattorini/Rider/T160-300x300.png" alt=""></div>
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/KREES/Motoseghe/KC340.png" alt=""></div>
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/Active/Generatori/INVERTER/3500I-300x300.png" alt=""></div>
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/KREES/Tagliasiepi/KC270.png" alt=""></div>
+      <!-- duplicato per loop seamless -->
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/Active/Motoseghe/Professionali/65.65-300x300.png" alt=""></div>
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/Active/Tosaerba/Scocca in alluminio/RM4815-300x300.png" alt=""></div>
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/KREES/Robot rasaerba/KR101E.png" alt=""></div>
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/Active/Decespugliatori/Ad Asta Fissa/ST50.png" alt=""></div>
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/Active/Trattorini/Rider/T160-300x300.png" alt=""></div>
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/KREES/Motoseghe/KC340.png" alt=""></div>
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/Active/Generatori/INVERTER/3500I-300x300.png" alt=""></div>
+      <div class="img-marquee__item"><img loading="lazy" src="assets/img/prodotti/foto-catalogo/KREES/Tagliasiepi/KC270.png" alt=""></div>
+    </div>
+  </div>
 
   <!-- MARQUEE BRAND -->
   <div class="marquee reveal" aria-hidden="true">

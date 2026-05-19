@@ -1,0 +1,479 @@
+"""Append visual enhancements + animations package to cinematic.css"""
+
+css = r"""
+
+/* ============================================================
+   PACCHETTO VISUAL ENHANCEMENT — extra animazioni + decorazioni
+   ============================================================ */
+
+/* —— A. SCROLL PROGRESS BAR (in alto) —— */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 100%;
+  background: transparent;
+  z-index: 9990;
+  pointer-events: none;
+}
+.scroll-progress__fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #CE2B37, var(--c-stihl), #009246);
+  box-shadow: 0 0 12px rgba(242, 101, 34, 0.6);
+  transition: width 80ms linear;
+  will-change: width;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress__fill { transition: none; }
+}
+
+/* —— B. PARTICELLE HERO (canvas overlay flottante) —— */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+  mix-blend-mode: screen;
+}
+
+/* —— C. BLOB ANIMATO (background decorativo organico) —— */
+.blob {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(242,101,34,0.25), transparent 65%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+  animation: blob-float 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.blob--top-left { top: -200px; left: -150px; animation-delay: -3s; }
+.blob--bottom-right { bottom: -250px; right: -200px; animation-delay: -8s; background: radial-gradient(circle, rgba(0,146,70,0.18), transparent 65%); }
+.blob--center { top: 30%; left: 40%; width: 500px; height: 500px; animation-delay: -12s; background: radial-gradient(circle, rgba(206,43,55,0.12), transparent 65%); }
+
+@keyframes blob-float {
+  0%   { transform: translate(0, 0) scale(1) rotate(0); }
+  33%  { transform: translate(40px, -60px) scale(1.08) rotate(60deg); }
+  66%  { transform: translate(-50px, 30px) scale(0.95) rotate(120deg); }
+  100% { transform: translate(20px, -20px) scale(1.05) rotate(180deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .blob { animation: none; }
+}
+
+/* —— D. DECORATIVI: dots grid background pattern —— */
+.dots-bg {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(244,241,234,0.06) 1px, transparent 1.5px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 70%, transparent 100%);
+}
+
+/* —— E. GLASSMORPHISM card (vetro smerigliato) —— */
+.glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid rgba(244, 241, 234, 0.14);
+  border-radius: var(--radius-2);
+  padding: 1.6rem;
+  transition: background 400ms var(--ease-out),
+              border-color 400ms var(--ease-out),
+              transform 400ms var(--ease-out);
+}
+.glass-card:hover {
+  background: rgba(242, 101, 34, 0.08);
+  border-color: rgba(242, 101, 34, 0.32);
+  transform: translateY(-4px);
+}
+
+/* —— F. CUSTOM SCROLLBAR (browser bagliore brand) —— */
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: var(--c-ink); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--c-stihl), var(--c-stihl-deep));
+  border-radius: 6px;
+  border: 2px solid var(--c-ink);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--c-stihl), #ff8c4a);
+}
+::-webkit-scrollbar-corner { background: var(--c-ink); }
+* { scrollbar-color: var(--c-stihl) var(--c-ink); scrollbar-width: thin; }
+
+/* —— G. CUSTOM SELECTION color —— */
+::selection {
+  background: var(--c-stihl);
+  color: var(--c-ink);
+}
+
+/* —— H. FOCUS RING brand —— */
+*:focus-visible {
+  outline: 2px solid var(--c-stihl);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* —— I. FLOATING BOB animation (per elementi decorativi) —— */
+.float-bob {
+  animation: float-bob 4.6s ease-in-out infinite;
+  will-change: transform;
+}
+@keyframes float-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+.float-bob--slow { animation-duration: 6.2s; }
+.float-bob--fast { animation-duration: 3.4s; }
+@media (prefers-reduced-motion: reduce) {
+  .float-bob { animation: none; }
+}
+
+/* —— J. ANIMATED CORNER ACCENT (decorazione angolo) —— */
+.corner-accent {
+  position: relative;
+}
+.corner-accent::before,
+.corner-accent::after {
+  content: "";
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-color: var(--c-stihl);
+  border-style: solid;
+  border-width: 0;
+  transition: width 500ms var(--ease-out), height 500ms var(--ease-out);
+}
+.corner-accent::before {
+  top: -6px; left: -6px;
+  border-top-width: 2px; border-left-width: 2px;
+}
+.corner-accent::after {
+  bottom: -6px; right: -6px;
+  border-bottom-width: 2px; border-right-width: 2px;
+}
+.corner-accent:hover::before,
+.corner-accent:hover::after {
+  width: 56px; height: 56px;
+}
+
+/* —— K. NUMBER + ANIMATED SUFFIX (es. "10+") —— */
+.num-with-suffix {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.05em;
+}
+.num-with-suffix__suffix {
+  display: inline-block;
+  color: var(--c-stihl);
+  transform: translateY(-0.2em);
+  animation: suffix-bob 2.4s ease-in-out infinite;
+}
+@keyframes suffix-bob {
+  0%, 100% { transform: translateY(-0.2em); }
+  50%      { transform: translateY(-0.5em); }
+}
+
+/* —— L. IMAGE MARQUEE (foto che scorrono orizzontale infinito) —— */
+.img-marquee {
+  overflow: hidden;
+  padding: 1.4rem 0;
+  position: relative;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+.img-marquee__track {
+  display: flex;
+  gap: 1.6rem;
+  width: max-content;
+  animation: img-marquee 50s linear infinite;
+  will-change: transform;
+}
+.img-marquee__item {
+  flex: 0 0 240px;
+  aspect-ratio: 1;
+  background: var(--c-ivory-soft);
+  border-radius: var(--radius-2);
+  overflow: hidden;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-marquee__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 600ms var(--ease-out);
+}
+.img-marquee:hover .img-marquee__item img { transform: scale(1.08); }
+@keyframes img-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .img-marquee__track { animation: none; }
+}
+
+/* —— M. SECTION DIVIDER animato (linea che si traccia) —— */
+.section-divider-anim {
+  display: block;
+  margin: 0 auto;
+  padding: var(--space-4) 0;
+  text-align: center;
+  width: 100%;
+}
+.section-divider-anim svg {
+  display: block;
+  margin: 0 auto;
+  width: min(60%, 600px);
+  height: 24px;
+}
+.section-divider-anim path {
+  fill: none;
+  stroke: var(--c-stihl);
+  stroke-width: 1.5;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  transition: stroke-dashoffset 1800ms var(--ease-out);
+}
+.section-divider-anim.is-in path { stroke-dashoffset: 0; }
+
+/* —— N. PARALLAX MULTI-LAYER (profondità) —— */
+.parallax-layer {
+  transition: transform 80ms linear;
+  will-change: transform;
+}
+
+/* —— O. ZOOM-IN MASK (immagine entra con maschera circolare) —— */
+.zoom-mask {
+  clip-path: circle(0% at 50% 50%);
+  transition: clip-path 1400ms var(--ease-out);
+}
+.zoom-mask.is-in { clip-path: circle(75% at 50% 50%); }
+@media (prefers-reduced-motion: reduce) {
+  .zoom-mask { clip-path: none; transition: none; }
+}
+
+/* —— P. ROTATING BADGE (timbro che ruota) —— */
+.rotating-badge {
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  position: relative;
+  animation: rotate-slow 18s linear infinite;
+  will-change: transform;
+}
+.rotating-badge svg {
+  width: 100%;
+  height: 100%;
+}
+@keyframes rotate-slow {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rotating-badge { animation: none; }
+}
+
+/* —— Q. RIPPLE on click (CTA con onda) —— */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.btn-ripple .ripple-wave {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  animation: ripple 700ms ease-out;
+  pointer-events: none;
+}
+@keyframes ripple {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* —— R. GRADIENT TEXT ANIMATO (testo con gradient che si muove) —— */
+.gradient-text {
+  background: linear-gradient(90deg,
+    var(--c-ivory) 0%,
+    var(--c-stihl) 25%,
+    var(--c-ivory) 50%,
+    var(--c-stihl) 75%,
+    var(--c-ivory) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-slide 4s linear infinite;
+  display: inline-block;
+}
+@keyframes gradient-slide {
+  from { background-position: 0% center; }
+  to   { background-position: -200% center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gradient-text { animation: none; background-position: 0% center; }
+}
+
+/* —— S. HOVER CARD LIFT con shadow dinamica —— */
+.lift-card {
+  transition: transform 500ms var(--ease-out), box-shadow 500ms var(--ease-out);
+  will-change: transform;
+}
+.lift-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5),
+              0 8px 16px -8px rgba(242, 101, 34, 0.3);
+}
+
+/* —— T. SUBTLE PULSE (per elementi importanti) —— */
+.pulse-soft {
+  animation: pulse-soft 2.6s ease-in-out infinite;
+}
+@keyframes pulse-soft {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(242, 101, 34, 0.4); }
+  50%      { box-shadow: 0 0 0 12px rgba(242, 101, 34, 0); }
+}
+
+/* —— U. ANIMATED ICON CONTAINER (icona dentro cerchio con bordo) —— */
+.anim-icon-circle {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(242, 101, 34, 0.08);
+  color: var(--c-stihl);
+  transition: background 400ms var(--ease-out);
+}
+.anim-icon-circle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--c-stihl);
+  transform: scale(0.85);
+  opacity: 0;
+  transition: transform 600ms var(--ease-out), opacity 400ms ease;
+}
+.anim-icon-circle:hover { background: rgba(242, 101, 34, 0.18); }
+.anim-icon-circle:hover::before { transform: scale(1.15); opacity: 1; }
+
+/* —— V. STAGGER FADE (liste di elementi) —— */
+.stagger-fade > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+}
+.stagger-fade.is-in > *:nth-child(1)  { opacity: 1; transform: none; transition-delay: 0ms; }
+.stagger-fade.is-in > *:nth-child(2)  { opacity: 1; transform: none; transition-delay: 100ms; }
+.stagger-fade.is-in > *:nth-child(3)  { opacity: 1; transform: none; transition-delay: 200ms; }
+.stagger-fade.is-in > *:nth-child(4)  { opacity: 1; transform: none; transition-delay: 300ms; }
+.stagger-fade.is-in > *:nth-child(5)  { opacity: 1; transform: none; transition-delay: 400ms; }
+.stagger-fade.is-in > *:nth-child(6)  { opacity: 1; transform: none; transition-delay: 500ms; }
+.stagger-fade.is-in > *:nth-child(7)  { opacity: 1; transform: none; transition-delay: 600ms; }
+.stagger-fade.is-in > *:nth-child(n+8){ opacity: 1; transform: none; transition-delay: 700ms; }
+
+/* —— W. HOVER OUTLINE che cresce su immagine —— */
+.outline-grow {
+  position: relative;
+  overflow: hidden;
+}
+.outline-grow::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(244, 241, 234, 0.4);
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 400ms ease, transform 500ms var(--ease-out);
+  pointer-events: none;
+}
+.outline-grow:hover::after { opacity: 1; transform: scale(1); }
+
+/* —— X. SCROLL HINT HORIZONTAL (freccia che pulsa nei carousel) —— */
+.scroll-hint-h {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--c-ink);
+  border: 1px solid var(--c-line-strong);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-stihl);
+  pointer-events: none;
+  animation: scroll-hint-pulse 1.8s ease-in-out infinite;
+}
+@keyframes scroll-hint-pulse {
+  0%, 100% { transform: translate(0, -50%); opacity: 0.7; }
+  50%      { transform: translate(8px, -50%); opacity: 1; }
+}
+
+/* —— Y. SECTION FADE-IN (paragrafi che entrano dal basso) —— */
+.section-fade {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1000ms var(--ease-out), transform 1000ms var(--ease-out);
+}
+.section-fade.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* —— Z. HOVER IMAGE OVERLAY (overlay scuro + testo che appare) —— */
+.img-overlay-hover {
+  position: relative;
+  overflow: hidden;
+}
+.img-overlay-hover img {
+  transition: transform 800ms var(--ease-out), filter 500ms ease;
+}
+.img-overlay-hover__content {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(14,15,14,0.92) 0%, transparent 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.6rem;
+  color: var(--c-ivory);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 400ms ease, transform 500ms var(--ease-out);
+}
+.img-overlay-hover:hover img {
+  transform: scale(1.06);
+  filter: brightness(0.7);
+}
+.img-overlay-hover:hover .img-overlay-hover__content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* —— Reduce-motion override globale —— */
+@media (prefers-reduced-motion: reduce) {
+  .blob, .float-bob, .img-marquee__track, .rotating-badge,
+  .gradient-text, .pulse-soft, .scroll-hint-h, .corner-accent::before,
+  .corner-accent::after, .num-with-suffix__suffix {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+"""
+
+with open('css/pages/cinematic.css', 'a', encoding='utf-8') as f:
+    f.write(css)
+print(f"OK {len(css)} bytes appended (26 nuove animazioni/decorazioni)")
