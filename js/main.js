@@ -191,20 +191,30 @@
     setTimeout(() => { window.location.href = href; }, 700);
   });
 
-  /* ——— Filtri prodotti ——— */
+  /* ——— Filtri prodotti (chip + categoria + brand catalogo) ——— */
   const chips = document.querySelectorAll('.chip[data-filter]');
   if (chips.length) {
     const cards = document.querySelectorAll('[data-cat]');
+    const brandSections = document.querySelectorAll('.brand-section[data-brand]');
     chips.forEach(c => {
       c.addEventListener('click', () => {
         chips.forEach(x => x.classList.remove('is-active'));
         c.classList.add('is-active');
         const f = c.getAttribute('data-filter');
+        // Vecchio: filtra cards per data-cat
         cards.forEach(card => {
           if (f === 'all' || card.getAttribute('data-cat') === f) {
             card.style.display = '';
           } else {
             card.style.display = 'none';
+          }
+        });
+        // Nuovo: filtra brand-section per data-brand
+        brandSections.forEach(sec => {
+          if (f === 'all' || sec.getAttribute('data-brand') === f) {
+            sec.removeAttribute('hidden');
+          } else {
+            sec.setAttribute('hidden', '');
           }
         });
       });
