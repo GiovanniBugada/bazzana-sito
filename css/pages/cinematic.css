@@ -805,3 +805,186 @@
   }
   .product-catalog .depth-card__base { padding: 0.8rem; }
 }
+
+/* ============================================================
+   SUBGROUP — sotto-categorie dentro le categorie principali
+   (es. Decespugliatori > A Zaino / Ad Asta Fissa / Attrezzi)
+   ============================================================ */
+.subgroup {
+  margin-top: 1.4rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--c-line);
+}
+.subgroup__title {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-fg-muted);
+  margin: 0 0 1rem;
+}
+.subgroup__title em {
+  font-style: normal;
+  font-size: 0.7rem;
+  color: var(--c-stihl);
+  font-weight: 600;
+}
+.subgroup__bullet {
+  width: 8px;
+  height: 8px;
+  background: var(--c-stihl);
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(242, 101, 34, 0.4);
+}
+
+/* ============================================================
+   OTHER BRANDS section — marchi senza foto in catalogo
+   ============================================================ */
+.other-brands-note {
+  font-size: var(--fs-lead);
+  color: var(--c-fg-muted);
+  line-height: 1.55;
+  max-width: 56ch;
+  margin: 0 0 2rem;
+}
+.other-brands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.4rem;
+}
+.other-brand {
+  background: var(--c-ink-2);
+  border: 1px solid var(--c-line);
+  padding: 1.6rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: transform var(--dur) var(--ease-out),
+              border-color var(--dur) var(--ease-out),
+              background var(--dur) var(--ease-out);
+}
+.other-brand:hover {
+  transform: translateY(-4px);
+  border-color: var(--c-stihl);
+  background: var(--c-ink);
+}
+.other-brand h4 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 460;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.other-brand .role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-stihl);
+}
+.other-brand p {
+  font-size: 0.92rem;
+  color: var(--c-fg-muted);
+  line-height: 1.5;
+  margin: 0.4rem 0 0;
+}
+
+/* ============================================================
+   POLISH ANIMAZIONI — micro-rifiniture per impeccabilita'
+   ============================================================ */
+
+/* Smoothing card hover (no jank) */
+.depth-card,
+.depth-card__base,
+.depth-card__base img {
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Lazy-load fade per le immagini quando arrivano */
+.depth-card__base img {
+  opacity: 0;
+  animation: img-fade-in 500ms var(--ease-out) forwards;
+  animation-delay: 80ms;
+}
+.depth-card__base img[src=""] { opacity: 0; }
+@keyframes img-fade-in { to { opacity: 1; } }
+
+/* Stagger reveal automatico sulle card (cascading entry) */
+.cat-group__grid .depth-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+}
+.cat-group__grid .depth-card.is-in-view,
+.cat-group[open] .cat-group__grid .depth-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+.cat-group__grid .depth-card:nth-child(1) { transition-delay: 0ms; }
+.cat-group__grid .depth-card:nth-child(2) { transition-delay: 40ms; }
+.cat-group__grid .depth-card:nth-child(3) { transition-delay: 80ms; }
+.cat-group__grid .depth-card:nth-child(4) { transition-delay: 120ms; }
+.cat-group__grid .depth-card:nth-child(5) { transition-delay: 160ms; }
+.cat-group__grid .depth-card:nth-child(6) { transition-delay: 200ms; }
+.cat-group__grid .depth-card:nth-child(n+7) { transition-delay: 240ms; }
+
+/* Filtri chip: animazione fluida al filter toggle */
+.brand-section {
+  animation: brand-section-in 600ms var(--ease-out);
+}
+@keyframes brand-section-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cat-group: smooth height transition apertura */
+.cat-group[open] > summary {
+  color: var(--c-stihl);
+}
+.cat-group .cat-group__grid {
+  animation: cat-group-expand 500ms var(--ease-out);
+}
+.cat-group .subgroup {
+  animation: cat-group-expand 500ms var(--ease-out) 100ms backwards;
+}
+@keyframes cat-group-expand {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Filter chip animazione click + ripple */
+.chip {
+  overflow: hidden;
+  position: relative;
+}
+.chip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 400ms ease;
+  pointer-events: none;
+}
+.chip.is-active::before { opacity: 1; }
+.chip:active { transform: scale(0.94); transition: transform 120ms ease; }
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .cat-group__grid .depth-card,
+  .brand-section,
+  .cat-group .cat-group__grid,
+  .cat-group .subgroup,
+  .depth-card__base img {
+    animation: none;
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
