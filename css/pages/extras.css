@@ -1,6 +1,70 @@
 /* =========================================================
    EXTRAS CSS — toast, wishlist, cookie GDPR, search, lightbox
+   + polish depth-card catalogo v2
    ========================================================= */
+
+/* —— DEPTH-CARD v2: hint, CTA, accessory tag —— */
+.depth-card__hint {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-fg-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+.depth-card__cta {
+  display: inline-block;
+  margin-top: 0.8rem;
+  padding: 0.5rem 1rem;
+  background: var(--c-stihl);
+  color: var(--c-ink);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  transition: background var(--dur) var(--ease-out), transform 200ms var(--ease-out);
+  align-self: flex-start;
+}
+.depth-card__cta:hover {
+  background: #ff8c4a;
+  transform: translateX(4px);
+}
+.depth-card__acc-tag {
+  position: absolute;
+  top: 0.7rem;
+  right: 3rem;
+  z-index: 3;
+  background: rgba(244, 241, 234, 0.92);
+  color: var(--c-ink);
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* La card del catalogo ha un layout flex con nome+hint+wl-btn */
+.product-catalog .depth-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: transform 400ms var(--ease-out);
+}
+.product-catalog .depth-card:hover { transform: translateY(-3px); }
+.product-catalog .depth-card__name {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--c-fg);
+  line-height: 1.3;
+  font-weight: 500;
+}
+
 
 /* —— TOAST notifications —— */
 .toast-host {
