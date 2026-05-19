@@ -988,3 +988,319 @@
     transform: none;
   }
 }
+
+
+/* ============================================================
+   ANIMAZIONI AVANZATE — pacchetto polish finale
+   ============================================================ */
+
+/* 1. MAGNETIC BUTTONS */
+.btn[data-magnetic],
+.cta-magnetic {
+  position: relative;
+  will-change: transform;
+  transition: transform 200ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn[data-magnetic]:hover,
+  .cta-magnetic:hover {
+    transition: transform 80ms linear;
+  }
+}
+
+/* 2. 3D TILT CARDS */
+.tilt-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 400ms var(--ease-out);
+  will-change: transform;
+}
+.tilt-card__inner {
+  transition: transform 200ms var(--ease-out);
+  transform-style: preserve-3d;
+}
+.tilt-card:hover .tilt-card__inner {
+  transition: transform 80ms linear;
+}
+
+/* 3. TEXT GLITCH hover */
+.text-glitch {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.text-glitch::before,
+.text-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .text-glitch:hover::before {
+    opacity: 1;
+    color: #CE2B37;
+    animation: glitch-1 280ms steps(2) infinite;
+    text-shadow: -2px 0 #CE2B37;
+  }
+  .text-glitch:hover::after {
+    opacity: 1;
+    color: #009246;
+    animation: glitch-2 280ms steps(2) infinite reverse;
+    text-shadow: 2px 0 #009246;
+  }
+}
+@keyframes glitch-1 {
+  0%   { transform: translate(0); clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%); }
+  50%  { transform: translate(-2px, 0); clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); }
+  100% { transform: translate(0); clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%); }
+}
+@keyframes glitch-2 {
+  0%   { transform: translate(0); clip-path: polygon(0 80%, 100% 80%, 100% 100%, 0 100%); }
+  50%  { transform: translate(2px, 0); clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%); }
+  100% { transform: translate(0); clip-path: polygon(0 80%, 100% 80%, 100% 100%, 0 100%); }
+}
+
+/* 4. GRAIN overlay (effetto pellicola) */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 220px 220px;
+  animation: grain-shift 8s steps(8) infinite;
+}
+@keyframes grain-shift {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-10%, 5%); }
+  40%  { transform: translate(-5%, 15%); }
+  60%  { transform: translate(15%, 0); }
+  80%  { transform: translate(-15%, 0); }
+  100% { transform: translate(0, 0); }
+}
+
+/* 5. SECTION CURTAIN */
+.section-curtain {
+  position: relative;
+  overflow: hidden;
+}
+.section-curtain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--c-stihl);
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 900ms var(--ease-in-out);
+  z-index: 5;
+  pointer-events: none;
+}
+.section-curtain.is-curtain-in::before { transform: scaleY(1); }
+
+/* 6. SVG LINE DRAW */
+.line-draw-svg path,
+.line-draw-svg line,
+.line-draw-svg polyline {
+  stroke-dasharray: var(--draw-length, 1000);
+  stroke-dashoffset: var(--draw-length, 1000);
+  transition: stroke-dashoffset 1400ms var(--ease-out);
+}
+.line-draw-svg.is-drawn path,
+.line-draw-svg.is-drawn line,
+.line-draw-svg.is-drawn polyline {
+  stroke-dashoffset: 0;
+}
+
+/* 7. WORD-BY-WORD reveal */
+.word-reveal {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.25em;
+  overflow: hidden;
+}
+.word-reveal__word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(110%);
+  transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out);
+}
+.word-reveal.is-in .word-reveal__word {
+  opacity: 1;
+  transform: translateY(0);
+}
+.word-reveal.is-in .word-reveal__word:nth-child(1) { transition-delay: 0ms; }
+.word-reveal.is-in .word-reveal__word:nth-child(2) { transition-delay: 80ms; }
+.word-reveal.is-in .word-reveal__word:nth-child(3) { transition-delay: 160ms; }
+.word-reveal.is-in .word-reveal__word:nth-child(4) { transition-delay: 240ms; }
+.word-reveal.is-in .word-reveal__word:nth-child(5) { transition-delay: 320ms; }
+.word-reveal.is-in .word-reveal__word:nth-child(6) { transition-delay: 400ms; }
+.word-reveal.is-in .word-reveal__word:nth-child(n+7) { transition-delay: 480ms; }
+
+/* 8. STICKY SCALE-OUT */
+.sticky-scale {
+  transition: transform 600ms var(--ease-out), opacity 600ms ease;
+  transform-origin: center;
+}
+.sticky-scale.is-out {
+  transform: scale(0.92);
+  opacity: 0.55;
+}
+
+/* 9. CURSOR DOT TRAIL */
+.cursor-trail {
+  position: fixed;
+  top: 0; left: 0;
+  width: 5px; height: 5px;
+  background: var(--c-stihl);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+.cursor-trail.is-visible { opacity: 1; }
+@media (hover: none), (pointer: coarse) {
+  .cursor-trail { display: none; }
+}
+
+/* 10. CTA BORDER DRAW on hover */
+.btn-draw-border {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 1rem 2rem;
+  color: var(--c-fg);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-block;
+  isolation: isolate;
+}
+.btn-draw-border::before,
+.btn-draw-border::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--c-stihl);
+  transition: clip-path 500ms var(--ease-out);
+  pointer-events: none;
+}
+.btn-draw-border::before {
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+}
+.btn-draw-border::after {
+  clip-path: polygon(50% 0, 50% 0, 50% 100%, 50% 100%);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-draw-border:hover::before { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+  .btn-draw-border:hover::after { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+  .btn-draw-border:hover { color: var(--c-stihl); }
+}
+
+/* 11. REVEAL DIAGONAL clip-path */
+.reveal-diagonal {
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  transition: clip-path 1100ms var(--ease-out);
+}
+.reveal-diagonal.is-in {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* 12. ARROW rotate on hover */
+.arrow-rotate {
+  display: inline-block;
+  transition: transform 400ms var(--ease-elastic);
+}
+.btn:hover .arrow-rotate,
+a:hover > .arrow-rotate {
+  transform: rotate(-45deg) translateX(2px);
+}
+
+/* 13. SCROLL VELOCITY MARQUEE (acceleration) */
+.velocity-marquee {
+  display: flex;
+  gap: 3.2rem;
+  width: max-content;
+  animation: vel-scroll var(--vel-dur, 30s) linear infinite;
+  will-change: transform;
+}
+.velocity-marquee:hover { animation-duration: calc(var(--vel-dur, 30s) * 1.6); }
+@keyframes vel-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* 14. UNDERLINE GROW on focus (a11y CTA) */
+.underline-grow {
+  position: relative;
+  text-decoration: none;
+}
+.underline-grow::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 400ms var(--ease-out);
+}
+.underline-grow:hover::after,
+.underline-grow:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* 15. IMAGE BLEND filter shift on scroll */
+.img-filter-shift {
+  filter: saturate(0.7) contrast(1) brightness(0.85);
+  transition: filter 800ms var(--ease-out);
+}
+.img-filter-shift.is-in {
+  filter: saturate(1.05) contrast(1.05) brightness(1);
+}
+
+/* 16. HEADLINE LETTER UP (lettere che salgono on scroll) */
+.letter-up {
+  display: inline-flex;
+  overflow: hidden;
+}
+.letter-up__char {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 800ms var(--ease-out);
+}
+.letter-up.is-in .letter-up__char {
+  transform: translateY(0);
+}
+
+/* Reduce-motion override */
+@media (prefers-reduced-motion: reduce) {
+  .text-glitch::before, .text-glitch::after,
+  .grain-overlay,
+  .word-reveal__word,
+  .sticky-scale,
+  .reveal-diagonal,
+  .arrow-rotate,
+  .cursor-trail,
+  .velocity-marquee,
+  .letter-up__char,
+  .img-filter-shift {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1;
+    clip-path: none;
+    filter: none;
+  }
+  .grain-overlay { display: none; }
+}

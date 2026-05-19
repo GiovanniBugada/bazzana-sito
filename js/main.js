@@ -341,6 +341,112 @@
   }
   initScrollShowcase();
 
+  /* ——— MAGNETIC BUTTONS (CTA che si attraggono al cursore) ——— */
+  if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('[data-magnetic], .cta-magnetic').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width / 2) * 0.18;
+        const y = (e.clientY - r.top - r.height / 2) * 0.18;
+        el.style.transform = `translate(${x}px, ${y}px)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = '';
+      });
+    });
+  }
+
+  /* ——— 3D TILT cards (inclina su mouse) ——— */
+  if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      const inner = card.querySelector('.tilt-card__inner') || card;
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        const rotY = x * 12;
+        const rotX = -y * 8;
+        inner.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(0)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        inner.style.transform = '';
+      });
+    });
+  }
+
+  /* ——— WORD-BY-WORD reveal (titoli) ——— */
+  document.querySelectorAll('.word-reveal').forEach(el => {
+    if (el.dataset.wordSplit === '1') return;
+    el.dataset.wordSplit = '1';
+    const text = el.textContent;
+    el.innerHTML = text.split(/\s+/).filter(Boolean)
+      .map(w => `<span class="word-reveal__word">${w}</span>`)
+      .join(' ');
+  });
+  observeAndAdd('.word-reveal', 'is-in', 0.25);
+
+  /* ——— LETTER-UP per titoli char by char ——— */
+  document.querySelectorAll('.letter-up').forEach(el => {
+    if (el.dataset.letterSplit === '1') return;
+    el.dataset.letterSplit = '1';
+    const text = el.textContent;
+    el.innerHTML = text.split('').map((c, i) => {
+      if (c === ' ') return ' ';
+      return `<span class="letter-up__char" style="transition-delay:${i * 28}ms">${c}</span>`;
+    }).join('');
+  });
+  observeAndAdd('.letter-up', 'is-in', 0.25);
+
+  /* ——— SVG line draw on viewport entry ——— */
+  observeAndAdd('.line-draw-svg', 'is-drawn', 0.3);
+
+  /* ——— REVEAL DIAGONAL ——— */
+  observeAndAdd('.reveal-diagonal', 'is-in', 0.2);
+
+  /* ——— IMG FILTER SHIFT on scroll ——— */
+  observeAndAdd('.img-filter-shift', 'is-in', 0.25);
+
+  /* ——— STICKY SCALE-OUT (elemento si rimpicciolisce uscendo dal viewport) ——— */
+  if (!reduced && 'IntersectionObserver' in window) {
+    const stickyScales = document.querySelectorAll('.sticky-scale');
+    if (stickyScales.length) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          en.target.classList.toggle('is-out', !en.isIntersecting);
+        });
+      }, { threshold: 0.1 });
+      stickyScales.forEach(el => io.observe(el));
+    }
+  }
+
+  /* ——— CURSOR TRAIL (puntino che segue il mouse con lerp) ——— */
+  if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const trail = document.createElement('div');
+    trail.className = 'cursor-trail';
+    document.body.appendChild(trail);
+    let tx = 0, ty = 0, mx = 0, my = 0;
+    let visible = false;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      if (!visible) { trail.classList.add('is-visible'); visible = true; }
+    });
+    const lerp = () => {
+      tx += (mx - tx) * 0.18;
+      ty += (my - ty) * 0.18;
+      trail.style.transform = `translate(${tx}px, ${ty}px) translate(-50%, -50%)`;
+      requestAnimationFrame(lerp);
+    };
+    lerp();
+  }
+
+  /* ——— GRAIN OVERLAY (film grain effect) ——— */
+  if (!reduced) {
+    const grain = document.createElement('div');
+    grain.className = 'grain-overlay';
+    grain.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(grain);
+  }
+
   // Parallax sottile per immagini con data-parallax-speed (sondaven style)
   if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     const parallaxEls = document.querySelectorAll('[data-parallax-speed]');
