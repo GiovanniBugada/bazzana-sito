@@ -110,17 +110,27 @@
 
 <main id="main">
 
-  <!-- HERO con blob decorativi + dots grid -->
+  <!-- HERO impattante con mesh gradient + blob + dots + zoom slow + section number -->
   <section class="hero">
+    <!-- Section number 01 / 06 -->
+    <span class="section-num" aria-hidden="true">
+      <span class="section-num__current">01</span>
+      <span class="section-num__sep">/</span>
+      <span class="section-num__total">06</span>
+    </span>
+    <!-- Decorazioni background -->
     <div class="blob blob--top-left" aria-hidden="true"></div>
     <div class="blob blob--bottom-right" aria-hidden="true"></div>
+    <div class="blob blob--center" aria-hidden="true"></div>
     <div class="dots-bg" aria-hidden="true"></div>
-    <div class="hero__media">
+    <div class="hero__media hero__media--zoom">
       <img class="img-filter-shift reveal-diagonal" src="assets/img/hero/facciata-esterna-rossa.jpg" alt="Facciata del negozio Motor Garden Bazzana a Cene, valle Seriana" fetchpriority="high" data-parallax-speed="0.15" />
     </div>
+    <!-- Overlay gradient piu' definito per leggibilita' testo -->
+    <div class="hero__overlay" aria-hidden="true"></div>
     <div class="hero__inner">
       <div class="hero__eyebrows reveal" data-delay="1">
-        <span>Cene · BG · Italia</span>
+        <span class="hero__loc"><span class="hero__loc-dot"></span>Cene · BG · Italia</span>
         <div class="right">
           <span>45.79° N</span>
           <span>09.84° E</span>
@@ -135,12 +145,13 @@
         Vendita, assistenza e ricambi ufficiali Stihl. L'officina autorizzata che fa durare le macchine, in valle Seriana.
       </p>
       <div class="hero__ctas reveal" data-delay="4">
-        <a class="btn cta-magnetic" href="prodotti.html" data-cursor="Sfoglia" data-magnetic>Vedi i prodotti</a>
+        <a class="btn cta-magnetic pulse-soft" href="prodotti.html" data-cursor="Sfoglia" data-magnetic>Vedi i prodotti</a>
         <a class="btn btn--outline cta-magnetic" href="contatti.html" data-cursor="Visita" data-magnetic>Vieni in negozio</a>
       </div>
     </div>
-    <div class="scroll-cue" aria-hidden="true">
+    <div class="scroll-cue scroll-cue--enhanced" aria-hidden="true">
       <span>Scorri</span>
+      <span class="scroll-cue__arrow">↓</span>
       <span class="scroll-cue__line"></span>
     </div>
   </section>
@@ -523,6 +534,21 @@
 
 </main>
 
+<!-- ROTATING BADGE timbro circolare sopra footer -->
+<div class="rotating-stamp" aria-hidden="true">
+  <div class="rotating-stamp__circle">
+    <svg viewBox="0 0 200 200">
+      <defs>
+        <path id="stamp-circle" d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0" />
+      </defs>
+      <text class="rotating-stamp__text">
+        <textPath href="#stamp-circle">MOTOR GARDEN BAZZANA · CENE BG · APERTI 2026 · STIHL · MOTOR GARDEN · </textPath>
+      </text>
+    </svg>
+    <span class="rotating-stamp__center">2026</span>
+  </div>
+</div>
+
 <footer class="site-footer">
   <div class="site-footer__inner">
     <div class="site-footer__top">
@@ -563,6 +589,19 @@
 </footer>
 
 <button class="sound-toggle" aria-label="Attiva suono ambiente">Audio</button>
+
+<!-- STICKY FAB STACK: WhatsApp + Phone + Back-to-top -->
+<div class="fab-stack" id="fab-stack" aria-label="Azioni rapide">
+  <a class="fab-stack__btn fab-stack__btn--wa" href="https://wa.me/39035719411?text=Ciao%21%20Vorrei%20info%20su%20Motor%20Garden%20Bazzana" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zM12.04 20.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.26 8.26 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23z"/></svg>
+  </a>
+  <a class="fab-stack__btn fab-stack__btn--phone" href="tel:+39035719411" aria-label="Chiama 035 719411">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  </a>
+  <button class="fab-stack__btn fab-stack__btn--top" id="fab-top" aria-label="Torna su">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+  </button>
+</div>
 
 <script src="js/main.js"></script>
 <script src="js/extras.js" defer></script>

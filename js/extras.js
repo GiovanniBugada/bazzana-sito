@@ -200,8 +200,44 @@
     });
   }
 
+  /* ——— STICKY FAB STACK (WhatsApp + Phone + Top) ——— */
+  function initFabStack() {
+    const stack = document.getElementById('fab-stack');
+    if (!stack) return;
+    const update = () => {
+      stack.classList.toggle('is-visible', window.scrollY > 400);
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+    const topBtn = document.getElementById('fab-top');
+    if (topBtn) {
+      topBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+      });
+    }
+  }
+
+  /* ——— OBSERVERS section-entrance + headline-shift ——— */
+  function initEntranceObservers() {
+    if (reduced || !('IntersectionObserver' in window)) {
+      document.querySelectorAll('.section-entrance, .headline-shift').forEach(el => el.classList.add('is-in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add('is-in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.section-entrance, .headline-shift').forEach(el => io.observe(el));
+  }
+
   /* ——— INIT ——— */
   function init() {
+    initFabStack();
+    initEntranceObservers();
     updateWishlistBadge();
     injectWishlistButtons();
     initCatalogSearch();

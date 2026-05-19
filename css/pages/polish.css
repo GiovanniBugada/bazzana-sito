@@ -1,0 +1,282 @@
+/* =========================================================
+   POLISH CSS — Fase 1 hero impatto + section number + decorazioni
+   ========================================================= */
+
+/* —— HERO impattante: media zoom-in slow on load —— */
+.hero__media--zoom {
+  overflow: hidden;
+}
+.hero__media--zoom img {
+  animation: hero-zoom-in 14s ease-out forwards;
+  will-change: transform;
+}
+@keyframes hero-zoom-in {
+  from { transform: scale(1.12); }
+  to   { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__media--zoom img { animation: none; transform: scale(1); }
+}
+
+/* —— HERO overlay gradient per leggibilita' testo —— */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(14,15,14,0.10) 0%, rgba(14,15,14,0.70) 100%),
+    linear-gradient(90deg, rgba(14,15,14,0.45) 0%, rgba(14,15,14,0.15) 60%, rgba(14,15,14,0.15) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.hero__inner { position: relative; z-index: 2; }
+
+/* —— LOCATION dot pulsante nella hero eyebrow —— */
+.hero__loc {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.hero__loc-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--c-stihl);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(242,101,34,0.6);
+  animation: loc-pulse 1.8s ease-in-out infinite;
+  display: inline-block;
+}
+@keyframes loc-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(0.6); opacity: 0.55; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__loc-dot { animation: none; }
+}
+
+/* —— SECTION NUMBER "01 / 06" decorativo in alto destra di ogni section —— */
+.section-num {
+  position: absolute;
+  top: 7rem;
+  right: 2rem;
+  z-index: 3;
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: var(--c-fg-muted);
+  opacity: 0.7;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+.section-num__current {
+  color: var(--c-stihl);
+  font-weight: 600;
+  font-size: 1rem;
+}
+.section-num__sep {
+  opacity: 0.4;
+  margin: 0 0.1em;
+}
+.section-num__total { opacity: 0.6; }
+@media (max-width: 700px) {
+  .section-num { top: 5rem; right: 1rem; font-size: 0.66rem; }
+  .section-num__current { font-size: 0.84rem; }
+}
+
+/* —— SCROLL CUE enhanced con freccia che oscilla —— */
+.scroll-cue--enhanced {
+  z-index: 3;
+}
+.scroll-cue__arrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: var(--c-stihl);
+  text-align: center;
+  margin: 0.4rem 0 0.2rem;
+  animation: scroll-cue-arrow 1.8s ease-in-out infinite;
+}
+@keyframes scroll-cue-arrow {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50%      { transform: translateY(6px); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue__arrow { animation: none; }
+}
+
+/* =========================================================
+   STICKY FAB STACK (basso destra: WhatsApp + Phone + Top)
+   ========================================================= */
+.fab-stack {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 9990;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  pointer-events: none;
+}
+.fab-stack__btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-ink);
+  color: var(--c-ivory);
+  border: 1px solid var(--c-line-strong);
+  text-decoration: none;
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 360ms var(--ease-out),
+              transform 360ms var(--ease-out),
+              background 280ms var(--ease-out),
+              color 280ms var(--ease-out);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+.fab-stack.is-visible .fab-stack__btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fab-stack.is-visible .fab-stack__btn:nth-child(1) { transition-delay: 0ms; }
+.fab-stack.is-visible .fab-stack__btn:nth-child(2) { transition-delay: 80ms; }
+.fab-stack.is-visible .fab-stack__btn:nth-child(3) { transition-delay: 160ms; }
+
+.fab-stack__btn--wa { background: #25D366; color: #fff; border-color: #25D366; }
+.fab-stack__btn--wa:hover { background: #1ebf5a; transform: scale(1.08); }
+.fab-stack__btn--phone:hover { background: var(--c-stihl); color: var(--c-ink); border-color: var(--c-stihl); }
+.fab-stack__btn--top:hover { background: var(--c-ivory); color: var(--c-ink); border-color: var(--c-ivory); }
+.fab-stack__btn svg { width: 22px; height: 22px; }
+
+@media (max-width: 600px) {
+  .fab-stack { right: 1rem; bottom: 5rem; }
+  .fab-stack__btn { width: 46px; height: 46px; }
+}
+
+/* =========================================================
+   ROTATING BADGE circolare (timbro sopra footer)
+   ========================================================= */
+.rotating-stamp {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-6) 0 var(--space-4);
+}
+.rotating-stamp__circle {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  animation: stamp-rotate 24s linear infinite;
+  will-change: transform;
+}
+.rotating-stamp__circle::before {
+  content: "";
+  position: absolute;
+  inset: 38px;
+  background: var(--c-stihl);
+  border-radius: 50%;
+}
+.rotating-stamp__center {
+  position: absolute;
+  inset: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 460;
+  letter-spacing: 0.08em;
+  color: var(--c-ink);
+  text-transform: uppercase;
+  z-index: 2;
+  animation: stamp-rotate-counter 24s linear infinite;
+}
+@keyframes stamp-rotate { to { transform: rotate(360deg); } }
+@keyframes stamp-rotate-counter { to { transform: rotate(-360deg); } }
+.rotating-stamp__circle svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+.rotating-stamp__text {
+  fill: var(--c-fg-muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rotating-stamp__circle,
+  .rotating-stamp__center { animation: none; }
+}
+
+/* =========================================================
+   IMG SWAP applicato alle CAT-CARD (crossfade hover)
+   ========================================================= */
+.cat-card .cat-card__bg-alt {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 700ms var(--ease-out), transform 1400ms var(--ease-out);
+  filter: saturate(0.95) brightness(0.6) contrast(1.05);
+  z-index: 0;
+}
+@media (hover: hover) and (pointer: fine) {
+  .cat-card:hover .cat-card__bg-alt {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .cat-card:hover .cat-card__bg {
+    opacity: 0.3;
+  }
+}
+
+/* =========================================================
+   CAT-CARD NUMERO che si anima on hover
+   ========================================================= */
+.cat-card__num {
+  transition: color var(--dur) var(--ease-out), letter-spacing 400ms var(--ease-out);
+}
+.cat-card:hover .cat-card__num {
+  color: var(--c-stihl);
+  letter-spacing: 0.2em;
+}
+
+/* =========================================================
+   ENTRANCE clip-path diagonale per le sezioni
+   ========================================================= */
+.section-entrance {
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  transition: clip-path 1200ms cubic-bezier(0.86, 0, 0.07, 1);
+}
+.section-entrance.is-in {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-entrance { clip-path: none; transition: none; }
+}
+
+/* =========================================================
+   HEADLINE SHIFT (h2 sale quando entra in viewport)
+   ========================================================= */
+.headline-shift {
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 900ms var(--ease-out), opacity 700ms ease;
+}
+.headline-shift.is-in {
+  transform: translateY(-8px);
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .headline-shift { transform: none; opacity: 1; transition: none; }
+}
