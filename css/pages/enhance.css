@@ -1,0 +1,462 @@
+/* =========================================================
+   ENHANCE.CSS — color polish + animazioni dinamiche eleganti
+   Importato dopo polish.css per overriding mirato.
+   ========================================================= */
+
+/* —— PALETTE estesa: gradient e accenti caldi —— */
+:root {
+  --c-stihl-glow: rgba(242, 101, 34, 0.42);
+  --c-stihl-glow-soft: rgba(242, 101, 34, 0.18);
+  --c-amber: #ffb86b;
+  --c-terra: #c84f18;
+  --c-forest-deep: #15291f;
+  --grad-fire: linear-gradient(135deg, #ff8c4a 0%, #f26522 50%, #c84f18 100%);
+  --grad-night: linear-gradient(180deg, #0E0F0E 0%, #16181A 60%, #1F2123 100%);
+  --grad-warm-overlay: linear-gradient(180deg, rgba(14,15,14,0.10) 0%, rgba(31,33,35,0.70) 70%, rgba(14,15,14,0.92) 100%);
+}
+
+/* —— HERO overlay piu' ricco con doppio gradient —— */
+.hero__overlay {
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(242,101,34,0.10) 0%, transparent 50%),
+    linear-gradient(160deg, rgba(14,15,14,0.20) 0%, rgba(14,15,14,0.78) 80%);
+}
+
+/* —— Hero title con sottile gradient su <em> —— */
+.hero__title em {
+  background: linear-gradient(135deg, var(--c-amber) 0%, var(--c-stihl) 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+}
+
+/* —— Hero CTA primario: gradient warm + glow on hover —— */
+.hero__ctas .btn:not(.btn--outline) {
+  background: var(--grad-fire);
+  border: none;
+  color: var(--c-ivory);
+  position: relative;
+  overflow: hidden;
+  transition: transform 280ms var(--ease-out),
+              box-shadow 360ms var(--ease-out),
+              filter 280ms ease;
+  box-shadow: 0 6px 20px rgba(242, 101, 34, 0.25);
+}
+.hero__ctas .btn:not(.btn--outline):hover {
+  transform: translateY(-3px);
+  filter: brightness(1.08);
+  box-shadow: 0 18px 40px var(--c-stihl-glow),
+              0 0 0 1px rgba(255, 184, 107, 0.4) inset;
+}
+.hero__ctas .btn:not(.btn--outline)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+              transparent 0%,
+              rgba(255, 255, 255, 0.22) 50%,
+              transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 700ms var(--ease-out);
+  pointer-events: none;
+}
+.hero__ctas .btn:not(.btn--outline):hover::after { transform: translateX(100%); }
+
+.hero__ctas .btn--outline {
+  border: 1px solid rgba(244, 241, 234, 0.4);
+  background: rgba(14, 15, 14, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 280ms var(--ease-out);
+}
+.hero__ctas .btn--outline:hover {
+  background: rgba(244, 241, 234, 0.08);
+  border-color: var(--c-stihl);
+  color: var(--c-stihl);
+  transform: translateY(-3px);
+}
+
+/* —— Hero subtitle con border decorativo a sinistra —— */
+.hero__sub {
+  position: relative;
+  padding-left: 1.2rem;
+}
+.hero__sub::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--c-stihl);
+  border-radius: 1px;
+  opacity: 0.75;
+}
+
+/* —— NAV link con underline che scivola da centro —— */
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--c-stihl);
+  transition: width 400ms var(--ease-out), left 400ms var(--ease-out);
+}
+.nav a:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* —— MANIFESTO quote con gradient su <em> —— */
+.manifesto__quote em {
+  background: var(--grad-fire);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* —— CAT-CARD bento: bordo arancione che si traccia + glow soft —— */
+.cat-card {
+  position: relative;
+  border: 1px solid transparent;
+  transition: transform 500ms var(--ease-out),
+              border-color 600ms var(--ease-out),
+              box-shadow 600ms var(--ease-out);
+  isolation: isolate;
+}
+.cat-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--c-stihl);
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: clip-path 700ms var(--ease-out), opacity 300ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .cat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 50px -16px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(242, 101, 34, 0.25);
+  }
+  .cat-card:hover::before {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+  }
+  .cat-card:hover .cat-card__bg {
+    filter: saturate(1.05) brightness(0.62) contrast(1.08);
+    transform: scale(1.04);
+  }
+  .cat-card:hover .cat-card__title {
+    color: var(--c-stihl);
+  }
+}
+.cat-card__title {
+  transition: color 400ms var(--ease-out);
+}
+
+/* —— BRANDS grid: card piu' definite con bordo gradient —— */
+.brands__item {
+  padding: 1.6rem 1.4rem;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-2);
+  transition: border-color 400ms var(--ease-out),
+              background 400ms var(--ease-out),
+              transform 400ms var(--ease-out);
+  background: rgba(244, 241, 234, 0.02);
+}
+.brands__item:hover {
+  border-color: var(--c-stihl);
+  background: rgba(242, 101, 34, 0.05);
+  transform: translateY(-4px);
+}
+.brands__item .name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 460;
+  letter-spacing: -0.02em;
+  display: block;
+  margin-bottom: 0.3rem;
+  transition: color 300ms ease;
+}
+.brands__item:hover .name { color: var(--c-stihl); }
+.brands__item .role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-stihl);
+  display: block;
+  margin-bottom: 0.6rem;
+}
+.brands__item .desc {
+  font-size: 0.9rem;
+  color: var(--c-fg-muted);
+  line-height: 1.55;
+}
+
+/* —— WORKSHOP banner: media con glow on hover —— */
+.workshop__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-2);
+}
+.workshop__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, var(--c-stihl-glow-soft), transparent 60%);
+  opacity: 0;
+  transition: opacity 500ms ease;
+  pointer-events: none;
+}
+.workshop__media:hover::after { opacity: 1; }
+.workshop__media img {
+  transition: transform 1200ms var(--ease-out), filter 600ms ease;
+}
+.workshop__media:hover img {
+  transform: scale(1.04);
+  filter: saturate(1.05) brightness(1.04);
+}
+
+/* —— SECTIONS alternate background per ritmo visivo —— */
+.manifesto { background: var(--grad-night); }
+.cats { background: var(--c-ink); }
+.workshop { background: var(--c-ink-soft); }
+.brands { background: var(--c-ink-2); }
+.visit { background: var(--c-ink); }
+.cinema-stats { background: var(--c-ink-soft); }
+
+/* —— FAB stack con glow brand on visible —— */
+.fab-stack.is-visible .fab-stack__btn--wa {
+  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.3),
+              0 0 0 0 rgba(37, 211, 102, 0.4);
+  animation: fab-wa-pulse 2.8s ease-in-out infinite;
+}
+@keyframes fab-wa-pulse {
+  0%, 100% { box-shadow: 0 8px 28px rgba(37, 211, 102, 0.3), 0 0 0 0 rgba(37, 211, 102, 0.4); }
+  50%      { box-shadow: 0 8px 28px rgba(37, 211, 102, 0.4), 0 0 0 10px rgba(37, 211, 102, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fab-stack.is-visible .fab-stack__btn--wa { animation: none; }
+}
+
+/* —— SCROLL CUE piu' decisa —— */
+.scroll-cue {
+  bottom: 1.6rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+}
+.scroll-cue span:first-child {
+  opacity: 0.65;
+  transition: opacity 400ms ease;
+}
+.scroll-cue:hover span:first-child { opacity: 1; }
+
+/* —— Hero eyebrows ricchi —— */
+.hero__eyebrows {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.65);
+}
+.hero__eyebrows .hero__loc { color: var(--c-ivory); }
+
+/* —— STATS cifra: gradient + glow soft —— */
+.stat-block__value {
+  background: var(--grad-fire);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 24px var(--c-stihl-glow-soft);
+  filter: drop-shadow(0 4px 20px var(--c-stihl-glow-soft));
+}
+
+/* —— PROGRESS BAR piu' luminosa —— */
+.scroll-progress__fill {
+  background: linear-gradient(90deg, #ff6b35 0%, #f26522 50%, #c84f18 100%);
+  box-shadow: 0 0 18px rgba(242, 101, 34, 0.7);
+}
+
+/* —— SECTION TITLE underline-grow eye-catcher —— */
+.section-header h2,
+.cats__head h2,
+.brands__head h2 {
+  position: relative;
+  display: inline-block;
+}
+.section-header h2::after,
+.cats__head h2::after,
+.brands__head h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 0;
+  height: 3px;
+  background: var(--c-stihl);
+  border-radius: 2px;
+  transition: width 1000ms var(--ease-out) 200ms;
+}
+.section-header.is-in h2::after,
+.cats__head.is-in h2::after,
+.brands__head.is-in h2::after,
+.section-header h2:hover::after,
+.cats__head h2:hover::after,
+.brands__head h2:hover::after {
+  width: 80px;
+}
+
+/* —— STICKY-NARRATIVE step current dot —— */
+.scroll-showcase__step.is-active .scroll-showcase__eyebrow::before {
+  content: "● ";
+  color: var(--c-stihl);
+  animation: blink-soft 1.4s ease-in-out infinite;
+}
+@keyframes blink-soft {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-showcase__step.is-active .scroll-showcase__eyebrow::before { animation: none; }
+}
+
+/* —— FAQ summary: hover background + arrow stronger —— */
+.faq-item summary {
+  position: relative;
+  padding-left: 1rem;
+  transition: padding-left 300ms var(--ease-out), background 300ms ease;
+}
+.faq-item summary::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: var(--c-stihl);
+  border-radius: 2px;
+  transition: height 400ms var(--ease-out);
+}
+.faq-item[open] summary { padding-left: 1.5rem; }
+.faq-item[open] summary::before { height: 60%; }
+.faq-item summary:hover { padding-left: 1.3rem; }
+.faq-item summary:hover::before { height: 40%; }
+
+/* —— H-SCROLL card: shadow piu' definita —— */
+.h-scroll-card {
+  border-radius: var(--radius-2);
+  transition: transform 400ms var(--ease-out),
+              background 400ms ease,
+              border-color 400ms ease,
+              box-shadow 400ms ease;
+}
+.h-scroll-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--c-stihl);
+  background: var(--c-ink);
+  box-shadow: 0 20px 40px -16px rgba(242, 101, 34, 0.3);
+}
+.h-scroll-card:hover .h-scroll-card__city { color: var(--c-stihl); }
+.h-scroll-card__city { transition: color 300ms ease; }
+
+/* —— FILTER chip glow on active —— */
+.chip.is-active {
+  background: var(--grad-fire);
+  border: none;
+  box-shadow: 0 4px 14px var(--c-stihl-glow-soft);
+}
+
+/* —— CATALOG SEARCH input glow on focus —— */
+.catalog-search__field:focus-within {
+  border-color: var(--c-stihl);
+  box-shadow: 0 0 0 4px var(--c-stihl-glow-soft);
+}
+.catalog-search__field:focus-within svg {
+  color: var(--c-stihl);
+}
+
+/* —— DEPTH-CARD hover ring brand —— */
+.product-catalog .depth-card__base {
+  position: relative;
+  transition: box-shadow 500ms var(--ease-out);
+}
+.product-catalog .depth-card:hover .depth-card__base {
+  box-shadow: 0 16px 40px -12px rgba(242, 101, 34, 0.25),
+              0 0 0 1px rgba(242, 101, 34, 0.3);
+}
+
+/* —— TOAST con gradient sottile —— */
+.toast--success { border-left-color: #4ade80; box-shadow: 0 14px 40px rgba(74, 222, 128, 0.12), 0 8px 24px rgba(0,0,0,0.3); }
+.toast--info    { border-left-color: var(--c-stihl); box-shadow: 0 14px 40px var(--c-stihl-glow-soft), 0 8px 24px rgba(0,0,0,0.3); }
+.toast--error   { border-left-color: #e63946; box-shadow: 0 14px 40px rgba(230, 57, 70, 0.12), 0 8px 24px rgba(0,0,0,0.3); }
+
+/* —— FOOTER wordmark piu' espressivo —— */
+.site-footer__wordmark {
+  background: linear-gradient(180deg, var(--c-ivory) 0%, var(--c-ivory) 60%, rgba(244, 241, 234, 0.5) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* —— VISIT map iframe con bordo arancione subtle —— */
+.visit__map {
+  border-radius: var(--radius-2);
+  overflow: hidden;
+  border: 1px solid var(--c-line);
+  transition: border-color 400ms ease, box-shadow 400ms ease;
+}
+.visit__map:hover {
+  border-color: var(--c-stihl);
+  box-shadow: 0 12px 32px -12px var(--c-stihl-glow-soft);
+}
+
+/* —— BRAND marquee dot piu' visibile —— */
+.brand-marquee__item::before,
+.marquee__item::before {
+  content: "● ";
+  color: var(--c-stihl);
+  margin-right: 0.3em;
+  opacity: 0.6;
+  font-size: 0.6em;
+  vertical-align: middle;
+}
+
+/* —— SECTION dividers piu' raffinati —— */
+section:not(.hero) + section {
+  position: relative;
+}
+section:not(.hero) + section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--c-stihl);
+  opacity: 0;
+  transition: opacity 800ms ease, width 800ms var(--ease-out);
+}
+section.is-in::before { opacity: 0.45; width: 120px; }
+
+/* —— Reduce motion override globale —— */
+@media (prefers-reduced-motion: reduce) {
+  .hero__ctas .btn::after,
+  .scroll-showcase__step.is-active .scroll-showcase__eyebrow::before,
+  .fab-stack.is-visible .fab-stack__btn--wa {
+    animation: none !important;
+    transition: none !important;
+  }
+}
