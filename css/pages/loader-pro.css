@@ -1,0 +1,395 @@
+/* =========================================================
+   LOADER PRO — caricamento cinematografico con sparks +
+   ring spinner + brand list + corner info
+   ========================================================= */
+
+.loader {
+  /* Overrides per nuovo loader */
+  gap: 1.8rem;
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(242,101,34,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 70%, rgba(0,146,70,0.04) 0%, transparent 50%),
+    #050606;
+}
+
+/* —— Background sparks (particelle decorative arancioni) —— */
+.loader__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.loader__spark {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--c-stihl);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--c-stihl), 0 0 14px rgba(242, 101, 34, 0.6);
+  opacity: 0;
+  animation: loader-spark 6s ease-in-out infinite;
+}
+.loader__spark--1 { top: 15%; left: 20%; animation-delay: 0s; }
+.loader__spark--2 { top: 70%; left: 80%; animation-delay: 1.2s; }
+.loader__spark--3 { top: 40%; left: 88%; animation-delay: 2.4s; }
+.loader__spark--4 { top: 80%; left: 15%; animation-delay: 3.6s; width: 3px; height: 3px; }
+.loader__spark--5 { top: 25%; left: 65%; animation-delay: 4.8s; }
+@keyframes loader-spark {
+  0%   { opacity: 0; transform: scale(0.6); }
+  20%  { opacity: 0.9; transform: scale(1); }
+  50%  { opacity: 0.5; transform: scale(0.8); }
+  100% { opacity: 0; transform: scale(0.4) translateY(-30px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader__spark { animation: none; opacity: 0; }
+}
+
+/* —— Top label "MOTOR GARDEN BAZZANA" —— */
+.loader__top {
+  position: absolute;
+  top: clamp(1.5rem, 4vh, 3rem);
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.55);
+  z-index: 3;
+  opacity: 0;
+  animation: loader-top-in 600ms var(--ease-out) 200ms forwards;
+}
+.loader__top-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--c-stihl);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--c-stihl-glow);
+  animation: loader-top-dot 1.6s ease-in-out infinite;
+}
+@keyframes loader-top-in {
+  to { opacity: 1; }
+}
+@keyframes loader-top-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(0.55); opacity: 0.4; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader__top { animation: none; opacity: 1; }
+  .loader__top-dot { animation: none; }
+}
+
+/* —— Logo con ring spinner —— */
+.loader__logo {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader__ring {
+  position: absolute;
+  width: clamp(280px, 60vw, 540px);
+  height: clamp(280px, 60vw, 540px);
+  pointer-events: none;
+  z-index: 1;
+}
+.loader__ring-arc {
+  stroke-dasharray: 578;
+  stroke-dashoffset: 578;
+  animation: loader-ring-draw 2200ms cubic-bezier(0.65, 0, 0.35, 1) 200ms forwards,
+             loader-ring-rotate 4s linear infinite 2200ms;
+  transform-origin: center;
+  filter: drop-shadow(0 0 8px var(--c-stihl-glow));
+}
+@keyframes loader-ring-draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes loader-ring-rotate {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader__ring-arc { animation: none; stroke-dashoffset: 0; }
+}
+
+/* —— Tagline piu' espressiva —— */
+.loader__tagline {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.65);
+}
+
+/* —— Progress wrap ricco —— */
+.loader__bar-wrap {
+  width: min(420px, 80vw);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: relative;
+}
+.loader__status {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.55);
+}
+.loader__status-label::before {
+  content: "→ ";
+  color: var(--c-stihl);
+}
+.loader__pct {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 480;
+  letter-spacing: 0.05em;
+  color: var(--c-ivory);
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(135deg, #ff8c4a 0%, #f26522 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.loader__bar {
+  width: 100%;
+  height: 1px;
+  background: rgba(244, 241, 234, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+.loader__bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #ff6b35, #f26522, #ffb86b);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: loader-bar-fill 2200ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  box-shadow: 0 0 12px var(--c-stihl-glow);
+}
+.loader__hint {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.35);
+  margin-top: 0.4rem;
+  max-width: 100%;
+}
+.loader__hint span::before {
+  color: var(--c-stihl);
+  margin-right: 0.3em;
+}
+
+@keyframes loader-bar-fill {
+  to { transform: scaleX(1); }
+}
+
+/* —— Corner info (bottom-left e bottom-right) —— */
+.loader__corner {
+  position: absolute;
+  bottom: clamp(1rem, 3vh, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.45);
+  z-index: 3;
+  opacity: 0;
+  animation: loader-corner-in 700ms var(--ease-out) 1100ms forwards;
+}
+.loader__corner--bl { left: clamp(1rem, 3vw, 2rem); align-items: flex-start; }
+.loader__corner--br { right: clamp(1rem, 3vw, 2rem); align-items: flex-end; }
+.loader__corner-num {
+  color: var(--c-stihl);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+}
+.loader__corner-txt { opacity: 0.7; }
+@keyframes loader-corner-in {
+  to { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader__corner { animation: none; opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .loader__top { font-size: 0.6rem; letter-spacing: 0.3em; }
+  .loader__corner { font-size: 0.58rem; }
+  .loader__hint { gap: 0.5rem; font-size: 0.55rem; }
+  .loader__pct { font-size: 1.1rem; }
+}
+
+/* =========================================================
+   TIPOGRAFIA — colori scritte raffinati
+   ========================================================= */
+
+/* —— Hero title con sottile text-stroke su outline word —— */
+.hero__title {
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* —— EYEBROWS uniformi con bullet —— */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.eyebrow::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--c-stihl);
+  display: inline-block;
+}
+
+/* —— Cat-card title piu' ricca —— */
+.cat-card__title {
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.5);
+}
+.cat-card__title em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--c-amber), var(--c-stihl));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* —— Workshop body h2 ricco —— */
+.workshop__body h2 em.serif-italic,
+.cats__head h2 em.serif-italic,
+.visit__body h2 em.serif-italic {
+  background: linear-gradient(135deg, var(--c-amber) 0%, var(--c-stihl) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+}
+
+/* —— Tel-link in header con accent gradient —— */
+.tel-link {
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--c-ivory), var(--c-stihl));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  transition: filter 300ms ease;
+}
+.tel-link:hover { filter: brightness(1.2); }
+
+/* —— Reveal text con drop-shadow lieve in dark sections —— */
+.is-dark p, .manifesto p {
+  color: rgba(244, 241, 234, 0.78);
+}
+
+/* =========================================================
+   DINAMICHE — elementi visivi che si muovono
+   ========================================================= */
+
+/* —— STICKY CTA BANNER laterale (decorativo, su desktop wide) —— */
+.side-ribbon {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: left center;
+  background: var(--c-stihl);
+  color: var(--c-ink);
+  padding: 0.5rem 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 600;
+  z-index: 80;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: transform 400ms var(--ease-out), background 300ms ease;
+  box-shadow: 0 4px 14px var(--c-stihl-glow-soft);
+}
+.side-ribbon:hover {
+  background: #ff8c4a;
+  transform: translateY(-50%) rotate(-90deg) translateX(4px);
+}
+@media (max-width: 1100px) {
+  .side-ribbon { display: none; }
+}
+
+/* —— FLOATING DOT (decorative) per spotlight section —— */
+.floating-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--c-stihl);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--c-stihl-glow);
+  pointer-events: none;
+  animation: float-dot 8s ease-in-out infinite;
+}
+@keyframes float-dot {
+  0%, 100% { transform: translate(0, 0); }
+  25%      { transform: translate(20px, -30px); }
+  50%      { transform: translate(-15px, -50px); }
+  75%      { transform: translate(10px, -25px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-dot { animation: none; }
+}
+
+/* —— TICKER ROW (decorativo orizzontale full-width) —— */
+.ticker-row {
+  width: 100%;
+  background: var(--c-ink);
+  border-block: 1px solid var(--c-line);
+  padding: 0.9rem 0;
+  overflow: hidden;
+  position: relative;
+}
+.ticker-row__track {
+  display: flex;
+  gap: 2.4rem;
+  width: max-content;
+  animation: ticker-scroll 28s linear infinite;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.55);
+  will-change: transform;
+}
+.ticker-row__track:hover { animation-play-state: paused; }
+.ticker-row__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  white-space: nowrap;
+}
+.ticker-row__item .accent {
+  color: var(--c-stihl);
+}
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-row__track { animation: none; }
+}

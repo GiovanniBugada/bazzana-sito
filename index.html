@@ -59,16 +59,64 @@
 <a class="skip-link" href="#main">Vai al contenuto</a>
 
 <div class="loader" aria-hidden="true">
+  <!-- Background mesh gradient + sparks -->
+  <div class="loader__bg" aria-hidden="true">
+    <span class="loader__spark loader__spark--1"></span>
+    <span class="loader__spark loader__spark--2"></span>
+    <span class="loader__spark loader__spark--3"></span>
+    <span class="loader__spark loader__spark--4"></span>
+    <span class="loader__spark loader__spark--5"></span>
+  </div>
+
+  <!-- Top label fisso -->
+  <div class="loader__top">
+    <span class="loader__top-dot"></span>
+    <span>MOTOR GARDEN BAZZANA</span>
+  </div>
+
+  <!-- Logo container -->
   <div class="loader__logo">
     <div class="loader__logo-stage">
       <img src="assets/brand/logo-bazzana.png" alt="" width="460" height="160" loading="eager" fetchpriority="high">
     </div>
+    <!-- Ring spinner decorativo intorno al logo -->
+    <svg class="loader__ring" viewBox="0 0 200 200" aria-hidden="true">
+      <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(244,241,234,0.08)" stroke-width="1"/>
+      <circle class="loader__ring-arc" cx="100" cy="100" r="92" fill="none" stroke="#F26522" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
   </div>
+
+  <!-- Linea tricolore decorativa -->
   <div class="loader__line" aria-hidden="true"><span></span><span></span><span></span></div>
-  <div class="loader__tagline">Aperti nel 2026 &middot; Cene (BG)</div>
+
+  <!-- Tagline -->
+  <div class="loader__tagline">Esperti del verde &middot; Aperti nel 2026 &middot; Cene (BG)</div>
+
+  <!-- Progress + status row -->
   <div class="loader__bar-wrap">
+    <div class="loader__status">
+      <span class="loader__status-label">Caricamento</span>
+      <span class="loader__pct" aria-live="polite">000%</span>
+    </div>
     <div class="loader__bar"></div>
-    <div class="loader__pct" aria-live="polite">000%</div>
+    <div class="loader__hint">
+      <span>● Stihl</span>
+      <span>● Active</span>
+      <span>● Honda</span>
+      <span>● Oleo-Mac</span>
+      <span>● Echo</span>
+      <span>● Ligier</span>
+    </div>
+  </div>
+
+  <!-- Bottom corners info -->
+  <div class="loader__corner loader__corner--bl">
+    <span class="loader__corner-num">v2.6</span>
+    <span class="loader__corner-txt">Edizione Awwwards</span>
+  </div>
+  <div class="loader__corner loader__corner--br">
+    <span class="loader__corner-txt">45.79° N · 09.84° E</span>
+    <span class="loader__corner-num">Val Seriana</span>
   </div>
 </div>
 
