@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="ph-title">
+  <title id="ph-title">Foto in arrivo — Rasaerba semovente</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4f1ea"/>
+      <stop offset="100%" stop-color="#e8e3d4"/>
+    </linearGradient>
+    <pattern id="grain" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="4" fill="transparent"/>
+      <circle cx="1" cy="1" r="0.3" fill="rgba(14, 15, 14, 0.04)"/>
+      <circle cx="3" cy="3" r="0.3" fill="rgba(14, 15, 14, 0.03)"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <rect width="600" height="600" fill="url(#grain)"/>
+  <rect x="80" y="80" width="440" height="440" fill="none" stroke="rgba(14, 15, 14, 0.10)" stroke-width="1" stroke-dasharray="4 6"/>
+
+  <!-- Rasaerba semovente: corpo + cesto + manubrio + frecce avanzamento -->
+  <g transform="translate(300 270)" fill="none" stroke="#0E0F0E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.65">
+    <!-- Cesto raccolta dietro -->
+    <path d="M 70 -10 L 110 -30 L 110 30 L 70 20 Z"/>
+    <!-- Corpo -->
+    <rect x="-70" y="0" width="140" height="42" rx="4"/>
+    <!-- Ruote più grandi (semovente) -->
+    <circle cx="-50" cy="50" r="18"/>
+    <circle cx="50" cy="50" r="18"/>
+    <circle cx="-50" cy="50" r="6" opacity="0.5"/>
+    <circle cx="50" cy="50" r="6" opacity="0.5"/>
+    <!-- Manubrio -->
+    <path d="M -30 0 L -60 -70"/>
+    <path d="M 30 0 L 60 -70"/>
+    <path d="M -65 -75 L 65 -75"/>
+  </g>
+
+  <!-- Frecce avanzamento semovente -->
+  <g transform="translate(180 320)" fill="none" stroke="#2D8B3E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.75">
+    <path d="M 0 0 L 22 0 M 14 -7 L 22 0 L 14 7"/>
+    <path d="M -25 0 L -5 0 M -13 -7 L -5 0 L -13 7" opacity="0.45"/>
+  </g>
+
+  <text x="300" y="370" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" letter-spacing="2.8" fill="#0E0F0E" opacity="0.55" font-weight="500">WEIBANG · RASAERBA SEMOVENTE</text>
+  <text x="300" y="415" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="32" font-weight="400" fill="#0E0F0E">Foto in arrivo</text>
+  <text x="300" y="452" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="17" font-weight="300" font-style="italic" fill="#0E0F0E" opacity="0.7">specifiche e foto del modello qui sotto</text>
+
+  <circle cx="300" cy="495" r="3.5" fill="#2D8B3E"/>
+</svg>

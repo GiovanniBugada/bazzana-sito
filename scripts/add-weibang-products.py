@@ -1,20 +1,93 @@
 #!/usr/bin/env python3
-"""Genera pagine prodotto Weibang con foto placeholder, aggiorna marquee marchi
-nei file gia' esistenti e aggiunge entry sitemap.xml.
+"""Genera pagine prodotto Weibang con SVG placeholder per categoria,
+aggiorna marquee marchi nei file esistenti, sostituisce la sezione brand
+Weibang in prodotti.html (delimitata da marker WEIBANG:START / WEIBANG:END)
+e aggiunge entry sitemap.xml.
 
-Pattern identico a scripts/add-ligier-products.py / add-stihl-products.py.
+Pattern derivato da scripts/add-ligier-products.py / add-stihl-products.py,
+ma esteso: lo script e' completamente idempotente — genera tutto, basta
+rilanciarlo dopo aver modificato MODELS.
 """
 from __future__ import annotations
 
 import re
+from collections import OrderedDict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PRODOTTI = ROOT / "prodotti"
+PRODOTTI_HTML = ROOT / "prodotti.html"
 SITEMAP = ROOT / "sitemap.xml"
 
-# (slug, model_label, category, lead, description, specs[list of (label, value)])
+# Mapping: slug -> (id_catalogo, sottocategoria_catalogo, svg_categoria)
+# - id_catalogo: data-product-id univoco per la card
+# - sottocategoria_catalogo: nome leggibile del <details data-cat="...">
+# - svg_categoria: filename in assets/img/placeholder-categoria/
+CATALOG_MAP = {
+    "weibang-wb-506-scv":     ("weib1",  "Rasaerba - Semoventi",          "rasaerba-semovente"),
+    "weibang-wb-506-hcv":     ("weib2",  "Rasaerba - Semoventi",          "rasaerba-semovente"),
+    "weibang-wb-456-scv":     ("weib7",  "Rasaerba - Semoventi",          "rasaerba-semovente"),
+    "weibang-wb-537-scv":     ("weib8",  "Rasaerba - Semoventi",          "rasaerba-semovente"),
+    "weibang-wb-506-sc":      ("weib9",  "Rasaerba - A spinta",           "rasaerba-spinta"),
+    "weibang-wb-484-sbv-pro": ("weib10", "Rasaerba - Professionali",      "rasaerba-pro"),
+    "weibang-wb-537-scv-bbc": ("weib3",  "Rasaerba - Professionali BBC",  "rasaerba-pro"),
+    "weibang-wb-656-slcv-bbc":("weib4",  "Rasaerba - Professionali BBC",  "rasaerba-pro"),
+    "weibang-p40-bull":       ("weib5",  "Rasaerba - Batteria",           "rasaerba-batteria"),
+    "weibang-wb-1100-pro":    ("weib6",  "Trattorini - Rasaerba",         "trattorino"),
+    "weibang-wb-384-rb":      ("weib11", "Robot tagliaerba",              "robot"),
+}
+
+# Ordine di display delle sottocategorie nel catalogo Weibang
+CATALOG_ORDER = [
+    "Rasaerba - Semoventi",
+    "Rasaerba - A spinta",
+    "Rasaerba - Professionali",
+    "Rasaerba - Professionali BBC",
+    "Rasaerba - Batteria",
+    "Trattorini - Rasaerba",
+    "Robot tagliaerba",
+]
+
+PLACEHOLDER_DIR = "assets/img/placeholder-categoria"
+
+
+def page_img_path(svg_basename: str) -> str:
+    """Path immagine dal punto di vista delle pagine in prodotti/ (relativo)."""
+    return f"../{PLACEHOLDER_DIR}/{svg_basename}.svg"
+
+
+def catalog_img_path(svg_basename: str) -> str:
+    """Path immagine dal punto di vista di prodotti.html (root)."""
+    return f"{PLACEHOLDER_DIR}/{svg_basename}.svg"
+
+
+def cat_slug(cat_label: str) -> str:
+    """es. 'Rasaerba - A spinta' -> 'rasaerba-a-spinta'"""
+    s = cat_label.lower()
+    s = s.replace(" - ", "-").replace(" ", "-").replace("·", "-")
+    s = re.sub(r"-+", "-", s).strip("-")
+    return s
+
+# (slug, model_label, category, lead, description, specs[list of (label, value)], tagline)
 MODELS = [
+    (
+        "weibang-wb-506-scv",
+        "WB 506 SCV",
+        "Rasaerba semovente",
+        "Rasaerba semovente da 51 cm di taglio, telaio robusto e trasmissione progressiva. Foto del modello in arrivo.",
+        "Pensato per giardini medio-grandi e uso intensivo. Per scheda "
+        "tecnica completa, prezzo aggiornato e disponibilita', chiamaci o "
+        "passa in negozio a Cene (BG).",
+        [
+            ("Larghezza taglio", "51 cm"),
+            ("Trazione", "Semovente"),
+            ("Categoria", "Professionale"),
+            ("Disponibilita'", "Chiamaci per info"),
+            ("Assistenza", "Officina interna Bazzana"),
+            ("Garanzia", "Standard produttore"),
+        ],
+        "spinta facile, taglio pulito.",
+    ),
     (
         "weibang-wb-506-hcv",
         "WB 506 HCV",
@@ -224,7 +297,7 @@ TEMPLATE = """<!DOCTYPE html>
   "name": "Weibang {model}",
   "brand": {{ "@type": "Brand", "name": "Weibang" }},
   "category": "{category}",
-  "image": "https://www.motorgardenbazzana.it/assets/img/placeholder-foto-arrivo.svg",
+  "image": "https://www.motorgardenbazzana.it/{img_rel}",
   "offers": {{
     "@type": "Offer",
     "availability": "https://schema.org/InStock",
@@ -270,10 +343,10 @@ TEMPLATE = """<!DOCTYPE html>
       <a href="../foto.html">Foto</a>
       <a href="../note.html">Blog</a>
       <a href="../storia.html">Storia</a><a href="../contatti.html">Contatti</a></nav></div>
-<main id="main" class="product" data-bzn-product data-brand="Weibang" data-model="{model}" data-category="{category}" data-description="{description_attr}" data-img="assets/img/placeholder-foto-arrivo.svg" data-specs="{specs_attr}">
+<main id="main" class="product" data-bzn-product data-brand="Weibang" data-model="{model}" data-category="{category}" data-description="{description_attr}" data-img="{img_rel}" data-specs="{specs_attr}">
   <p class="product__crumbs"><a href="../index.html">Home</a> / <a href="../prodotti.html">Prodotti</a> / Weibang {model}</p>
   <div class="product__grid">
-    <div class="product__media reveal in"><img src="../assets/img/placeholder-foto-arrivo.svg" alt="Foto in arrivo — Weibang {model}" style="background:#f4f1ea; padding:1.5rem;" /></div>
+    <div class="product__media reveal in"><img src="../{img_rel}" alt="Foto in arrivo — Weibang {model}" style="background:#f4f1ea; padding:1.5rem;" /></div>
     <div>
       <p class="product__brand reveal">Weibang · {category}</p>
       <h1 class="product__title reveal" data-delay="1">{model}<br/><em class="serif-italic">{tagline}</em></h1>
@@ -451,6 +524,7 @@ def build_specs_html(specs):
 
 
 def render_page(slug, model, category, lead, description, specs, tagline):
+    svg_cat = CATALOG_MAP[slug][2]
     return TEMPLATE.format(
         slug=slug,
         model=model,
@@ -463,6 +537,7 @@ def render_page(slug, model, category, lead, description, specs, tagline):
         model_url=model.replace(" ", "%20"),
         specs_attr=build_specs_attr(specs),
         specs_html=build_specs_html(specs),
+        img_rel=catalog_img_path(svg_cat),
     )
 
 
@@ -474,6 +549,109 @@ def write_pages():
             encoding="utf-8",
         )
         print(f"  scritto {out.relative_to(ROOT)}")
+
+
+# ----------------------------------------------------------------------
+# CATALOGO: sezione brand Weibang in prodotti.html
+# ----------------------------------------------------------------------
+
+CATALOG_CARD_TPL = """        <article class="depth-card" data-product-id="{pid}" data-product-name="{model}" data-product-brand="Weibang" data-product-cat="{cat}" data-product-img="{img}">
+          <div class="depth-card__base">
+            <img src="{img}" alt="Weibang {model} - {cat}" loading="lazy" decoding="async">
+          </div>
+          <div class="depth-card__overlay">
+            <h4 class="depth-card__title">Weibang {model}</h4>
+          </div>
+          <div class="depth-card__info">
+            <span class="depth-card__brand-tag">Weibang</span>
+            <span class="depth-card__name">{model}</span>
+            <span class="depth-card__hint">{cat}</span>
+          </div>
+        </article>"""
+
+
+def build_catalog_section():
+    """Genera l'HTML completo della sezione brand Weibang del catalogo.
+    Organizza i prodotti per sottocategoria nell'ordine definito da CATALOG_ORDER.
+    """
+    # Mappa slug -> tupla MODELS
+    by_slug = {m[0]: m for m in MODELS}
+
+    # Raggruppa per sottocategoria di catalogo (NON la 'category' del modello,
+    # ma la 'sottocategoria_catalogo' di CATALOG_MAP)
+    groups = OrderedDict()
+    for cat_label in CATALOG_ORDER:
+        groups[cat_label] = []
+    for slug, (pid, cat_label, svg_cat) in CATALOG_MAP.items():
+        if slug not in by_slug:
+            continue
+        model = by_slug[slug][1]
+        groups.setdefault(cat_label, []).append((pid, model, cat_label, svg_cat))
+
+    lines = []
+    lines.append('      <!-- WEIBANG:START -->')
+    lines.append('      <!-- Sezione Weibang rasaerba professionali (placeholder per categoria, foto reali in arrivo) -->')
+    lines.append('      <div class="brand-section" data-brand="weibang">')
+    lines.append('        <h3 class="brand-section__title">Weibang</h3>')
+
+    for cat_label, items in groups.items():
+        if not items:
+            continue
+        slug = cat_slug(cat_label)
+        lines.append(f'        <details class="cat-group" data-cat="{cat_label}" data-cat-slug="{slug}" open>')
+        lines.append(f'          <summary class="cat-group__title">{cat_label}</summary>')
+        lines.append('          <div class="cat-group__grid">')
+        for pid, model, cat, svg_cat in items:
+            card = CATALOG_CARD_TPL.format(
+                pid=pid,
+                model=model,
+                cat=cat,
+                img=catalog_img_path(svg_cat),
+            )
+            lines.append(card)
+        lines.append('          </div>')
+        lines.append('        </details>')
+
+    lines.append('      </div>')
+    lines.append('      <!-- WEIBANG:END -->')
+    return "\n".join(lines)
+
+
+def update_prodotti_html_section():
+    """Sostituisce idempotentemente la sezione Weibang in prodotti.html.
+    La sezione e' delimitata dai marker <!-- WEIBANG:START --> ... <!-- WEIBANG:END -->.
+    Se i marker non esistono, li inserisce sostituendo la sezione corrente.
+    """
+    if not PRODOTTI_HTML.exists():
+        print("  prodotti.html non trovato, salto")
+        return
+    text = PRODOTTI_HTML.read_text(encoding="utf-8")
+    new_section = build_catalog_section()
+
+    # Caso 1: marker presenti -> sostituisci tutto fra di loro
+    marker_re = re.compile(
+        r"      <!-- WEIBANG:START -->.*?      <!-- WEIBANG:END -->",
+        re.DOTALL,
+    )
+    if marker_re.search(text):
+        text = marker_re.sub(new_section, text)
+        PRODOTTI_HTML.write_text(text, encoding="utf-8")
+        print("  sezione Weibang rigenerata (via marker WEIBANG:START/END)")
+        return
+
+    # Caso 2: marker assenti -> trova la sezione attuale e sostituisci
+    legacy_re = re.compile(
+        r'      <!--[^\n]*Sezione Weibang[^\n]*-->\s*\n\s*<div class="brand-section" data-brand="weibang">.*?</div>\s*\n(?=</section>)',
+        re.DOTALL,
+    )
+    m = legacy_re.search(text)
+    if m:
+        text = text[: m.start()] + new_section + "\n" + text[m.end():]
+        PRODOTTI_HTML.write_text(text, encoding="utf-8")
+        print("  sezione Weibang sostituita (legacy senza marker -> con marker)")
+        return
+
+    print("  ATTENZIONE: nessuna sezione Weibang trovata in prodotti.html, salto")
 
 
 def update_marquee_in_existing_files():
@@ -513,14 +691,6 @@ def update_sitemap():
         new_entries.append(
             f"  <url><loc>{url}</loc><lastmod>{today}</lastmod><priority>0.6</priority></url>"
         )
-    # anche wb-506-scv (gia' creato manualmente)
-    extra_slug = "weibang-wb-506-scv"
-    extra_url = f"{base}{extra_slug}.html"
-    if extra_url not in text:
-        new_entries.insert(
-            0,
-            f"  <url><loc>{extra_url}</loc><lastmod>{today}</lastmod><priority>0.6</priority></url>",
-        )
     if not new_entries:
         print("  sitemap gia' contiene tutte le pagine Weibang")
         return
@@ -533,6 +703,9 @@ def update_sitemap():
 def main():
     print("Genero pagine Weibang...")
     write_pages()
+    print()
+    print("Aggiorno sezione catalogo Weibang in prodotti.html...")
+    update_prodotti_html_section()
     print()
     print("Aggiorno marquee marchi nei file esistenti...")
     update_marquee_in_existing_files()

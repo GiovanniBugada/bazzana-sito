@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="ph-title">
+  <title id="ph-title">Foto in arrivo — Trattorino tagliaerba</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4f1ea"/>
+      <stop offset="100%" stop-color="#e8e3d4"/>
+    </linearGradient>
+    <pattern id="grain" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="4" fill="transparent"/>
+      <circle cx="1" cy="1" r="0.3" fill="rgba(14, 15, 14, 0.04)"/>
+      <circle cx="3" cy="3" r="0.3" fill="rgba(14, 15, 14, 0.03)"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <rect width="600" height="600" fill="url(#grain)"/>
+  <rect x="80" y="80" width="440" height="440" fill="none" stroke="rgba(14, 15, 14, 0.10)" stroke-width="1" stroke-dasharray="4 6"/>
+
+  <!-- Trattorino: cofano + sedile + volante + 4 ruote -->
+  <g transform="translate(300 275)" fill="none" stroke="#0E0F0E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.7">
+    <!-- Cofano motore -->
+    <path d="M -100 10 L -100 -15 L -55 -15 L -45 10"/>
+    <line x1="-95" y1="-5" x2="-65" y2="-5" stroke-width="1.5" opacity="0.5"/>
+    <!-- Telaio corpo -->
+    <rect x="-100" y="10" width="200" height="22" rx="3"/>
+    <!-- Piatto taglio sotto -->
+    <rect x="-90" y="38" width="180" height="10" rx="3" opacity="0.5"/>
+    <!-- Sedile -->
+    <path d="M 15 10 L 25 -25 L 75 -25 L 75 10"/>
+    <line x1="25" y1="-25" x2="25" y2="-50" stroke-width="2"/>
+    <path d="M 25 -50 L 50 -50"/>
+    <!-- Volante / leva -->
+    <line x1="-30" y1="10" x2="-30" y2="-30"/>
+    <circle cx="-30" cy="-35" r="10"/>
+    <!-- 4 Ruote -->
+    <circle cx="-80" cy="58" r="16"/>
+    <circle cx="80" cy="58" r="22"/>
+    <circle cx="-80" cy="58" r="6" opacity="0.5"/>
+    <circle cx="80" cy="58" r="10" opacity="0.5"/>
+  </g>
+
+  <text x="300" y="380" text-anchor="middle" font-family="JetBrains Mono, ui-monospace, monospace" font-size="11" letter-spacing="2.8" fill="#0E0F0E" opacity="0.55" font-weight="500">WEIBANG · TRATTORINO TAGLIAERBA</text>
+  <text x="300" y="425" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="32" font-weight="400" fill="#0E0F0E">Foto in arrivo</text>
+  <text x="300" y="462" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="17" font-weight="300" font-style="italic" fill="#0E0F0E" opacity="0.7">seduto, comodo — foto qui sotto</text>
+
+  <circle cx="300" cy="500" r="3.5" fill="#2D8B3E"/>
+</svg>
