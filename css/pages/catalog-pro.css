@@ -1,0 +1,411 @@
+/* =========================================================
+   CATALOG PRO — catalogo prodotti.html più "model-forward"
+   - Modello prominente sotto immagine
+   - Hover overlay con preview descrizione (solo per prodotti
+     con detail page nel database)
+   ========================================================= */
+
+/* ——————————————————————————————————————————————
+   Catalog card info: modello più grande, gerarchia chiara
+   —————————————————————————————————————————————— */
+
+.depth-card__info {
+  padding: 1rem 1.1rem 1.2rem !important;
+  background: #fff !important;
+  border-top: 1px solid rgba(12, 13, 12, 0.06) !important;
+  gap: 0.3rem !important;
+  /* Quando l'overlay e' attivo (hover), nascondi questa sezione per
+     evitare la sovrapposizione delle scritte (bianco sotto + dark overlay sopra). */
+  transition: opacity 280ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .depth-card:hover .depth-card__info {
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+  }
+}
+.depth-card__brand-tag {
+  font-family: var(--font-mono) !important;
+  font-size: 0.6rem !important;
+  letter-spacing: 0.3em !important;
+  color: var(--c-stihl) !important;
+  font-weight: 500 !important;
+}
+.depth-card .depth-card__name {
+  font-family: var(--font-display) !important;
+  font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.3rem) !important;
+  font-weight: 460 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.15 !important;
+  color: var(--c-ivory, #f4f1ea) !important;
+}
+/* Hint = piccola riga sotto al nome modello. Era 0.55 alpha → poco leggibile */
+.depth-card .depth-card__hint {
+  font-family: var(--font-mono) !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.06em !important;
+  color: rgba(244, 241, 234, 0.78) !important;
+  margin-top: 0.1rem !important;
+}
+
+/* Marker badge "scheda completa" per prodotti con detail page */
+.depth-card.has-detail .depth-card__info {
+  position: relative;
+}
+.depth-card.has-detail .depth-card__name::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--c-stihl);
+  border-radius: 50%;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  box-shadow: 0 0 4px rgba(238, 94, 31, 0.5);
+}
+
+/* ——————————————————————————————————————————————
+   Hover overlay con descrizione (per prodotti con database)
+   —————————————————————————————————————————————— */
+
+.depth-card.has-detail .depth-card__overlay {
+  padding: 1.4rem 1.2rem !important;
+}
+.depth-card.has-detail .depth-card__title {
+  font-family: var(--font-display) !important;
+  font-size: clamp(1.4rem, 1.1rem + 0.6vw, 1.7rem) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.1 !important;
+  color: var(--c-ivory) !important;
+  margin-bottom: 0.4rem !important;
+}
+.depth-card__desc-preview {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: rgba(244, 241, 234, 0.82);
+  margin: 0.6rem 0 1rem;
+  max-width: 280px;
+}
+.depth-card__detail-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.95rem;
+  background: var(--c-stihl);
+  color: var(--c-ink);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 280ms ease, color 280ms ease;
+}
+.depth-card__detail-cta:hover {
+  background: var(--c-ivory);
+  color: var(--c-ink);
+}
+
+/* ——————————————————————————————————————————————
+   Catalog grid: spacing più aria
+   —————————————————————————————————————————————— */
+
+.cat-group__grid {
+  gap: clamp(0.9rem, 1.6vw, 1.4rem) !important;
+}
+
+/* Scroll-margin per quando scrollIntoView() porta una brand-section in cima:
+   lascia spazio per header + un po' di respiro. */
+.product-catalog .brand-section {
+  scroll-margin-top: 100px;
+}
+
+/* Brand chip filter active state più premium */
+.chip.is-active {
+  background: var(--c-stihl) !important;
+  border-color: var(--c-stihl) !important;
+  color: var(--c-ink) !important;
+  font-weight: 500;
+  box-shadow: 0 4px 14px rgba(238, 94, 31, 0.25) !important;
+}
+
+/* ——————————————————————————————————————————————
+   Conteggio dentro il chip + riga categoria
+   —————————————————————————————————————————————— */
+.chip__count {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.05rem 0.45rem;
+  background: rgba(242, 239, 231, 0.12);
+  border-radius: 999px;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  color: rgba(242, 239, 231, 0.78);
+  font-variant-numeric: tabular-nums;
+}
+.chip.is-active .chip__count {
+  background: rgba(10, 11, 10, 0.18);
+  color: var(--c-ink, #0a0b0a);
+}
+
+/* Riga categorie (sotto i brand) */
+.filter-chips.filter-chips--cat {
+  width: min(1320px, 92vw);
+  margin: 1rem auto 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.filter-chips__label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 231, 0.78);
+  margin-right: 0.5rem;
+}
+.chip--cat {
+  font-size: 0.66rem !important;
+  padding: 0.42rem 0.9rem !important;
+}
+
+/* Empty state */
+.product-catalog__empty {
+  width: min(1320px, 92vw);
+  margin: 2rem auto;
+  padding: 2.4rem 1.4rem;
+  text-align: center;
+  border: 1px dashed rgba(242, 239, 231, 0.18);
+  border-radius: 12px;
+  background: rgba(242, 239, 231, 0.03);
+}
+.product-catalog__empty p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: rgba(242, 239, 231, 0.7);
+  margin: 0 0 1rem;
+}
+
+/* ——————————————————————————————————————————————
+   PRODUCT MODAL — popup scheda prodotto (catalog-pro.js)
+   —————————————————————————————————————————————— */
+
+.product-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4rem;
+}
+.product-modal.is-open {
+  display: flex;
+  animation: pmodal-in 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes pmodal-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.product-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 11, 10, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  cursor: pointer;
+}
+.product-modal__panel {
+  position: relative;
+  z-index: 2;
+  width: min(820px, 100%);
+  max-height: 92vh;
+  background: var(--c-ivory, #f2efe7);
+  color: var(--c-ink, #0c0d0c);
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  border: 1px solid rgba(12, 13, 12, 0.08);
+  overflow: hidden;
+  animation: pmodal-rise 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes pmodal-rise {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.product-modal__close {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  z-index: 4;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(12, 13, 12, 0.18);
+  background: rgba(242, 239, 231, 0.92);
+  color: var(--c-ink);
+  font-size: 1.15rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 240ms ease, color 240ms ease, border-color 240ms ease, transform 240ms ease;
+}
+.product-modal__close:hover {
+  background: var(--c-ink);
+  color: var(--c-ivory);
+  border-color: var(--c-ink);
+  transform: rotate(90deg);
+}
+.product-modal__media {
+  background: #f4f1ea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4rem;
+  border-right: 1px solid rgba(12, 13, 12, 0.06);
+}
+.product-modal__img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.product-modal__body {
+  padding: 1.6rem 1.8rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  overflow-y: auto;
+}
+.product-modal__brand {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-stihl, #ee5e1f);
+  font-weight: 500;
+}
+.product-modal__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 1.1rem + 0.9vw, 2rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--c-ink);
+}
+.product-modal__cat {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  /* Contrasto aumentato: era 0.55 (poco leggibile) */
+  color: rgba(12, 13, 12, 0.78);
+  margin: 0;
+}
+.product-modal__desc {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  /* Era #3a3a35 - ora piu' scuro per migliore contrasto */
+  color: #1a1b1a;
+  margin: 0.6rem 0 0;
+}
+.product-modal__specs {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.4rem 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  border-top: 1px solid rgba(12, 13, 12, 0.08);
+  padding-top: 1rem;
+  margin: 0.8rem 0 0;
+}
+.product-modal__specs dt {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.6rem;
+  color: rgba(12, 13, 12, 0.75);
+  padding-block: 0.2rem;
+  border-bottom: 1px solid rgba(12, 13, 12, 0.05);
+}
+.product-modal__specs dd {
+  margin: 0;
+  font-weight: 500;
+  padding-block: 0.2rem;
+  border-bottom: 1px solid rgba(12, 13, 12, 0.05);
+  color: var(--c-ink);
+}
+.product-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(12, 13, 12, 0.08);
+}
+.product-modal__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid;
+  transition: background 280ms ease, color 280ms ease, border-color 280ms ease;
+}
+.product-modal__cta--primary {
+  background: var(--c-stihl, #ee5e1f);
+  color: var(--c-ink, #0c0d0c);
+  border-color: var(--c-stihl, #ee5e1f);
+}
+.product-modal__cta--primary:hover {
+  background: var(--c-ink, #0c0d0c);
+  color: var(--c-ivory, #f2efe7);
+  border-color: var(--c-ink, #0c0d0c);
+}
+.product-modal__cta--ghost {
+  background: transparent;
+  color: var(--c-ink, #0c0d0c);
+  border-color: rgba(12, 13, 12, 0.22);
+}
+.product-modal__cta--ghost:hover {
+  background: var(--c-ink, #0c0d0c);
+  color: var(--c-ivory, #f2efe7);
+  border-color: var(--c-ink, #0c0d0c);
+}
+/* L'attributo [hidden] deve nascondere davvero il bottone — il CSS
+   sopra ha display:inline-flex che fa override del comportamento UA. */
+.product-modal__cta[hidden] {
+  display: none !important;
+}
+
+/* Mobile: stack media + body */
+@media (max-width: 640px) {
+  .product-modal__panel {
+    grid-template-columns: 1fr;
+    max-height: 88vh;
+  }
+  .product-modal__media {
+    padding: 1rem;
+    aspect-ratio: 4/3;
+  }
+}
+
+/* Wishlist disabilitato globalmente: nascondi se rimane in DOM */
+.wl-btn { display: none !important; }
+[data-wishlist-count] { display: none !important; }
+
+/* ——————————————————————————————————————————————
+   Catalog hero page-hero più sobrio
+   —————————————————————————————————————————————— */
+
+.product-catalog .page-hero {
+  padding-block: clamp(7rem, 13vh, 9rem) clamp(3rem, 6vh, 4rem) !important;
+}

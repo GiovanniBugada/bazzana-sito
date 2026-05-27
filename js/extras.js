@@ -140,7 +140,7 @@
       <div class="cookie-banner__inner">\
         <div class="cookie-banner__text">\
           <strong>Usiamo i cookie</strong>\
-          <p>Usiamo cookie tecnici per il funzionamento del sito. Nessun tracker pubblicitario, nessuna profilazione. Vedi la <a href="#" tabindex="0">Privacy Policy</a>.</p>\
+          <p>Usiamo cookie tecnici per il funzionamento del sito. Nessun tracker pubblicitario, nessuna profilazione. Vedi la <a href="/privacy.html" tabindex="0">Privacy Policy</a>.</p>\
         </div>\
         <div class="cookie-banner__actions">\
           <button class="cookie-banner__btn cookie-banner__btn--primary" data-act="accept">Accetta</button>\
@@ -193,7 +193,7 @@
     document.querySelectorAll('[data-wa-product]').forEach(link => {
       const name = link.getAttribute('data-wa-product') || 'prodotto';
       const msg = 'Ciao! Vorrei informazioni su: ' + name;
-      const url = 'https://wa.me/39035719411?text=' + encodeURIComponent(msg);
+      const url = 'https://wa.me/393464156981?text=' + encodeURIComponent(msg);
       link.setAttribute('href', url);
       link.setAttribute('target', '_blank');
       link.setAttribute('rel', 'noopener');
@@ -217,37 +217,8 @@
     }
   }
 
-  /* ——— PAGE TRANSITION CURTAIN orizzontale ——— */
-  function initPageCurtain() {
-    if (reduced) return;
-    // Crea overlay curtain
-    const curtain = document.createElement('div');
-    curtain.className = 'page-curtain';
-    curtain.setAttribute('aria-hidden', 'true');
-    const logo = document.createElement('img');
-    logo.src = 'assets/brand/logo-bazzana.png';
-    logo.alt = '';
-    logo.className = 'page-curtain__logo';
-    curtain.appendChild(logo);
-    document.body.appendChild(curtain);
-
-    // Entry animation on first load (gia' visualizzata dal loader, salto)
-
-    // Click su link interno -> curtain leave -> navigazione -> reveal
-    document.addEventListener('click', (e) => {
-      const a = e.target.closest('a');
-      if (!a) return;
-      const href = a.getAttribute('href');
-      if (!href) return;
-      if (href.startsWith('#')) return;
-      if (a.target === '_blank') return;
-      if (href.startsWith('http') && !href.includes(location.host)) return;
-      if (href.startsWith('mailto:') || href.startsWith('tel:') || href.includes('wa.me')) return;
-      e.preventDefault();
-      curtain.classList.add('is-entering');
-      setTimeout(() => { window.location.href = href; }, 750);
-    });
-  }
+  /* PAGE TRANSITION CURTAIN — RIMOSSO: l'overlay arancione col logo
+     bianco era invasivo. Navigazione ora nativa, niente intermezzi. */
 
   /* ——— OBSERVERS section-entrance + headline-shift ——— */
   function initEntranceObservers() {
@@ -270,9 +241,9 @@
   function init() {
     initFabStack();
     initEntranceObservers();
-    initPageCurtain();
-    updateWishlistBadge();
-    injectWishlistButtons();
+    // Wishlist disabilitato: gli utenti non capivano cosa facesse il cuore.
+    // Sostituito da bottone "Scheda" + modal descrizione (catalog-pro.js).
+    // updateWishlistBadge(); injectWishlistButtons();
     initCatalogSearch();
     initCookieBanner();
     initLightbox();

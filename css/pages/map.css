@@ -1,0 +1,233 @@
+/* =========================================================
+   BZN MAP — stile per il container Leaflet
+   ========================================================= */
+
+.bzn-map {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #e8eef3;
+  min-height: 360px;
+  isolation: isolate;
+}
+
+.bzn-map__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  cursor: grab;
+}
+.bzn-map__canvas:active { cursor: grabbing; }
+
+/* Toggle Mappa ↔ Satellite (top-right) */
+.bzn-map__layer-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 700;
+  display: inline-flex;
+  background: var(--c-ivory, #f4f1ea);
+  border-radius: 999px;
+  padding: 4px;
+  gap: 2px;
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(10, 11, 10, 0.06);
+}
+.bzn-map__layer-btn {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 0;
+  color: var(--c-ink, #0a0b0a);
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 220ms ease, color 220ms ease;
+  font-weight: 500;
+}
+.bzn-map__layer-btn.is-active {
+  background: var(--c-ink, #0a0b0a);
+  color: var(--c-ivory, #f4f1ea);
+}
+.bzn-map__layer-btn:not(.is-active):hover {
+  background: rgba(10, 11, 10, 0.08);
+}
+
+/* In vista satellite, scurisci la card con info per leggibilità */
+.bzn-map.is-satellite .bzn-map__card {
+  background: rgba(10, 11, 10, 0.88);
+  color: var(--c-ivory, #f4f1ea);
+}
+.bzn-map.is-satellite .bzn-map__card-addr {
+  color: rgba(244, 241, 234, 0.78);
+}
+.bzn-map.is-satellite .bzn-map__btn {
+  color: var(--c-ivory, #f4f1ea);
+  border-color: rgba(244, 241, 234, 0.3);
+}
+.bzn-map.is-satellite .bzn-map__btn:hover {
+  background: var(--c-ivory, #f4f1ea);
+  color: var(--c-ink, #0a0b0a);
+  border-color: var(--c-ivory, #f4f1ea);
+}
+.bzn-map.is-satellite .bzn-map__btn--primary {
+  background: var(--c-stihl, #ee5e1f);
+  color: var(--c-ink, #0a0b0a);
+  border-color: var(--c-stihl, #ee5e1f);
+}
+
+/* Overlay con la card delle azioni — bottom-left */
+.bzn-map__overlay {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 600;
+  pointer-events: none;
+  display: flex;
+  justify-content: flex-start;
+}
+.bzn-map__card {
+  pointer-events: auto;
+  background: var(--c-ivory, #f4f1ea);
+  border-radius: 10px;
+  padding: 0.85rem 1rem 0.9rem;
+  box-shadow: 0 18px 40px -16px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(10, 11, 10, 0.05);
+  max-width: 320px;
+  color: var(--c-ink, #0a0b0a);
+}
+.bzn-map__card-eyebrow {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-stihl, #ee5e1f);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.bzn-map__card-addr {
+  font-family: var(--font-body, system-ui);
+  font-size: 0.84rem;
+  color: rgba(10, 11, 10, 0.78);
+  margin: 0 0 0.7rem;
+  line-height: 1.4;
+}
+.bzn-map__card-actions {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+.bzn-map__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.55rem 0.85rem;
+  border-radius: 6px;
+  border: 1px solid rgba(10, 11, 10, 0.16);
+  color: var(--c-ink, #0a0b0a);
+  background: transparent;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease, transform 200ms ease;
+  cursor: pointer;
+}
+.bzn-map__btn:hover {
+  background: var(--c-ink, #0a0b0a);
+  color: var(--c-ivory, #f4f1ea);
+  border-color: var(--c-ink, #0a0b0a);
+  transform: translateY(-1px);
+}
+.bzn-map__btn--primary {
+  background: var(--c-stihl, #ee5e1f);
+  color: var(--c-ink, #0a0b0a);
+  border-color: var(--c-stihl, #ee5e1f);
+  font-weight: 600;
+}
+.bzn-map__btn--primary:hover {
+  background: var(--c-ink, #0a0b0a);
+  color: var(--c-ivory, #f4f1ea);
+  border-color: var(--c-ink, #0a0b0a);
+}
+.bzn-map__btn svg { flex-shrink: 0; }
+
+/* Marker pin (divIcon) */
+.bzn-map__pin {
+  background: transparent;
+  border: 0;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+}
+.bzn-map__pin svg {
+  width: 36px;
+  height: 48px;
+  transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.bzn-map__pin:hover svg {
+  transform: translateY(-3px) scale(1.06);
+}
+
+/* Override Leaflet attribution + zoom control: stile più sobrio */
+.bzn-map .leaflet-control-zoom a {
+  background: var(--c-ivory, #f4f1ea);
+  color: var(--c-ink, #0a0b0a);
+  border: 0;
+  border-bottom: 1px solid rgba(10, 11, 10, 0.08);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-weight: 400;
+}
+.bzn-map .leaflet-control-zoom a:hover {
+  background: var(--c-ink, #0a0b0a);
+  color: var(--c-ivory, #f4f1ea);
+}
+.bzn-map .leaflet-control-zoom {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.25);
+  border: 0;
+}
+.bzn-map .leaflet-control-attribution {
+  background: rgba(244, 241, 234, 0.86);
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.55rem;
+  letter-spacing: 0.04em;
+  padding: 2px 6px;
+  border-radius: 4px 0 0 0;
+}
+.bzn-map .leaflet-control-attribution a {
+  color: var(--c-stihl, #ee5e1f);
+}
+
+/* Popup */
+.bzn-map .leaflet-popup-content-wrapper {
+  background: var(--c-ivory, #f4f1ea);
+  color: var(--c-ink, #0a0b0a);
+  border-radius: 8px;
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.4);
+  font-family: var(--font-body, system-ui);
+}
+.bzn-map .leaflet-popup-content {
+  margin: 0.6rem 0.85rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+.bzn-map .leaflet-popup-content strong {
+  font-family: var(--font-display, serif);
+  font-weight: 460;
+  font-size: 1rem;
+}
+.bzn-map .leaflet-popup-tip {
+  background: var(--c-ivory, #f4f1ea);
+}
+
+/* Card minore su mobile */
+@media (max-width: 640px) {
+  .bzn-map { min-height: 320px; }
+  .bzn-map__overlay { bottom: 0.7rem; left: 0.7rem; right: 0.7rem; }
+  .bzn-map__card { padding: 0.7rem 0.85rem 0.75rem; max-width: 100%; }
+  .bzn-map__btn { font-size: 0.6rem; padding: 0.5rem 0.7rem; }
+}

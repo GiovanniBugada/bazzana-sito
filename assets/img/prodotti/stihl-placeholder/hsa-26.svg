@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="ph-title">
+  <title id="ph-title">Stihl HSA 26</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4f1ea"/>
+      <stop offset="100%" stop-color="#e8e3d4"/>
+    </linearGradient>
+    <pattern id="grain" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="4" fill="transparent"/>
+      <circle cx="1" cy="1" r="0.3" fill="rgba(14, 15, 14, 0.04)"/>
+      <circle cx="3" cy="3" r="0.3" fill="rgba(14, 15, 14, 0.03)"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <rect width="600" height="600" fill="url(#grain)"/>
+
+  <!-- Cornice dashed -->
+  <rect x="80" y="80" width="440" height="440" fill="none" stroke="rgba(14, 15, 14, 0.10)" stroke-width="1" stroke-dasharray="4 6"/>
+
+  <!-- Stihl badge in alto -->
+  <rect x="180" y="125" width="240" height="42" rx="3" fill="#ee5e1f"/>
+  <text x="300" y="153" text-anchor="middle"
+        font-family="Inter, system-ui, sans-serif"
+        font-size="22" font-weight="700" letter-spacing="4"
+        fill="#ffffff">
+    STIHL
+  </text>
+
+  <!-- Icona macchina (silhouette stilizzata) -->
+  <g transform="translate(300 280)" fill="none" stroke="#0E0F0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.4">
+    <rect x="-50" y="-8" width="80" height="16" rx="2"/><polygon points="30,-8 60,-8 50,0 60,8 30,8"/><circle cx="-40" cy="0" r="3"/><line x1="-50" y1="-15" x2="30" y2="-15" stroke-dasharray="3 3"/>
+  </g>
+
+  <!-- Nome modello (grande) -->
+  <text x="300" y="430" text-anchor="middle"
+        font-family="Fraunces, Georgia, serif"
+        font-size="42" font-weight="500"
+        fill="#0E0F0E">
+    HSA 26
+  </text>
+
+  <!-- Categoria (piccola) -->
+  <text x="300" y="465" text-anchor="middle"
+        font-family="JetBrains Mono, ui-monospace, monospace"
+        font-size="11" letter-spacing="2.5"
+        fill="#0E0F0E" opacity="0.6"
+        font-weight="500">
+    TAGLIASIEPI
+  </text>
+
+  <!-- Eyebrow in basso -->
+  <text x="300" y="510" text-anchor="middle"
+        font-family="Fraunces, Georgia, serif"
+        font-size="14" font-weight="300" font-style="italic"
+        fill="#0E0F0E" opacity="0.5">
+    Foto in arrivo a breve
+  </text>
+
+  <!-- Brand dot -->
+  <circle cx="300" cy="540" r="3" fill="#ee5e1f"/>
+</svg>

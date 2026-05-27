@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="ph-title">
+  <title id="ph-title">Stihl MS 192 T</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4f1ea"/>
+      <stop offset="100%" stop-color="#e8e3d4"/>
+    </linearGradient>
+    <pattern id="grain" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="4" fill="transparent"/>
+      <circle cx="1" cy="1" r="0.3" fill="rgba(14, 15, 14, 0.04)"/>
+      <circle cx="3" cy="3" r="0.3" fill="rgba(14, 15, 14, 0.03)"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <rect width="600" height="600" fill="url(#grain)"/>
+
+  <!-- Cornice dashed -->
+  <rect x="80" y="80" width="440" height="440" fill="none" stroke="rgba(14, 15, 14, 0.10)" stroke-width="1" stroke-dasharray="4 6"/>
+
+  <!-- Stihl badge in alto -->
+  <rect x="180" y="125" width="240" height="42" rx="3" fill="#ee5e1f"/>
+  <text x="300" y="153" text-anchor="middle"
+        font-family="Inter, system-ui, sans-serif"
+        font-size="22" font-weight="700" letter-spacing="4"
+        fill="#ffffff">
+    STIHL
+  </text>
+
+  <!-- Icona macchina (silhouette stilizzata) -->
+  <g transform="translate(300 280)" fill="none" stroke="#0E0F0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.4">
+    <path d="M -60 -10 L -10 -10 L -10 -25 L 30 -25 L 50 -10 L 60 -10 L 55 5 L 50 -5 L 30 -5 L 25 -15 L -10 -15 L -10 5 L -60 5 Z"/><circle cx="-30" cy="-5" r="3"/><line x1="50" y1="-10" x2="58" y2="-15"/>
+  </g>
+
+  <!-- Nome modello (grande) -->
+  <text x="300" y="430" text-anchor="middle"
+        font-family="Fraunces, Georgia, serif"
+        font-size="42" font-weight="500"
+        fill="#0E0F0E">
+    MS 192 T
+  </text>
+
+  <!-- Categoria (piccola) -->
+  <text x="300" y="465" text-anchor="middle"
+        font-family="JetBrains Mono, ui-monospace, monospace"
+        font-size="11" letter-spacing="2.5"
+        fill="#0E0F0E" opacity="0.6"
+        font-weight="500">
+    MOTOSEGHE
+  </text>
+
+  <!-- Eyebrow in basso -->
+  <text x="300" y="510" text-anchor="middle"
+        font-family="Fraunces, Georgia, serif"
+        font-size="14" font-weight="300" font-style="italic"
+        fill="#0E0F0E" opacity="0.5">
+    Foto in arrivo a breve
+  </text>
+
+  <!-- Brand dot -->
+  <circle cx="300" cy="540" r="3" fill="#ee5e1f"/>
+</svg>

@@ -1,0 +1,101 @@
+/* =========================================================
+   NEWSLETTER MINI-FORM — footer compact opt-in email
+   ========================================================= */
+
+.newsletter {
+  width: min(1320px, 92vw);
+  margin: 0 auto clamp(2rem, 4vh, 3rem);
+  padding: clamp(1.8rem, 4vh, 2.6rem) 0 clamp(1.4rem, 3vh, 2rem);
+  border-top: 1px solid rgba(242, 239, 231, 0.08);
+  border-bottom: 1px solid rgba(242, 239, 231, 0.08);
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 2rem;
+  align-items: center;
+}
+.newsletter__head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.newsletter__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-stihl, #ee5e1f);
+}
+.newsletter__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 0.95rem + 0.95vw, 1.6rem);
+  font-weight: 360;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+  color: var(--c-ivory, #f2efe7);
+  max-width: 28ch;
+}
+.newsletter__title em { font-style: italic; color: var(--c-stihl, #ee5e1f); }
+
+.newsletter__form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+  position: relative;
+}
+.newsletter__input {
+  flex: 1;
+  background: transparent;
+  border: 1px solid rgba(242, 239, 231, 0.18);
+  color: var(--c-ivory, #f2efe7);
+  padding: 0.85rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 280ms ease;
+}
+.newsletter__input::placeholder { color: rgba(242, 239, 231, 0.4); font-style: italic; }
+.newsletter__input:focus { border-color: var(--c-stihl, #ee5e1f); }
+.newsletter__submit {
+  background: var(--c-ivory, #f2efe7);
+  color: var(--c-ink, #0c0d0c);
+  border: 1px solid var(--c-ivory, #f2efe7);
+  padding: 0 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 280ms ease, color 280ms ease, border-color 280ms ease;
+}
+.newsletter__submit:hover {
+  background: var(--c-stihl, #ee5e1f);
+  border-color: var(--c-stihl, #ee5e1f);
+  color: var(--c-ink, #0c0d0c);
+}
+.newsletter__note {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 231, 0.4);
+  margin-top: 0.6rem;
+}
+/* Stato sent */
+.newsletter.is-sent .newsletter__submit {
+  background: #1f3a2e;
+  color: var(--c-ivory);
+  border-color: #1f3a2e;
+  pointer-events: none;
+}
+.newsletter.is-sent .newsletter__submit::before {
+  content: "✓ ";
+  margin-right: 0.4rem;
+}
+
+@media (max-width: 760px) {
+  .newsletter { grid-template-columns: 1fr; gap: 1.2rem; }
+  .newsletter__form { flex-direction: column; }
+  .newsletter__submit { padding: 0.85rem; }
+}

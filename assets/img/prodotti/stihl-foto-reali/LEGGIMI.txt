@@ -1,0 +1,39 @@
+METTI QUI LE FOTO STIHL REALI
+==============================
+
+Quando hai le foto ufficiali Stihl (dal portale rivenditori
+https://shop.stihl.com o dal catalogo dealer), copia tutti i file
+in QUESTA cartella.
+
+REGOLA NOMI FILE:
+  Il file deve contenere il CODICE MODELLO nel nome (separatori liberi).
+  Esempi che funzionano:
+    - MS 251.jpg
+    - ms-251.png
+    - stihl_ms251_fronte.jpg
+    - FS131.webp
+    - HSA 56 - tagliasiepi.png
+    - hsa-56-batteria.jpg
+
+Esempi che NON funzionano (non c'è il codice):
+    - foto1.jpg
+    - motosega.png
+    - prodotto-stihl.jpg
+
+Formati supportati: jpg, jpeg, png, webp, avif, bmp, tif
+
+POI LANCIA:
+    python scripts/import-stihl-photos.py
+
+Lo script:
+  1. Trova ogni foto nella cartella
+  2. La abbina al prodotto Stihl giusto cercando il codice modello nel nome
+  3. La processa (resize 1200px, EXIF auto-rotate, JPG + WebP)
+  4. La salva in assets/img/prodotti/stihl-foto/
+  5. Aggiorna prodotti.html sostituendo il placeholder con la foto reale
+
+Modelli da coprire: vedi catalogo completo nel sito o nel file
+scripts/add-stihl-products.py (107 modelli).
+
+I prodotti senza foto reale restano col placeholder personalizzato
+"Stihl [MODELLO]" che hai già visto in catalogo — niente di rotto.

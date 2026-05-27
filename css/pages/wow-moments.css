@@ -1,0 +1,448 @@
+/* =========================================================
+   WOW MOMENTS — Fase 10.2-10.5 in un solo file
+   - Hero scroll-driven scene change
+   - Form input polish (contatti)
+   - Confetti container
+   - Easter egg cursors
+   - Audio toggle button
+   - Konami modal
+   ========================================================= */
+
+/* ——————————————————————————————————————————————
+   10.2 · HERO SCROLL-DRIVEN SCENE CHANGE
+   Al primo scroll: title trasla in alto + scale, appare un
+   pannello foto a destra che entra da fuori viewport.
+   —————————————————————————————————————————————— */
+
+.hero-v2 {
+  position: relative;
+  overflow: hidden;
+}
+.hero-v2__main {
+  transition: transform 1100ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+  will-change: transform;
+}
+.hero-v2.is-scrolled .hero-v2__main {
+  transform: translateY(-12vh);
+}
+.hero-v2.is-scrolled .hero-v2__title {
+  transform: scale(0.88);
+  transform-origin: left center;
+}
+
+/* Scene photo card: appare a destra durante lo scroll */
+.hero-v2__scene {
+  position: absolute;
+  top: 14vh;
+  right: max(4vw, 1.5rem);
+  width: clamp(220px, 30vw, 380px);
+  aspect-ratio: 3/4;
+  z-index: 4;
+  overflow: hidden;
+  border: 1px solid rgba(242, 239, 231, 0.16);
+  background: var(--c-ink-2, #16181a);
+  opacity: 0;
+  transform: translateY(40px) scale(0.94);
+  transition:
+    opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1300ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.6);
+}
+.hero-v2__scene img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.92) contrast(1.06) brightness(0.78);
+  transform: scale(1.06);
+  transition: transform 1800ms cubic-bezier(0.22, 1, 0.36, 1), filter 800ms ease;
+}
+.hero-v2.is-scrolled .hero-v2__scene {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.hero-v2.is-scrolled .hero-v2__scene img {
+  transform: scale(1);
+  filter: saturate(1) contrast(1.06) brightness(0.92);
+}
+.hero-v2__scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 13, 12, 0) 0%, rgba(12, 13, 12, 0.55) 100%);
+  pointer-events: none;
+}
+.hero-v2__scene-cap {
+  position: absolute;
+  left: 1.1rem;
+  bottom: 1.1rem;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 231, 0.85);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.hero-v2__scene-cap::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 1px;
+  background: var(--c-stihl, #ee5e1f);
+}
+
+@media (max-width: 960px) {
+  .hero-v2__scene { display: none; }
+  .hero-v2.is-scrolled .hero-v2__main { transform: none; }
+  .hero-v2.is-scrolled .hero-v2__title { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-v2__main,
+  .hero-v2__title,
+  .hero-v2__scene,
+  .hero-v2__scene img { transition: none !important; }
+}
+
+/* ——————————————————————————————————————————————
+   10.3 · FORM POLISH (contatti)
+   —————————————————————————————————————————————— */
+
+.contact__form .field {
+  position: relative;
+  margin-block: 1.4rem;
+}
+.contact__form .field input,
+.contact__form .field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(242, 239, 231, 0.22);
+  padding: 0.8rem 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 0.95rem + 0.4vw, 1.4rem);
+  font-weight: 360;
+  color: var(--c-ivory, #f2efe7);
+  outline: none;
+  transition: border-color 320ms ease, padding-bottom 320ms ease;
+}
+.contact__form .field input:focus,
+.contact__form .field textarea:focus {
+  border-bottom-color: var(--c-stihl, #ee5e1f);
+  padding-bottom: 0.7rem;
+}
+.contact__form .field input::placeholder,
+.contact__form .field textarea::placeholder {
+  color: rgba(242, 239, 231, 0.36);
+  font-style: italic;
+}
+.contact__form .field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 231, 0.5);
+  margin-bottom: 0.4rem;
+}
+
+/* Underline animato sotto l'input al focus (in aggiunta al border-bottom) */
+.contact__form .field::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--c-stihl, #ee5e1f);
+  transition: width 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 0 6px rgba(238, 94, 31, 0.4);
+}
+.contact__form .field:focus-within::after { width: 100%; }
+
+/* Submit button morph */
+.contact__form button[type="submit"] {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  padding: 1rem 1.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 500;
+  background: var(--c-stihl, #ee5e1f);
+  color: var(--c-ink, #0c0d0c);
+  border: 1px solid var(--c-stihl, #ee5e1f);
+  cursor: pointer;
+  transition: background 320ms ease, color 320ms ease, transform 320ms ease;
+}
+.contact__form button[type="submit"]:hover {
+  background: var(--c-ivory, #f2efe7);
+  border-color: var(--c-ivory, #f2efe7);
+  transform: translateY(-2px);
+}
+
+/* Stato "inviato" */
+.contact__form.is-sent button[type="submit"] {
+  background: #1f3a2e;
+  color: var(--c-ivory);
+  border-color: #1f3a2e;
+  pointer-events: none;
+}
+.contact__form.is-sent button[type="submit"]::before {
+  content: "✓ ";
+  margin-right: 0.4rem;
+}
+
+/* ——————————————————————————————————————————————
+   10.3 · CONFETTI CANVAS
+   —————————————————————————————————————————————— */
+
+.confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ——————————————————————————————————————————————
+   10.4 · EASTER EGG CURSORS — cursor cambia su zone tematiche
+   —————————————————————————————————————————————— */
+
+.cur.is-egg-officina .cur__ring {
+  border-color: rgba(238, 94, 31, 0.85);
+  background: rgba(238, 94, 31, 0.14);
+  transform: translate3d(-50%, -50%, 0) scale(1.8);
+}
+.cur.is-egg-officina .cur__dot {
+  width: 0 !important;
+  height: 0 !important;
+}
+.cur.is-egg-officina::after {
+  content: "🔧";
+  position: absolute;
+  font-size: 14px;
+  top: 0;
+  left: 0;
+  transform: translate3d(-50%, -50%, 0);
+  pointer-events: none;
+}
+.cur.is-egg-verde .cur__ring {
+  border-color: rgba(31, 58, 46, 0.85);
+  background: rgba(31, 58, 46, 0.14);
+  transform: translate3d(-50%, -50%, 0) scale(1.8);
+}
+.cur.is-egg-verde::after {
+  content: "🌿";
+  position: absolute;
+  font-size: 14px;
+  top: 0;
+  left: 0;
+  transform: translate3d(-50%, -50%, 0);
+  pointer-events: none;
+}
+.cur.is-egg-cene .cur__ring {
+  border-color: rgba(242, 239, 231, 0.85);
+  transform: translate3d(-50%, -50%, 0) scale(1.8);
+}
+.cur.is-egg-cene::after {
+  content: "📍";
+  position: absolute;
+  font-size: 14px;
+  top: 0;
+  left: 0;
+  transform: translate3d(-50%, -50%, 0);
+  pointer-events: none;
+}
+
+/* ——————————————————————————————————————————————
+   10.4 · KONAMI MODAL — appare con codice ↑↑↓↓←→←→BA
+   —————————————————————————————————————————————— */
+
+.konami {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 11, 10, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 2rem;
+}
+.konami.is-open {
+  display: flex;
+  animation: konami-in 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes konami-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.konami__inner {
+  position: relative;
+  width: min(560px, 92vw);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  align-items: center;
+  animation: konami-rise 800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes konami-rise {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.konami__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-stihl, #ee5e1f);
+}
+.konami__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 1.5rem + 4vw, 5rem);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 0.94;
+  color: var(--c-ivory);
+  margin: 0;
+}
+.konami__title em {
+  font-style: italic;
+  color: var(--c-stihl, #ee5e1f);
+}
+.konami__photo {
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border: 1px solid rgba(242, 239, 231, 0.1);
+}
+.konami__photo img { width: 100%; height: 100%; object-fit: cover; }
+.konami__caption {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: rgba(242, 239, 231, 0.6);
+}
+.konami__close {
+  position: absolute;
+  top: -1rem;
+  right: 0;
+  width: 42px;
+  height: 42px;
+  background: transparent;
+  border: 1px solid rgba(242, 239, 231, 0.3);
+  color: var(--c-ivory);
+  cursor: pointer;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  transition: background 240ms ease, color 240ms ease, border-color 240ms ease;
+}
+.konami__close:hover {
+  background: var(--c-stihl, #ee5e1f);
+  color: var(--c-ink, #0c0d0c);
+  border-color: var(--c-stihl, #ee5e1f);
+}
+
+/* ——————————————————————————————————————————————
+   10.5 · DARK/LIGHT theme via prefers-color-scheme
+   (preparazione: applicato a body tramite data-theme)
+   —————————————————————————————————————————————— */
+
+@media (prefers-color-scheme: light) {
+  /* Soltanto un hint sottile: il sito è dark-first ma rispetta */
+  html[data-theme-auto="1"] body { color-scheme: light; }
+}
+
+/* ——————————————————————————————————————————————
+   10.5 · AUDIO TOGGLE — pulsante in basso a sinistra
+   —————————————————————————————————————————————— */
+
+.audio-toggle {
+  position: fixed;
+  bottom: 1.2rem;
+  left: 1.2rem;
+  z-index: 90;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(12, 13, 12, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(242, 239, 231, 0.18);
+  color: rgba(242, 239, 231, 0.8);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  transition: background 320ms ease, color 320ms ease, border-color 320ms ease, transform 320ms ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: audio-in 700ms cubic-bezier(0.22, 1, 0.36, 1) 3000ms forwards;
+}
+@keyframes audio-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+.audio-toggle:hover {
+  background: var(--c-ivory);
+  color: var(--c-ink);
+  border-color: var(--c-ivory);
+  transform: scale(1.05);
+}
+.audio-toggle.is-on {
+  background: var(--c-stihl);
+  color: var(--c-ink);
+  border-color: var(--c-stihl);
+}
+.audio-toggle.is-on::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(238, 94, 31, 0.5);
+  animation: audio-pulse 1.8s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes audio-pulse {
+  0% { opacity: 1; transform: scale(0.95); }
+  100% { opacity: 0; transform: scale(1.5); }
+}
+
+@media (max-width: 600px) {
+  .audio-toggle { width: 38px; height: 38px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .audio-toggle::after { animation: none; }
+  .audio-toggle { animation: none; opacity: 1; transform: none; }
+}
+
+/* ——————————————————————————————————————————————
+   10.4 · PAGE TRANSITION OVERLAY
+   —————————————————————————————————————————————— */
+
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: #0a0b0a;
+  transform: translateY(100%);
+  pointer-events: none;
+  transition: transform 700ms cubic-bezier(0.83, 0, 0.17, 1);
+}
+.page-transition.is-active {
+  transform: translateY(0);
+}
+.page-transition.is-active.is-finishing {
+  transform: translateY(-100%);
+  transition-delay: 100ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-transition { display: none; }
+}

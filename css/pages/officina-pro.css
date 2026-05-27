@@ -1,0 +1,491 @@
+/* =========================================================
+   OFFICINA PRO — redesign cinematic
+   Hero ricco + stats marchi + timeline 4 step + brands + cta
+   ========================================================= */
+
+main.officina { padding: 0; background: var(--c-ink, #0c0d0c); color: var(--c-ivory, #f2efe7); }
+
+/* ——————————————————————————————————————————————
+   HERO
+   —————————————————————————————————————————————— */
+
+.officina__hero {
+  position: relative;
+  padding: clamp(8rem, 14vh, 11rem) 0 clamp(3rem, 6vh, 5rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+.officina__hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 20% 30%, rgba(238, 94, 31, 0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 100% 100%, rgba(177, 72, 33, 0.10) 0%, transparent 60%),
+    linear-gradient(180deg, #0a0b0a 0%, #0e0f0e 60%, #0a0b0a 100%);
+  pointer-events: none;
+}
+.officina__hero-inner {
+  position: relative;
+  z-index: 1;
+  width: min(1320px, 92vw);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: clamp(2.4rem, 5vw, 5rem);
+  align-items: end;
+}
+.officina__hero-meta {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 231, 0.55);
+  margin-bottom: 1rem;
+}
+.officina__hero-eyebrow {
+  color: var(--c-stihl, #ee5e1f);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.officina__hero-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  background: var(--c-stihl, #ee5e1f);
+}
+.officina__hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 1.5rem + 8vw, 10rem);
+  font-weight: 280;
+  letter-spacing: -0.055em;
+  line-height: 0.86;
+  margin: 0;
+}
+.officina__hero-title em {
+  font-style: italic;
+  color: var(--c-stihl, #ee5e1f);
+}
+.officina__hero-sub {
+  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem);
+  line-height: 1.55;
+  color: rgba(242, 239, 231, 0.78);
+  max-width: 44ch;
+  padding-left: 1.1rem;
+  border-left: 1px solid rgba(242, 239, 231, 0.18);
+  margin: 1.4rem 0 0;
+  grid-column: 1;
+}
+.officina__hero-photo {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  border: 1px solid rgba(242, 239, 231, 0.08);
+  grid-column: 2;
+  grid-row: 2 / 4;
+  align-self: end;
+  margin-bottom: -3rem;
+  z-index: 2;
+}
+.officina__hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.94) contrast(1.06) brightness(0.85);
+}
+.officina__hero-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 13, 12, 0) 60%, rgba(12, 13, 12, 0.5) 100%);
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .officina__hero-inner { grid-template-columns: 1fr; }
+  .officina__hero-photo {
+    grid-column: 1;
+    grid-row: auto;
+    margin-bottom: 0;
+    margin-top: 1.4rem;
+    aspect-ratio: 4/3;
+  }
+}
+
+/* ——————————————————————————————————————————————
+   STATS marchi
+   —————————————————————————————————————————————— */
+
+.officina__stats {
+  padding: clamp(2.5rem, 5vh, 4rem) 0;
+  border-top: 1px solid rgba(242, 239, 231, 0.06);
+  border-bottom: 1px solid rgba(242, 239, 231, 0.06);
+  background: rgba(238, 94, 31, 0.04);
+}
+.officina__stats-inner {
+  width: min(1320px, 92vw);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.4rem, 3vw, 2.4rem);
+}
+.officina__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-left: 1.2rem;
+  border-left: 1px solid var(--c-stihl, #ee5e1f);
+}
+.officina__stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 1.4rem + 2.8vw, 4rem);
+  font-weight: 300;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  color: var(--c-ivory, #f2efe7);
+  font-variant-numeric: tabular-nums;
+}
+.officina__stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 231, 0.55);
+  line-height: 1.3;
+}
+@media (max-width: 760px) {
+  .officina__stats-inner { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ——————————————————————————————————————————————
+   TIMELINE 4 step
+   —————————————————————————————————————————————— */
+
+.officina__timeline {
+  padding: clamp(5rem, 10vh, 8rem) 0;
+  position: relative;
+}
+.officina__timeline-head {
+  width: min(1320px, 92vw);
+  margin: 0 auto clamp(3rem, 6vh, 5rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.officina__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-stihl, #ee5e1f);
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.officina__eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  background: var(--c-stihl, #ee5e1f);
+}
+.officina__heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 1.5rem + 3.5vw, 5rem);
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  line-height: 0.94;
+  margin: 0.5rem 0 0;
+  color: var(--c-ivory, #f2efe7);
+}
+.officina__heading em {
+  font-style: italic;
+  color: var(--c-stihl, #ee5e1f);
+}
+.officina__steps {
+  width: min(1320px, 92vw);
+  margin-inline: auto;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.officina__step {
+  display: grid;
+  grid-template-columns: 80px 1fr 0.9fr;
+  gap: clamp(1.4rem, 3vw, 3rem);
+  padding: clamp(2.4rem, 5vh, 3.6rem) 0;
+  border-top: 1px solid rgba(242, 239, 231, 0.08);
+  align-items: start;
+}
+.officina__step:last-child { border-bottom: 1px solid rgba(242, 239, 231, 0.08); }
+.officina__step-marker {
+  position: sticky;
+  top: 14vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.officina__step-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 1.4rem + 2.4vw, 3.6rem);
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  color: var(--c-stihl, #ee5e1f);
+  line-height: 1;
+}
+.officina__step-line {
+  display: block;
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, var(--c-stihl, #ee5e1f), transparent);
+}
+.officina__step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.officina__step-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.6rem);
+  font-weight: 380;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  margin: 0;
+  color: var(--c-ivory, #f2efe7);
+}
+.officina__step-text {
+  font-size: clamp(0.96rem, 0.9rem + 0.3vw, 1.08rem);
+  line-height: 1.65;
+  color: rgba(242, 239, 231, 0.75);
+  max-width: 44ch;
+  margin: 0;
+}
+.officina__step-photo {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border: 1px solid rgba(242, 239, 231, 0.06);
+}
+.officina__step-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.92) contrast(1.04) brightness(0.85);
+  transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1), filter 600ms ease;
+}
+.officina__step:hover .officina__step-photo img {
+  transform: scale(1.04);
+  filter: saturate(1) contrast(1.06) brightness(0.92);
+}
+
+@media (max-width: 900px) {
+  .officina__step { grid-template-columns: 1fr; gap: 1rem; }
+  .officina__step-marker { position: relative; top: 0; flex-direction: row; align-items: center; }
+  .officina__step-line { width: 60px; height: 1px; background: linear-gradient(to right, var(--c-stihl), transparent); }
+}
+
+/* ——————————————————————————————————————————————
+   BRANDS grid 8 marchi
+   —————————————————————————————————————————————— */
+
+.officina__brands {
+  padding: clamp(5rem, 10vh, 7rem) 0;
+  background: var(--c-ivory, #f2efe7);
+  color: var(--c-ink, #0c0d0c);
+}
+.officina__brands-inner {
+  width: min(1320px, 92vw);
+  margin-inline: auto;
+}
+.officina__brands-head {
+  margin-bottom: clamp(2.4rem, 5vh, 3.6rem);
+}
+.officina__brands .officina__eyebrow { color: var(--c-stihl-deep, #c84d18); }
+.officina__brands .officina__eyebrow::before { background: var(--c-stihl-deep, #c84d18); }
+.officina__brands .officina__heading { color: var(--c-ink, #0c0d0c); }
+.officina__brands .officina__heading em { color: var(--c-stihl-deep, #c84d18); }
+
+.officina__brand-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(12, 13, 12, 0.08);
+  border-left: 1px solid rgba(12, 13, 12, 0.08);
+}
+.officina__brand {
+  border-right: 1px solid rgba(12, 13, 12, 0.08);
+  border-bottom: 1px solid rgba(12, 13, 12, 0.08);
+  padding: 1.8rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: background 280ms ease;
+}
+.officina__brand:hover { background: #fff; }
+.officina__brand-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2.2rem);
+  font-weight: 340;
+  letter-spacing: -0.03em;
+  transition: color 280ms ease, transform 280ms ease;
+  transform-origin: left;
+}
+.officina__brand:hover .officina__brand-name {
+  color: var(--c-stihl-deep, #c84d18);
+  transform: translateX(4px);
+}
+.officina__brand-role {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(12, 13, 12, 0.5);
+}
+
+@media (max-width: 760px) { .officina__brand-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .officina__brand-grid { grid-template-columns: 1fr; } }
+
+/* ——————————————————————————————————————————————
+   CATEGORIE — Cosa lavoriamo
+   —————————————————————————————————————————————— */
+
+.officina__categories {
+  padding: clamp(5rem, 10vh, 8rem) 0;
+}
+.officina__categories-inner {
+  width: min(1320px, 92vw);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: clamp(2.4rem, 5vw, 5rem);
+  align-items: start;
+}
+.officina__cat-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem 2rem;
+}
+.officina__cat-list li {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 0.95rem + 0.6vw, 1.5rem);
+  font-weight: 380;
+  letter-spacing: -0.018em;
+  line-height: 1.25;
+  padding-left: 1rem;
+  border-left: 2px solid rgba(238, 94, 31, 0.4);
+  color: rgba(242, 239, 231, 0.88);
+  transition: border-color 280ms ease, color 280ms ease;
+}
+.officina__cat-list li:hover {
+  border-color: var(--c-stihl, #ee5e1f);
+  color: var(--c-ivory, #f2efe7);
+}
+@media (max-width: 900px) {
+  .officina__categories-inner { grid-template-columns: 1fr; }
+  .officina__cat-list { grid-template-columns: 1fr; }
+}
+
+/* ——————————————————————————————————————————————
+   CTA finale
+   —————————————————————————————————————————————— */
+
+.officina__cta {
+  padding: clamp(6rem, 14vh, 10rem) 0;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 50% 80% at 50% 0%, rgba(31, 58, 46, 0.5) 0%, transparent 70%),
+    var(--c-ink, #0c0d0c);
+  border-top: 1px solid rgba(242, 239, 231, 0.06);
+}
+.officina__cta-inner {
+  width: min(900px, 92vw);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  align-items: center;
+}
+.officina__cta-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-stihl, #ee5e1f);
+  margin: 0;
+}
+.officina__cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 1.5rem + 4.5vw, 5.5rem);
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  line-height: 0.92;
+  margin: 0;
+}
+.officina__cta-title em {
+  font-style: italic;
+  color: var(--c-stihl, #ee5e1f);
+}
+.officina__cta-text {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: rgba(242, 239, 231, 0.78);
+  max-width: 48ch;
+  margin: 0;
+}
+.officina__cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.officina__cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1rem 1.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid;
+  font-weight: 500;
+  transition: background 320ms ease, color 320ms ease, border-color 320ms ease;
+  will-change: transform;
+}
+.officina__cta-btn--primary {
+  background: var(--c-stihl, #ee5e1f);
+  color: var(--c-ink, #0c0d0c);
+  border-color: var(--c-stihl, #ee5e1f);
+}
+.officina__cta-btn--primary:hover {
+  background: var(--c-ivory, #f2efe7);
+  border-color: var(--c-ivory, #f2efe7);
+}
+.officina__cta-btn--ghost {
+  background: transparent;
+  color: var(--c-ivory, #f2efe7);
+  border-color: rgba(242, 239, 231, 0.32);
+}
+.officina__cta-btn--ghost:hover {
+  background: var(--c-ivory, #f2efe7);
+  color: var(--c-ink, #0c0d0c);
+  border-color: var(--c-ivory, #f2efe7);
+}

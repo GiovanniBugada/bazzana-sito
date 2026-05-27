@@ -190,9 +190,21 @@
 @media (hover: hover) and (pointer: fine) {
   .depth-card:hover .depth-card__base { transform: translateY(-4px); }
   .depth-card:hover .depth-card__base img { transform: scale(1.06); filter: saturate(1.05) contrast(1.05); }
-  .depth-card:hover .depth-card__overlay { opacity: 1; transform: translateY(0); }
+  .depth-card:hover .depth-card__overlay { opacity: 1; transform: translateY(0); pointer-events: auto; }
   .depth-card:hover .depth-card__badge { opacity: 1; transform: translateY(0); }
 }
+/* Touch / coarse pointer: overlay sempre raggiungibile, niente hover */
+@media (hover: none), (pointer: coarse) {
+  .depth-card__overlay {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    background: linear-gradient(to top, rgba(0,0,0,0.78), rgba(0,0,0,0.25) 40%, transparent 70%);
+  }
+  .depth-card__badge { opacity: 1; transform: translateY(0); }
+}
+/* Bottone Scheda: cliccabile sempre, anche se l'overlay è invisibile */
+.depth-card__detail-cta { pointer-events: auto; }
 
 /* —— 6. Scroll-driven image scale (MSI) —— */
 .scroll-scale-img {

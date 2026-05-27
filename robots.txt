@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /prodotti/_archive/
+Disallow: /prodotti/dettaglio.html
+Disallow: /scripts/
 
 Sitemap: https://www.motorgardenbazzana.it/sitemap.xml

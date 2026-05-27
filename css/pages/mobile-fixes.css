@@ -1,0 +1,149 @@
+/* =========================================================
+   MOBILE FIXES — touch targets 44×44 + 320px ultra-narrow
+   ========================================================= */
+
+/* ——— Touch targets minimi su mobile ——— */
+@media (hover: none), (pointer: coarse), (max-width: 760px) {
+  .site-header__inner { padding: 0.6rem 1rem; }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 6px;
+  }
+  .tel-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 6px 10px;
+  }
+  .menu-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px;
+  }
+  /* Footer links: padding più generoso */
+  .site-footer__col ul a,
+  .site-footer__legal a,
+  .site-footer__bottom a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding-block: 4px;
+  }
+  /* Menu overlay links */
+  .menu-overlay__list a {
+    min-height: 56px;
+    display: inline-flex;
+    align-items: center;
+  }
+  /* Filter buttons foto/catalog */
+  .foto__filter,
+  .foto__layout-btn,
+  .chip {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ——— 320px iPhone SE ultra narrow ——— */
+@media (max-width: 360px) {
+  /* Hero title scala */
+  .hero-v2__title {
+    font-size: clamp(2.6rem, 13vw, 3.8rem) !important;
+  }
+  .storia__hero-title {
+    font-size: clamp(2.4rem, 12vw, 3.4rem) !important;
+  }
+  .product-pro__model {
+    font-size: clamp(2.4rem, 13vw, 3.6rem) !important;
+  }
+  .officina__hero-title {
+    font-size: clamp(2.4rem, 12vw, 3.4rem) !important;
+  }
+  /* Manifesto */
+  .manifesto-v2__quote {
+    font-size: clamp(2rem, 9vw, 3rem) !important;
+  }
+  /* Stats nums */
+  .stats-bar__num,
+  .officina__stat-num,
+  .storia__hero-stat-num {
+    font-size: clamp(2rem, 9vw, 2.6rem) !important;
+  }
+  /* Padding sezioni ridotto */
+  .hero-v2 { padding: clamp(5rem, 9vh, 7rem) 1rem clamp(1.4rem, 3vh, 2rem) !important; }
+  .hero-v2__main { gap: 1rem !important; padding: 0 !important; }
+  /* Container generali */
+  .site-footer__inner,
+  .feature-pin__inner,
+  .visit-v2__grid,
+  .galleria__grid,
+  .stats-bar,
+  .brands-v2__list,
+  .product-pro__hero-inner,
+  .product-pro__showcase-inner,
+  .storia__chapter-inner,
+  .storia__hero-inner,
+  .officina__hero-inner,
+  .officina__stats-inner,
+  .officina__steps,
+  .officina__brand-grid,
+  .officina__categories-inner,
+  .officina__cta-inner {
+    width: 92vw !important;
+    padding-inline: 0 !important;
+  }
+  /* Featured strip 2 col compact */
+  .featured-strip__grid {
+    grid-template-columns: 1fr !important;
+  }
+  .featured-strip__card:nth-child(n+3) { display: none !important; }
+  /* CTAs stack */
+  .product-pro__cta-row,
+  .storia__cta-actions,
+  .product-pro__cta-final-actions,
+  .officina__cta-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .product-pro__cta,
+  .product-pro__desc-toggle,
+  .storia__cta-btn,
+  .officina__cta-btn {
+    justify-content: center !important;
+    width: 100%;
+  }
+  /* FAB più piccoli */
+  .fab-stack { bottom: 0.8rem !important; right: 0.8rem !important; gap: 0.4rem !important; }
+  .fab-stack__btn { width: 40px !important; height: 40px !important; }
+  /* Audio toggle più piccolo */
+  .audio-toggle { width: 36px !important; height: 36px !important; bottom: 0.8rem !important; left: 0.8rem !important; }
+  /* Galleria 1 col su ultra-narrow */
+  .galleria__grid {
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: 60vw !important;
+  }
+  .galleria__item--tall,
+  .galleria__item--wide { grid-column: span 1 !important; grid-row: span 1 !important; }
+}
+
+/* ——— prefers-reduced-motion ——— */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hero-v2__particles,
+  .storia__hero-particles,
+  .hero-v2__pulse,
+  .storia__hero-pulse,
+  .visit-v2__media::before,
+  .visit-v2__media::after,
+  .hero-v2__scroll-line,
+  .storia__hero-scroll-line { display: none !important; }
+}

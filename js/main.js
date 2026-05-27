@@ -29,6 +29,21 @@
     }
     // Hide loader: aspetta load OR timer minimo
     let doneTimer = false, doneLoad = document.readyState === 'complete';
+    let alreadyHidden = false;
+    const hardHide = () => {
+      if (alreadyHidden) return;
+      alreadyHidden = true;
+      // setProperty con 'important' priority — l'unico modo per sovrascrivere
+      // il `display: flex !important` definito in loader-cinematic.css.
+      loader.style.setProperty('display', 'none', 'important');
+      loader.style.setProperty('pointer-events', 'none', 'important');
+      loader.style.setProperty('visibility', 'hidden', 'important');
+      loader.setAttribute('hidden', '');
+      loader.setAttribute('aria-hidden', 'true');
+      // Sblocca body
+      document.body.style.overflow = '';
+      document.body.classList.add('is-loaded');
+    };
     const tryHide = () => {
       if (doneTimer && doneLoad) {
         loader.classList.add('is-done');
@@ -36,6 +51,8 @@
         document.body.classList.add('is-loaded');
         const hero = document.querySelector('.hero');
         if (hero) hero.classList.add('is-loaded');
+        // Hard hide dopo le transition complete + buffer
+        setTimeout(hardHide, 1300);
       }
     };
     setTimeout(() => { doneTimer = true; tryHide(); }, min);
@@ -44,12 +61,8 @@
     } else {
       tryHide();
     }
-    // Failsafe 4s
-    setTimeout(() => {
-      loader.classList.add('is-done');
-      document.body.style.overflow = '';
-      document.body.classList.add('is-loaded');
-    }, 4000);
+    // Failsafe a 3.5s: hard hide assoluto (evita loader stuck su tab throttled)
+    setTimeout(hardHide, 3500);
   }
 
   /* ——— Header scroll state ——— */
@@ -86,20 +99,43 @@
 
   /* Custom cursor disattivato: usiamo cursore nativo OS per consistency */
 
-  /* ——— Reveal on scroll ——— */
+  /* ——— Reveal on scroll — FIX: trigger anticipato + safety net immediato
+     - Elementi già sopra al viewport (es. reload mid-page, anchor jump) → in subito
+     - rootMargin positivo: si attivano PRIMA di entrare (200px), pronti a vista
+     - threshold 0: basta 1 pixel
+     - Se reduced-motion → tutti subito visibili
+  */
+  function revealNow(el) { el.classList.add('in'); el.classList.add('is-in'); }
+  function isPastTop(el) {
+    const r = el.getBoundingClientRect();
+    return r.bottom < 0; // già sopra il viewport
+  }
   const revealEls = document.querySelectorAll('.reveal, .reveal-mask');
-  if ('IntersectionObserver' in window && revealEls.length) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(en => {
-        if (en.isIntersecting) {
-          en.target.classList.add('in');
-          io.unobserve(en.target);
-        }
+  if (revealEls.length) {
+    if (reduced || !('IntersectionObserver' in window)) {
+      revealEls.forEach(revealNow);
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          if (en.isIntersecting) {
+            revealNow(en.target);
+            io.unobserve(en.target);
+          }
+        });
+      }, { threshold: 0, rootMargin: '0px 0px 200px 0px' });
+      revealEls.forEach(el => {
+        if (isPastTop(el)) { revealNow(el); return; } // già passato → in subito
+        io.observe(el);
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
-    revealEls.forEach(el => io.observe(el));
-  } else {
-    revealEls.forEach(el => el.classList.add('in'));
+      // Safety net 2s: niente reveal "fantasma"
+      setTimeout(() => {
+        revealEls.forEach(el => { if (!el.classList.contains('in')) {
+          const r = el.getBoundingClientRect();
+          // Mostra solo se davvero in/sopra viewport (sotto resta animato)
+          if (r.top < window.innerHeight + 100) revealNow(el);
+        }});
+      }, 2000);
+    }
   }
 
   /* ——— Smooth scroll (light, no lib) ——— */
@@ -125,50 +161,55 @@
     });
   }
 
-  /* ——— Page transition out (mask) ——— */
-  const mask = document.createElement('div');
-  mask.className = 'page-mask';
-  document.body.appendChild(mask);
-  // entry: in
+  /* ——— Page transition v2 — dark curtain dal basso, linea arancio ——— */
   if (!reduced) {
-    mask.classList.add('is-out');
-    setTimeout(() => mask.classList.remove('is-out'), 950);
-  }
-  // exit: applied on internal link click
-  document.addEventListener('click', e => {
-    const a = e.target.closest('a');
-    if (!a) return;
-    const href = a.getAttribute('href');
-    if (!href) return;
-    if (href.startsWith('#')) return;
-    if (a.target === '_blank') return;
-    if (href.startsWith('http') && !href.includes(location.host)) return;
-    if (href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('https://wa.me')) return;
-    if (reduced) return;
-    e.preventDefault();
-    mask.classList.add('is-in');
-    setTimeout(() => { window.location.href = href; }, 700);
-  });
+    const trans = document.createElement('div');
+    trans.className = 'page-trans';
+    trans.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(trans);
 
-  /* ——— Filtri prodotti (chip + categoria + brand catalogo) ——— */
-  const chips = document.querySelectorAll('.chip[data-filter]');
+    // Se arriviamo da una navigazione interna → curtain in posizione coperta
+    // poi sale verso l'alto rivelando la nuova pagina.
+    try {
+      if (sessionStorage.getItem('mgb-pt-leaving') === '1') {
+        sessionStorage.removeItem('mgb-pt-leaving');
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            trans.classList.add('is-leaving');
+          });
+        });
+        setTimeout(() => trans.classList.remove('is-leaving'), 500);
+      }
+    } catch (e) {}
+
+    // Intercetta click su link interni → curtain sale dal basso → navigate
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('#')) return;
+      if (a.target === '_blank') return;
+      if (href.startsWith('http') && !href.includes(location.host)) return;
+      if (href.startsWith('mailto:') || href.startsWith('tel:') || href.includes('wa.me')) return;
+      // Modifier keys → lascia che il browser apra in nuova tab
+      if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      try { sessionStorage.setItem('mgb-pt-leaving', '1'); } catch (err) {}
+      trans.classList.add('is-entering');
+      setTimeout(() => { window.location.href = href; }, 360);
+    });
+  }
+
+  /* ——— Filtri prodotti per brand (chip nel catalogo) ——— */
+  const chips = document.querySelectorAll('.filter-chips .chip[data-filter]');
   if (chips.length) {
-    const cards = document.querySelectorAll('[data-cat]');
     const brandSections = document.querySelectorAll('.brand-section[data-brand]');
     chips.forEach(c => {
       c.addEventListener('click', () => {
         chips.forEach(x => x.classList.remove('is-active'));
         c.classList.add('is-active');
         const f = c.getAttribute('data-filter');
-        // Vecchio: filtra cards per data-cat
-        cards.forEach(card => {
-          if (f === 'all' || card.getAttribute('data-cat') === f) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-        // Nuovo: filtra brand-section per data-brand
         brandSections.forEach(sec => {
           if (f === 'all' || sec.getAttribute('data-brand') === f) {
             sec.removeAttribute('hidden');
@@ -176,12 +217,15 @@
             sec.setAttribute('hidden', '');
           }
         });
+        // Scroll a top del catalogo
+        const cat = document.querySelector('.product-catalog');
+        if (cat) cat.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
   }
 
   /* ——— Cinematic init (spotlight, count-up, reveal-clip, color-invert, scroll-scale) ——— */
-  function observeAndAdd(selector, cls, threshold) {
+  function observeAndAdd(selector, cls /*, threshold (ignored, now uses anticipated trigger) */) {
     const items = document.querySelectorAll(selector);
     if (!items.length) return;
     if (reduced || !('IntersectionObserver' in window)) {
@@ -195,11 +239,19 @@
           io.unobserve(en.target);
         }
       });
-    }, { threshold: threshold || 0.2 });
-    items.forEach(el => io.observe(el));
-    // Safety net 1500ms
+    }, { threshold: 0, rootMargin: '0px 0px 200px 0px' });
+    items.forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.bottom < 0) { el.classList.add(cls); return; } // già sopra viewport
+      io.observe(el);
+    });
+    // Safety net 1500ms — solo elementi davvero "vicini" al viewport
     setTimeout(() => {
-      items.forEach(el => { if (!el.classList.contains(cls)) el.classList.add(cls); });
+      items.forEach(el => {
+        if (el.classList.contains(cls)) return;
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight + 100) el.classList.add(cls);
+      });
     }, 1500);
   }
   observeAndAdd('.scroll-scale-img', 'is-in', 0.25);

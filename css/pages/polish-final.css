@@ -1,0 +1,247 @@
+/* =========================================================
+   POLISH FINAL — consolida i conflitti residui dei pass precedenti.
+   Caricato per ULTIMO. Decisioni definitive.
+   ========================================================= */
+
+/* ——————————————————————————————————————————————
+   1 · GALLERIA HEAD — decidere visibile (Awwwards aveva nascosto)
+   Riportala con tipografia coerente con le altre sezioni
+   —————————————————————————————————————————————— */
+
+.galleria { padding-top: clamp(5rem, 10vh, 7rem) !important; }
+.galleria__head {
+  display: grid !important;
+  grid-template-columns: auto 1fr !important;
+  width: min(1320px, 92vw) !important;
+  margin: 0 auto clamp(2.4rem, 5vh, 3.6rem) !important;
+  gap: 1rem 2.4rem !important;
+  align-items: end !important;
+}
+.galleria__head .eyebrow {
+  font-family: var(--font-mono) !important;
+  font-size: 0.62rem !important;
+  letter-spacing: 0.32em !important;
+  text-transform: uppercase;
+  color: var(--c-stihl) !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.6rem;
+  grid-column: 1 !important;
+}
+.galleria__head .eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  background: var(--c-stihl);
+}
+.galleria__title {
+  font-family: var(--font-display) !important;
+  font-size: clamp(2.2rem, 1.4rem + 3vw, 4.4rem) !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.05em !important;
+  line-height: 0.94 !important;
+  margin: 0 !important;
+  grid-column: 1 !important;
+  color: var(--c-ivory) !important;
+}
+.galleria__title em {
+  font-style: italic;
+  color: var(--c-stihl) !important;
+  -webkit-text-fill-color: var(--c-stihl) !important;
+  background: none !important;
+}
+
+@media (max-width: 760px) {
+  .galleria__head { grid-template-columns: 1fr !important; }
+}
+
+/* ——————————————————————————————————————————————
+   2 · BRANDS HEAD — riportare anche qui per coerenza
+   —————————————————————————————————————————————— */
+
+.brands-v2__head {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: flex-end !important;
+  width: min(1320px, 92vw) !important;
+  margin: 0 auto clamp(2.4rem, 5vh, 3.6rem) !important;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.brands-v2__head .eyebrow {
+  font-family: var(--font-mono) !important;
+  font-size: 0.62rem !important;
+  letter-spacing: 0.32em !important;
+  text-transform: uppercase;
+  color: var(--c-stihl) !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.6rem;
+}
+.brands-v2__head .eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  background: var(--c-stihl);
+}
+.brands-v2__title {
+  font-family: var(--font-display) !important;
+  font-size: clamp(2.2rem, 1.4rem + 3vw, 4.4rem) !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.05em !important;
+  line-height: 0.94 !important;
+  margin: 0.6rem 0 0 !important;
+  color: var(--c-ink) !important;
+  max-width: 18ch;
+}
+.brands-v2__title em {
+  font-style: italic;
+  color: var(--c-stihl-deep, #C84F18) !important;
+  -webkit-text-fill-color: var(--c-stihl-deep, #C84F18) !important;
+  background: none !important;
+}
+
+/* ——————————————————————————————————————————————
+   3 · HERO HOME — design finale Awwwards
+   Sub nascosto (intentional minimal), eyebrow + title + card
+   —————————————————————————————————————————————— */
+
+.hero-v2__sub { display: none !important; }
+.hero-v2__brands { display: none !important; }
+.hero-v2__topbar { display: none !important; }
+.hero-v2__particles { display: none !important; }
+.hero-v2__vignette { display: none !important; }
+
+/* Hero title finale */
+.hero-v2__title {
+  margin: 0 0 2.4rem !important;
+}
+
+/* Hero card minimal */
+.hero-v2__card {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.9rem;
+  background: transparent !important;
+  border: 1px solid rgba(242, 239, 231, 0.22) !important;
+  backdrop-filter: none !important;
+  padding: 0.85rem 1.2rem !important;
+  min-width: auto !important;
+  width: auto;
+}
+
+/* ——————————————————————————————————————————————
+   4 · DUAL FOCUS — design finale
+   —————————————————————————————————————————————— */
+
+.dual-focus__num { display: none !important; }
+.dual-focus__cta { display: none !important; }
+.dual-focus__desc { display: none !important; }
+.dual-focus__label {
+  display: inline-block !important;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--c-stihl) !important;
+  margin-bottom: 0.6rem;
+}
+.dual-focus__title em {
+  display: block !important;
+  margin-top: 0.4em !important;
+  font-style: italic;
+  color: var(--c-stihl) !important;
+  -webkit-text-fill-color: var(--c-stihl) !important;
+  background: none !important;
+}
+
+/* ——————————————————————————————————————————————
+   5 · FEATURED STRIP — info card più "puro"
+   —————————————————————————————————————————————— */
+
+.featured-strip__info {
+  background: #fff;
+  border-top: none !important;
+  padding: 1rem 1.1rem 1.4rem !important;
+}
+.featured-strip__brand {
+  color: var(--c-stihl) !important;
+  margin-bottom: 0.15rem;
+}
+.featured-strip__name {
+  font-weight: 400 !important;
+}
+
+/* ——————————————————————————————————————————————
+   6 · STATS BAR — più aria + accento arancio sui numeri
+   —————————————————————————————————————————————— */
+
+.stats-bar__num em {
+  color: var(--c-stihl);
+}
+
+/* ——————————————————————————————————————————————
+   7 · HSCROLL — head dimensione corretta
+   —————————————————————————————————————————————— */
+
+.hscroll__head {
+  width: min(1320px, 92vw) !important;
+}
+.hscroll__heading {
+  letter-spacing: -0.03em !important;
+}
+
+/* ——————————————————————————————————————————————
+   8 · FEATURE PIN — polish
+   —————————————————————————————————————————————— */
+
+.feature-pin__panel-title em {
+  display: block;
+  margin-top: 0.1em;
+  font-style: italic;
+  color: var(--c-stihl) !important;
+  -webkit-text-fill-color: var(--c-stihl) !important;
+  background: none !important;
+}
+
+/* ——————————————————————————————————————————————
+   9 · MOBILE FIX — assicura no overflow + spacing corretto
+   —————————————————————————————————————————————— */
+
+@media (max-width: 760px) {
+  .hero-v2__title { font-size: clamp(2.8rem, 12vw, 4.6rem) !important; }
+  .hero-v2__bottom { flex-direction: column; align-items: flex-start; gap: 1.4rem; }
+  .feature-pin__inner { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .feature-pin__visual { position: relative !important; top: 0 !important; aspect-ratio: 4/3 !important; height: auto !important; }
+  .feature-pin__panels { padding-block: 1rem 0 !important; gap: 2.4rem !important; }
+  .feature-pin__panel { min-height: auto !important; opacity: 1 !important; }
+  .hscroll { height: auto !important; padding: clamp(4rem, 9vh, 6rem) 0 !important; }
+  .hscroll__head { position: relative !important; padding-block: 0 2rem !important; }
+  .hscroll__track { position: relative !important; flex-direction: column !important; height: auto !important; padding: 0 6vw !important; gap: 1.4rem !important; }
+  .hscroll__panel { flex: none !important; width: 100% !important; height: 60vh !important; }
+  .hscroll__progress { display: none !important; }
+  .dual-focus { grid-template-columns: 1fr !important; }
+  .featured-strip__grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .featured-strip__card:nth-child(n+4) { display: none !important; }
+  body { overflow-x: hidden; }
+}
+
+/* ——————————————————————————————————————————————
+   10 · CONSOLE: fix focus-visible su pagine prodotto
+   —————————————————————————————————————————————— */
+
+main.product { padding-top: 0 !important; }
+
+/* ——————————————————————————————————————————————
+   11 · BG FOOTER — più cinematic
+   —————————————————————————————————————————————— */
+
+.site-footer {
+  background:
+    radial-gradient(ellipse 60% 80% at 20% 0%, rgba(238, 94, 31, 0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #0a0b0a 0%, #060708 100%) !important;
+}

@@ -8,11 +8,14 @@
   --c-ink-2: #1F2123;          /* sezioni alternate */
   --c-ivory: #F4F1EA;          /* avorio carta */
   --c-ivory-soft: #EAE5DA;
-  --c-stihl: #F26522;          /* arancio Stihl, accento */
-  --c-stihl-deep: #C84F18;
+  --c-stihl: #F26522;          /* arancio Stihl, accento principale */
+  --c-stihl-deep: #C84F18;     /* arancio bruciato, per testi/hover sofisticati */
+  --c-rust: #B14821;           /* terracotta, accento maturo */
   --c-forest: #1F3A2E;         /* verde profondo */
   --c-forest-soft: #2A4A3D;
   --c-beige: #C9B68C;          /* beige metallico */
+  --c-beige-soft: #E2D7B9;     /* avorio caldo per highlight su dark */
+  --c-clay: #8A4527;           /* terra di Siena, profondo */
   --c-muted: #8B8B85;           /* grigio testo secondario */
   --c-line: rgba(244, 241, 234, 0.12);
   --c-line-strong: rgba(244, 241, 234, 0.22);

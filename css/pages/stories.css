@@ -1,0 +1,131 @@
+/* =========================================================
+   STORIES — sezione "Sul banco oggi" (storie IG via Behold)
+   Fallback con foto reali quando il widget non è attivo.
+   ========================================================= */
+
+.h3-stories {
+  padding: clamp(4rem, 8vh, 6rem) clamp(1.5rem, 4vw, 3rem);
+  background: #0a0b0a;
+  color: var(--c-ivory, #f4f1ea);
+}
+.h3-stories__head {
+  width: min(1280px, 92vw);
+  margin: 0 auto clamp(2rem, 4vh, 3rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.h3-stories__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.4rem + 2.5vw, 3.2rem);
+  font-weight: 380;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0.4rem 0 0;
+}
+.h3-stories__title em {
+  font-style: italic;
+  color: var(--c-stihl, #ee5e1f);
+}
+
+.h3-stories__feed {
+  width: min(1280px, 92vw);
+  margin: 0 auto;
+}
+
+/* Quando Behold inietta il suo widget, nasconde il fallback */
+.h3-stories__feed:has(behold-widget) .h3-stories__fallback,
+.h3-stories__feed:has(.behold-stories) .h3-stories__fallback,
+.h3-stories__feed:has([data-behold-loaded]) .h3-stories__fallback {
+  display: none;
+}
+
+/* Grid di 4 card per il fallback */
+.h3-stories__fallback {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.h3-stories__card {
+  position: relative;
+  display: block;
+  aspect-ratio: 9/16;
+  overflow: hidden;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(244, 241, 234, 0.06);
+  border: 1px solid rgba(244, 241, 234, 0.08);
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), border-color 280ms ease, box-shadow 280ms ease;
+}
+.h3-stories__card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(238, 94, 31, 0.4);
+  box-shadow: 0 22px 50px -16px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(238, 94, 31, 0.2);
+}
+.h3-stories__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.95) brightness(0.85);
+  transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1), filter 600ms ease;
+}
+.h3-stories__card:hover img {
+  transform: scale(1.06);
+  filter: saturate(1.05) brightness(1);
+}
+
+/* Overlay scuro in basso con caption */
+.h3-stories__card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.78) 100%);
+  pointer-events: none;
+}
+.h3-stories__card-cap {
+  position: absolute;
+  left: 0.9rem;
+  bottom: 0.9rem;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-ivory, #f4f1ea);
+}
+
+/* Badge "IG" in alto a destra di ogni card */
+.h3-stories__card::before {
+  content: "";
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--c-stihl, #ee5e1f);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a0b0a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='3' width='18' height='18' rx='5'/><path d='M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z'/><line x1='17.5' y1='6.5' x2='17.51' y2='6.5'/></svg>");
+  background-size: 14px;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 3;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .h3-stories__fallback { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 540px) {
+  .h3-stories__head { flex-direction: column; align-items: flex-start; }
+}
+
+/* Stile per il widget Behold quando attivo (sovrascrive il loro stile di base) */
+.h3-stories__feed behold-widget,
+.h3-stories__feed .behold-stories {
+  --behold-bg: transparent;
+  --behold-border-radius: 12px;
+}

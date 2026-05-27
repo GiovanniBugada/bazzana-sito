@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Admin · Ruota foto prodotto</title>
+<style>
+  body {
+    margin: 0;
+    padding: 24px;
+    background: #0a0b0a;
+    color: #f4f1ea;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  h1 { margin: 0 0 8px; color: #ee5e1f; }
+  .lead {
+    font-size: 14px;
+    opacity: 0.7;
+    margin-bottom: 24px;
+    max-width: 800px;
+    line-height: 1.5;
+  }
+  .lead code {
+    background: #1a1b1a;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #9bf3a4;
+    font-size: 13px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: #1a1b1a;
+    border: 1px solid #2a2b2a;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .card__filename {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #aaa;
+    word-break: break-all;
+    line-height: 1.4;
+  }
+  .card__media {
+    background: #0a0b0a;
+    border-radius: 8px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .card__media img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card__controls {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .card__controls button {
+    flex: 1;
+    background: #ee5e1f;
+    border: none;
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 60px;
+  }
+  .card__controls button:hover { opacity: 0.85; }
+  .card__rot {
+    text-align: center;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: #ee5e1f;
+    font-weight: 600;
+  }
+  .card.has-rotation { border-color: #ee5e1f; }
+  #toolbar {
+    position: sticky;
+    top: 0;
+    background: rgba(10, 11, 10, 0.95);
+    backdrop-filter: blur(8px);
+    padding: 16px 0 24px;
+    margin: -24px -24px 24px;
+    padding: 16px 24px 16px;
+    border-bottom: 1px solid #2a2b2a;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  #generate-cmd {
+    background: #9bf3a4;
+    color: #0a0b0a;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  #generate-cmd:disabled {
+    background: #2a2b2a;
+    color: #555;
+    cursor: not-allowed;
+  }
+  #cmd-output {
+    margin-top: 16px;
+    background: #0a0b0a;
+    border: 1px solid #2a2b2a;
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #9bf3a4;
+    white-space: pre-wrap;
+    word-break: break-all;
+    display: none;
+  }
+  #cmd-output.is-visible { display: block; }
+  .copy-btn {
+    background: #ee5e1f;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 12px;
+  }
+</style>
+</head>
+<body>
+<div id="toolbar">
+  <div>
+    <h1>Ruota foto prodotto</h1>
+    <p class="lead" style="margin: 4px 0 0;">Click su <code>↻ 90°</code> finche la foto e' dritta. Quando hai finito, <strong>Genera comando</strong> e copialo nel terminale.</p>
+  </div>
+  <button id="generate-cmd" disabled>Genera comando Python (0 modifiche)</button>
+</div>
+
+<div id="grid" class="grid"></div>
+
+<pre id="cmd-output"></pre>
+<button id="copy-cmd" class="copy-btn" style="display:none;">Copia tutto</button>
+
+<script>
+const PHOTOS = [
+  // Foto delle 11 pagine prodotto dedicate
+  'assets/img/prodotti/rasaerba-honda-hr-fronte.jpg',
+  'assets/img/prodotti/rasaerba-honda-laterale.jpg',
+  'assets/img/prodotti/active-4860-dall-alto.jpg',
+  'assets/img/prodotti/cippatore-tritone-sprint.jpg',
+  'assets/img/prodotti/cippatore-laterale.jpg',
+  'assets/img/prodotti/microcar-frontale.jpg',
+  'assets/img/prodotti/microcar-3-quarti.jpg',
+  'assets/img/prodotti/microcar-laterale.jpg',
+  'assets/img/prodotti/microcar-posteriore.jpg',
+  'assets/img/prodotti/microcar-interno-camera.jpg',
+  'assets/img/prodotti/microcar-cruscotto.jpg',
+  'assets/img/prodotti/microcar-bagagliaio.jpg',
+  'assets/img/prodotti/microcar-ligier-jsbluepass-frontale.jpg',
+  'assets/img/prodotti/decespugliatore-01.jpg',
+  'assets/img/prodotti/decespugliatore-02.jpg',
+  'assets/img/prodotti/generatore-completo.jpg',
+  'assets/img/prodotti/generatore-pannello.jpg',
+  'assets/img/prodotti/soffiatore-01.jpg',
+  'assets/img/prodotti/motozappa-01.jpg',
+  'assets/img/prodotti/motosega-echo-dcs2500t.jpg',
+];
+
+const grid = document.getElementById('grid');
+const generateBtn = document.getElementById('generate-cmd');
+const cmdOutput = document.getElementById('cmd-output');
+const copyBtn = document.getElementById('copy-cmd');
+
+const state = new Map(); // path -> rotation (0,90,180,270)
+
+function renderCard(path) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.path = path;
+  card.innerHTML = `
+    <div class="card__filename">${path.split('/').pop()}</div>
+    <div class="card__media"><img src="${path}?cb=${Date.now()}" alt="" onerror="this.parentElement.parentElement.style.display='none'"></div>
+    <div class="card__rot">0°</div>
+    <div class="card__controls">
+      <button data-act="ccw">↺ -90°</button>
+      <button data-act="cw">+90° ↻</button>
+      <button data-act="flip">↕ 180°</button>
+    </div>
+  `;
+  grid.appendChild(card);
+  const img = card.querySelector('img');
+  const rotEl = card.querySelector('.card__rot');
+  state.set(path, 0);
+  card.querySelectorAll('button').forEach(b => {
+    b.addEventListener('click', () => {
+      let cur = state.get(path);
+      if (b.dataset.act === 'cw') cur = (cur + 90) % 360;
+      else if (b.dataset.act === 'ccw') cur = (cur - 90 + 360) % 360;
+      else if (b.dataset.act === 'flip') cur = (cur + 180) % 360;
+      state.set(path, cur);
+      img.style.transform = cur ? `rotate(${cur}deg)` : '';
+      rotEl.textContent = cur + '°';
+      card.classList.toggle('has-rotation', cur !== 0);
+      updateButton();
+    });
+  });
+}
+
+function updateButton() {
+  const modCount = Array.from(state.values()).filter(v => v !== 0).length;
+  generateBtn.textContent = `Genera comando Python (${modCount} modifiche)`;
+  generateBtn.disabled = modCount === 0;
+}
+
+function generateCommand() {
+  const lines = ['python -c "', 'from PIL import Image', 'from pathlib import Path', ''];
+  // Mappa rotazione visiva -> PIL transpose
+  // CSS rotate(90deg) = clockwise 90 -> per ottenere quel risultato sul file applichi ROTATE_270
+  // CSS rotate(-90deg) o 270deg = counterclockwise -> ROTATE_90
+  // CSS rotate(180deg) -> ROTATE_180
+  const pilMap = { 90: 'ROTATE_270', 180: 'ROTATE_180', 270: 'ROTATE_90' };
+  state.forEach((deg, path) => {
+    if (deg === 0) return;
+    const pilCode = pilMap[deg];
+    lines.push(`p = Path('${path}')`);
+    lines.push(`img = Image.open(p).convert('RGB')`);
+    lines.push(`rot = img.transpose(Image.${pilCode})`);
+    lines.push(`rot.save(p, 'JPEG', quality=85, optimize=True, progressive=True, exif=b'')`);
+    lines.push(`rot.save(p.with_suffix('.webp'), 'WEBP', quality=85, method=6)`);
+    lines.push(`print('${path.split('/').pop()} ruotato ${deg}deg')`);
+    lines.push('');
+  });
+  lines.push('"');
+  cmdOutput.textContent = lines.join('\n');
+  cmdOutput.classList.add('is-visible');
+  copyBtn.style.display = 'inline-block';
+}
+
+generateBtn.addEventListener('click', generateCommand);
+copyBtn.addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(cmdOutput.textContent);
+    copyBtn.textContent = '✓ Copiato!';
+    setTimeout(() => { copyBtn.textContent = 'Copia tutto'; }, 1500);
+  } catch (e) {
+    const r = document.createRange(); r.selectNodeContents(cmdOutput);
+    const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+  }
+});
+
+PHOTOS.forEach(renderCard);
+</script>
+</body>
+</html>
