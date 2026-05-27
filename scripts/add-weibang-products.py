@@ -104,6 +104,96 @@ MODELS = [
         ],
         "trattorino comodo per il tuo giardino.",
     ),
+    (
+        "weibang-wb-456-scv",
+        "WB 456 SCV",
+        "Rasaerba semovente compatto",
+        "Rasaerba semovente compatto 46 cm. Foto del modello in arrivo.",
+        "Versione compatta da 46 cm di taglio, ideale per giardini fino a "
+        "800 m². Trasmissione semovente, leggero e maneggevole. Per scheda "
+        "tecnica e disponibilita', chiamaci o passa in negozio.",
+        [
+            ("Larghezza taglio", "46 cm"),
+            ("Trazione", "Semovente"),
+            ("Categoria", "Hobby evoluto"),
+            ("Area consigliata", "Fino a 800 m²"),
+            ("Disponibilita'", "Chiamaci per info"),
+            ("Assistenza", "Officina interna Bazzana"),
+        ],
+        "compatto, agile, semovente.",
+    ),
+    (
+        "weibang-wb-537-scv",
+        "WB 537 SCV",
+        "Rasaerba semovente",
+        "Rasaerba semovente 53 cm versione standard. Foto del modello in arrivo.",
+        "Versione standard della famiglia 537 (senza freno lama BBC), pensata "
+        "per chi cerca un semovente serio senza il sovrapprezzo del sistema "
+        "professionale. Per disponibilita' e prezzo, chiamaci.",
+        [
+            ("Larghezza taglio", "53 cm"),
+            ("Trazione", "Semovente"),
+            ("Categoria", "Semi-pro"),
+            ("Area consigliata", "1000 - 2000 m²"),
+            ("Disponibilita'", "Chiamaci per info"),
+            ("Assistenza", "Officina interna Bazzana"),
+        ],
+        "il semovente serio, senza fronzoli.",
+    ),
+    (
+        "weibang-wb-506-sc",
+        "WB 506 SC",
+        "Rasaerba a spinta",
+        "Rasaerba a spinta 51 cm versione economica. Foto del modello in arrivo.",
+        "Versione a spinta (non semovente) del WB 506, indicata per giardini "
+        "piccoli e medi e per chi preferisce avere controllo manuale del "
+        "ritmo di taglio. Per disponibilita', chiamaci.",
+        [
+            ("Larghezza taglio", "51 cm"),
+            ("Trazione", "Spinta manuale"),
+            ("Categoria", "Hobby"),
+            ("Area consigliata", "Fino a 1000 m²"),
+            ("Disponibilita'", "Chiamaci per info"),
+            ("Assistenza", "Officina interna Bazzana"),
+        ],
+        "il classico a spinta, fatto bene.",
+    ),
+    (
+        "weibang-wb-484-sbv-pro",
+        "WB 484 SBV PRO",
+        "Rasaerba professionale",
+        "Rasaerba professionale 48 cm con telaio in acciaio. Foto del modello in arrivo.",
+        "Telaio in acciaio rinforzato e trasmissione professionale, pensato "
+        "per giardinieri che cercano un 48 cm capace di lavorare ore senza "
+        "scaldarsi. Per scheda completa e disponibilita', chiamaci.",
+        [
+            ("Larghezza taglio", "48 cm"),
+            ("Telaio", "Acciaio rinforzato"),
+            ("Trazione", "Semovente variabile"),
+            ("Categoria", "Professionale"),
+            ("Disponibilita'", "Chiamaci per info"),
+            ("Assistenza", "Officina interna Bazzana"),
+        ],
+        "telaio in acciaio, lavoro continuo.",
+    ),
+    (
+        "weibang-wb-384-rb",
+        "WB 384 RB",
+        "Robot tagliaerba",
+        "Robot tagliaerba Weibang. Foto del modello in arrivo.",
+        "Robot tagliaerba con perimetrale, programmazione automatica e ritorno "
+        "in base. Per area massima coperta, autonomia e disponibilita', "
+        "chiamaci o passa in negozio.",
+        [
+            ("Tipologia", "Robot tagliaerba"),
+            ("Alimentazione", "Batteria + base ricarica"),
+            ("Installazione", "Inclusa, dal nostro tecnico"),
+            ("Disponibilita'", "Chiamaci per info"),
+            ("Assistenza", "Officina interna Bazzana"),
+            ("Garanzia", "Standard produttore"),
+        ],
+        "il prato si fa da solo.",
+    ),
 ]
 
 TEMPLATE = """<!DOCTYPE html>

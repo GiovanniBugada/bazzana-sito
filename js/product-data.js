@@ -397,5 +397,120 @@ window.BAZZANA_PRODUCTS = [
       { title: 'Per giardini medi', value: 'Pensato per superfici da circa 1.500-3.000 m² con taglio frequente.' },
       { title: 'Foto in arrivo', value: 'Foto del modello in arrivo dal magazzino — chiamaci per vederlo dal vivo.' }
     ]
+  },
+  {
+    slug: 'weibang-wb-456-scv',
+    brand: 'Weibang',
+    model: 'WB 456 SCV',
+    modelFull: 'Weibang WB 456 SCV',
+    category: 'Rasaerba semovente compatto',
+    tagline: 'Compatto, agile, semovente.',
+    lead: 'Rasaerba semovente compatto da 46 cm. Foto del modello in arrivo.',
+    description: 'Versione compatta da 46 cm di taglio, ideale per giardini fino a 800 m². Trasmissione semovente, leggero e maneggevole. Per scheda tecnica e disponibilità, chiamaci o passa in negozio.',
+    specs: [
+      { label: 'Larghezza taglio', value: '46 cm' },
+      { label: 'Trazione', value: 'Semovente' },
+      { label: 'Categoria', value: 'Hobby evoluto' },
+      { label: 'Area consigliata', value: 'Fino a 800 m²' },
+      { label: 'Disponibilità', value: 'Chiamaci per info' },
+      { label: 'Assistenza', value: 'Officina interna Bazzana' }
+    ],
+    highlights: [
+      { title: '46 cm taglio', value: 'Compatto: passa nei viali stretti e tra le siepi.' },
+      { title: 'Semovente', value: 'Avanzamento autonomo: nessuno sforzo anche su salite leggere.' },
+      { title: 'Foto in arrivo', value: 'Foto in produzione — vieni in negozio o chiama per vederlo dal vivo.' }
+    ]
+  },
+  {
+    slug: 'weibang-wb-537-scv',
+    brand: 'Weibang',
+    model: 'WB 537 SCV',
+    modelFull: 'Weibang WB 537 SCV',
+    category: 'Rasaerba semovente',
+    tagline: 'Il semovente serio, senza fronzoli.',
+    lead: 'Rasaerba semovente 53 cm versione standard. Foto del modello in arrivo.',
+    description: 'Versione standard della famiglia 537 (senza freno lama BBC), pensata per chi cerca un semovente serio senza il sovrapprezzo del sistema professionale. Per disponibilità e prezzo, chiamaci.',
+    specs: [
+      { label: 'Larghezza taglio', value: '53 cm' },
+      { label: 'Trazione', value: 'Semovente' },
+      { label: 'Categoria', value: 'Semi-pro' },
+      { label: 'Area consigliata', value: '1000 - 2000 m²' },
+      { label: 'Disponibilità', value: 'Chiamaci per info' },
+      { label: 'Assistenza', value: 'Officina interna Bazzana' }
+    ],
+    highlights: [
+      { title: '53 cm di taglio', value: 'Larghezza generosa: meno passate sullo stesso prato.' },
+      { title: 'Senza BBC, prezzo onesto', value: 'Per chi non ferma e riparte tutto il giorno, il BBC non serve.' },
+      { title: 'Foto in arrivo', value: 'Foto del modello in arrivo: scrivici per vederlo in negozio.' }
+    ]
+  },
+  {
+    slug: 'weibang-wb-506-sc',
+    brand: 'Weibang',
+    model: 'WB 506 SC',
+    modelFull: 'Weibang WB 506 SC',
+    category: 'Rasaerba a spinta',
+    tagline: 'Il classico a spinta, fatto bene.',
+    lead: 'Rasaerba a spinta 51 cm versione economica. Foto del modello in arrivo.',
+    description: 'Versione a spinta (non semovente) del WB 506, indicata per giardini piccoli e medi e per chi preferisce avere controllo manuale del ritmo di taglio. Per disponibilità, chiamaci.',
+    specs: [
+      { label: 'Larghezza taglio', value: '51 cm' },
+      { label: 'Trazione', value: 'Spinta manuale' },
+      { label: 'Categoria', value: 'Hobby' },
+      { label: 'Area consigliata', value: 'Fino a 1000 m²' },
+      { label: 'Disponibilità', value: 'Chiamaci per info' },
+      { label: 'Assistenza', value: 'Officina interna Bazzana' }
+    ],
+    highlights: [
+      { title: 'A spinta', value: 'Il taglio lo decidi tu: ritmo manuale, niente parti meccaniche in più.' },
+      { title: 'Economico e robusto', value: 'Meno componenti = meno guasti, manutenzione semplificata.' },
+      { title: 'Foto in arrivo', value: 'Foto del modello in arrivo dal magazzino — chiamaci per vederlo dal vivo.' }
+    ]
+  },
+  {
+    slug: 'weibang-wb-484-sbv-pro',
+    brand: 'Weibang',
+    model: 'WB 484 SBV PRO',
+    modelFull: 'Weibang WB 484 SBV PRO',
+    category: 'Rasaerba professionale',
+    tagline: 'Telaio in acciaio, lavoro continuo.',
+    lead: 'Rasaerba professionale 48 cm con telaio in acciaio. Foto del modello in arrivo.',
+    description: 'Telaio in acciaio rinforzato e trasmissione professionale, pensato per giardinieri che cercano un 48 cm capace di lavorare ore senza scaldarsi. Per scheda completa e disponibilità, chiamaci.',
+    specs: [
+      { label: 'Larghezza taglio', value: '48 cm' },
+      { label: 'Telaio', value: 'Acciaio rinforzato' },
+      { label: 'Trazione', value: 'Semovente variabile' },
+      { label: 'Categoria', value: 'Professionale' },
+      { label: 'Disponibilità', value: 'Chiamaci per info' },
+      { label: 'Assistenza', value: 'Officina interna Bazzana' }
+    ],
+    highlights: [
+      { title: 'Telaio in acciaio', value: 'Resistente agli urti accidentali e al calore del motore in uso intensivo.' },
+      { title: 'Trazione variabile', value: 'Velocità di avanzamento adattabile al passo del giardiniere.' },
+      { title: 'Foto in arrivo', value: 'Foto del modello in arrivo: passa in negozio per vederlo.' }
+    ]
+  },
+  {
+    slug: 'weibang-wb-384-rb',
+    brand: 'Weibang',
+    model: 'WB 384 RB',
+    modelFull: 'Weibang WB 384 RB',
+    category: 'Robot tagliaerba',
+    tagline: 'Il prato si fa da solo.',
+    lead: 'Robot tagliaerba Weibang con perimetrale. Foto del modello in arrivo.',
+    description: 'Robot tagliaerba con perimetrale, programmazione automatica e ritorno in base. Per area massima coperta, autonomia e disponibilità, chiamaci o passa in negozio.',
+    specs: [
+      { label: 'Tipologia', value: 'Robot tagliaerba' },
+      { label: 'Alimentazione', value: 'Batteria + base ricarica' },
+      { label: 'Installazione', value: 'Inclusa, dal nostro tecnico' },
+      { label: 'Disponibilità', value: 'Chiamaci per info' },
+      { label: 'Assistenza', value: 'Officina interna Bazzana' },
+      { label: 'Garanzia', value: 'Standard produttore' }
+    ],
+    highlights: [
+      { title: 'Programmazione automatica', value: 'Decide quando tagliare in base al programma che imposti.' },
+      { title: 'Installazione inclusa', value: 'Posa cavo perimetrale e prima configurazione da noi.' },
+      { title: 'Foto in arrivo', value: 'Foto del modello in arrivo — chiamaci per vederlo dal vivo.' }
+    ]
   }
 ];

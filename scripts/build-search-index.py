@@ -55,6 +55,11 @@ DB_SLUGS = {
     ("weibang", "wb 656 slcv bbc"): "weibang-wb-656-slcv-bbc",
     ("weibang", "p40 bull"): "weibang-p40-bull",
     ("weibang", "wb 1100 pro"): "weibang-wb-1100-pro",
+    ("weibang", "wb 456 scv"): "weibang-wb-456-scv",
+    ("weibang", "wb 537 scv"): "weibang-wb-537-scv",
+    ("weibang", "wb 506 sc"): "weibang-wb-506-sc",
+    ("weibang", "wb 484 sbv pro"): "weibang-wb-484-sbv-pro",
+    ("weibang", "wb 384 rb"): "weibang-wb-384-rb",
 }
 
 # Stihl, Honda, Echo, Geotech, Ligier, Yashi NON sono nel catalogo HTML,
