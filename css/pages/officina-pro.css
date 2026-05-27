@@ -352,7 +352,7 @@ main.officina { padding: 0; background: var(--c-ink, #0c0d0c); color: var(--c-iv
   font-size: 0.6rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(12, 13, 12, 0.5);
+  color: rgba(244, 241, 234, 0.5); /* avorio semi-trasparente per leggibilita' su sfondo dark */
 }
 
 @media (max-width: 760px) { .officina__brand-grid { grid-template-columns: repeat(2, 1fr); } }
