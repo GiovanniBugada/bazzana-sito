@@ -127,6 +127,10 @@
   perspective: 1200px;
   transform-style: preserve-3d;
   isolation: isolate;
+  /* Performance: isola layout/paint del singolo card per evitare reflow
+     a cascata su pagine con tante card (es. catalogo ~650 prodotti).
+     Migliora fluidita' cursor + scroll. */
+  contain: layout paint style;
 }
 .depth-card__base {
   position: relative;

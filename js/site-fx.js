@@ -55,20 +55,31 @@
 
     let mx = -100, my = -100;
     let initialized = false;
+    let pendingMove = false;
     let getInteractiveSel = () => '';
 
     cur.classList.add('is-hidden');
 
-    /* Cursore v8: un solo elemento (.cur stesso), inline transform,
-       niente rAF loop. Sposta direttamente .cur sulla posizione mouse. */
+    /* Cursore v9: un solo elemento (.cur stesso), inline transform.
+       FIX FLUIDITA': il mousemove batched via requestAnimationFrame
+       (1 update per frame max) invece di chiamare setPos a ogni evento.
+       Su pagine con DOM pesante (es. prodotti.html con ~650 card)
+       evita scatti dovuti a transform applicati piu' volte per frame. */
     function setPos(x, y) {
       cur.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+    }
+    function flushMove() {
+      pendingMove = false;
+      setPos(mx, my);
     }
 
     document.addEventListener('mousemove', (e) => {
       mx = e.clientX;
       my = e.clientY;
-      setPos(mx, my);
+      if (!pendingMove) {
+        pendingMove = true;
+        requestAnimationFrame(flushMove);
+      }
       if (!initialized) {
         initialized = true;
         cur.classList.remove('is-hidden');
