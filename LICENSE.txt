@@ -1,69 +1,39 @@
-Copyright © 2026 Motor Garden Bazzana — Cene (BG), Italia
-P.IVA 02234180169 · Via U. Bellora 73, 24020 Cene (BG)
+MIT License
 
-TUTTI I DIRITTI RISERVATI · ALL RIGHTS RESERVED
+Copyright (c) 2025-2026 Bruno Baldassarri, Giovanni Bugada
+Motor Garden Bazzana — Cene (BG), Italia
 
-==============================================================================
-LICENZA PROPRIETARIA — USO RISERVATO
-==============================================================================
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Il presente software (di seguito "il Sito"), comprensivo di tutto il codice
-sorgente (HTML, CSS, JavaScript, Python), i contenuti testuali, le immagini,
-i font customizzati, i dati strutturati, le animazioni e ogni altro asset
-incluso in questa repository, è proprietà esclusiva di:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-    Motor Garden Bazzana
-    Via U. Bellora 73 — 24020 Cene (BG) — Italia
-    P.IVA 02234180169
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-------------------------------------------------------------------------------
-1. CONCESSIONI
-------------------------------------------------------------------------------
-Nessuna licenza, espressa o implicita, è concessa a terzi per:
-  a) la copia totale o parziale del Sito;
-  b) la modifica, l'adattamento, la traduzione del Sito;
-  c) la distribuzione, vendita, sub-licenza del Sito;
-  d) l'uso del Sito o di sue parti in lavori derivati;
-  e) la rimozione delle indicazioni di copyright e attribuzione.
+---
 
-------------------------------------------------------------------------------
-2. ECCEZIONI
-------------------------------------------------------------------------------
-Sono fatti salvi:
-  - I marchi terzi citati (Stihl, Honda, Active, Oleo-Mac, Kress, Shindaiwa,
-    Ligier, Weibang, ecc.) che restano di proprietà dei rispettivi titolari
-    e sono utilizzati a fini esclusivamente informativi e commerciali, nei
-    limiti consentiti dalla legge e dai rapporti di rivendita autorizzata.
-  - I font tipografici (Fraunces, Inter, JetBrains Mono) distribuiti via
-    Google Fonts sotto SIL Open Font License.
-  - Le librerie e i servizi di terzi referenziati (OpenStreetMap, FormSubmit,
-    eventuali integrazioni future) che mantengono le proprie licenze.
-  - Le foto del produttore/distributore, utilizzate previa autorizzazione
-    nei rapporti di rivendita.
+NOTE
+- I marchi commerciali citati (Stihl, Honda, Active, Oleo-Mac, Kress, Shindaiwa,
+  Ligier, Weibang, ecc.) restano di proprietà dei rispettivi titolari e sono
+  utilizzati a fini esclusivamente informativi nell'ambito dei rapporti di
+  rivendita autorizzata di Motor Garden Bazzana.
+- I font tipografici (Fraunces, Inter, JetBrains Mono) sono distribuiti via
+  Google Fonts sotto SIL Open Font License.
+- Le foto del produttore/distributore sono utilizzate previa autorizzazione.
 
-------------------------------------------------------------------------------
-3. UTILIZZO DA PARTE DI COLLABORATORI / FORNITORI
-------------------------------------------------------------------------------
-Sviluppatori, web designer, consulenti e fornitori incaricati da Motor Garden
-Bazzana possono accedere al codice ai soli fini di sviluppo, manutenzione e
-deploy del Sito, secondo gli accordi contrattuali in essere. Ogni modifica
-resta proprietà di Motor Garden Bazzana.
-
-------------------------------------------------------------------------------
-4. GARANZIE
-------------------------------------------------------------------------------
-Il Sito è fornito "così com'è", senza garanzie esplicite o implicite di
-funzionamento, idoneità a uno scopo specifico o assenza di difetti. In nessun
-caso Motor Garden Bazzana sarà responsabile per danni diretti o indiretti
-derivanti dall'uso non autorizzato del Sito o di sue parti.
-
-------------------------------------------------------------------------------
-5. CONTATTI PER LICENZE
-------------------------------------------------------------------------------
-Per richieste di licenza, partnership, fornitura di servizi o segnalazioni:
-
-    Email:    bazzanamotorgarden@gmail.com
-    Tel:      +39 346 4156981
-    WhatsApp: https://wa.me/393464156981
-
-==============================================================================
+CONTATTI
+- Motor Garden Bazzana — Via U. Bellora 73, 24020 Cene (BG), Italia
+- P.IVA 02234180169
+- Email: bazzanamotorgarden@gmail.com
+- Tel: +39 346 4156981

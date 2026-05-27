@@ -4,7 +4,7 @@ Sito **Awwwards-tier** per Motor Garden Bazzana, rivenditore ufficiale **Stihl**
 
 > Otto marchi sotto un tetto: Stihl · Active · Oleo-Mac · Kress · Shindaiwa · Ligier · Weibang · motori Honda.
 
-[![Status](https://img.shields.io/badge/status-WIP%202026-orange)]() [![Stack](https://img.shields.io/badge/stack-HTML%20%2B%20CSS%20%2B%20vanilla%20JS-blue)]() [![License](https://img.shields.io/badge/license-Proprietary-red)](LICENSE.txt)
+[![Status](https://img.shields.io/badge/status-WIP%202026-orange)]() [![Stack](https://img.shields.io/badge/stack-HTML%20%2B%20CSS%20%2B%20vanilla%20JS-blue)]() [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE.txt)
 
 ---
 
@@ -69,7 +69,7 @@ bazzana_v2/
 │   ├── product-rotate-admin.js    # admin rotazione foto
 │   └── compare.js                 # confronto prodotti
 ├── scripts/                # 🐍 tool Python per import foto, build index, ecc.
-└── docs/                   # 📑 documentazione progetto (brief, deploy, roadmap)
+└── docs/                   # 📑 documentazione progetto (brief, deploy, roadmap, studio fattibilità)
 ```
 
 ---
@@ -213,13 +213,16 @@ Mobile-first 320px → 1920px+. Touch + mouse + tastiera.
 
 | Documento | Contenuto |
 |-----------|-----------|
+| [`docs/idea-progetto.md`](docs/idea-progetto.md) | Idea originale del progetto (brainstorm iniziale) |
 | [`docs/business-brief.md`](docs/business-brief.md) | Obiettivi del progetto, target audience, KPI |
 | [`docs/studio-fattibilita.md`](docs/studio-fattibilita.md) | Studio fattibilità tecnica e business |
 | [`docs/roadmap.md`](docs/roadmap.md) | Roadmap funzionalità future |
 | [`docs/deploy.md`](docs/deploy.md) | Come pubblicare il sito |
 | [`docs/aggiungere-un-marchio.md`](docs/aggiungere-un-marchio.md) | Procedura aggiunta nuovo brand (es. Weibang) |
+| [`docs/feasibility_study/`](docs/feasibility_study/) | Studio di fattibilità originale (.docx) |
+| [`docs/economy_finance/`](docs/economy_finance/) | Spese progetto + template Gantt + timetable |
 | [`CHANGELOG.md`](CHANGELOG.md) | Cronologia rilasci |
-| [`LICENSE.txt`](LICENSE.txt) | Licenza proprietaria |
+| [`LICENSE.txt`](LICENSE.txt) | Licenza MIT |
 
 ---
 
@@ -235,4 +238,4 @@ Mobile-first 320px → 1920px+. Touch + mouse + tastiera.
 
 ---
 
-<sub>© Motor Garden Bazzana — Cene (BG) · Val Seriana · Italia · 2026</sub>
+<sub>© Motor Garden Bazzana — Cene (BG) · Val Seriana · Italia · 2026 — progetto sviluppato da Giovanni Bugada e Bruno Baldassarri.</sub>
