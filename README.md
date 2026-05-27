@@ -40,6 +40,4 @@ Le tecnologie utilizzate per costruire questo progetto:
 | Area | Tecnologia |
 | :--- | :--- |
 | **Frontend** | HTML, CSS, JavaScript |
-| **Backend** | SQL, PHP |
-| **Database** | ... |
 | **Design** | ... |
