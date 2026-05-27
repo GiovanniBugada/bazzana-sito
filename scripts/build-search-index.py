@@ -49,6 +49,12 @@ DB_SLUGS = {
     ("active", "mz cm"): "active-mz-cm",
     ("geotech", "tritone sprint"): "cippatore-tritone",
     ("ligier", "myli"): "ligier-myli",
+    ("weibang", "wb 506 scv"): "weibang-wb-506-scv",
+    ("weibang", "wb 506 hcv"): "weibang-wb-506-hcv",
+    ("weibang", "wb 537 scv bbc"): "weibang-wb-537-scv-bbc",
+    ("weibang", "wb 656 slcv bbc"): "weibang-wb-656-slcv-bbc",
+    ("weibang", "p40 bull"): "weibang-p40-bull",
+    ("weibang", "wb 1100 pro"): "weibang-wb-1100-pro",
 }
 
 # Stihl, Honda, Echo, Geotech, Ligier, Yashi NON sono nel catalogo HTML,

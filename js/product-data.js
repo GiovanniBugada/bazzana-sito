@@ -259,18 +259,143 @@ window.BAZZANA_PRODUCTS = [
       { title: 'Autonomia 192 km', value: 'Tra le più alte della categoria L6e: una settimana di tragitti urbani senza ricaricare.' },
       { title: '4 allestimenti', value: 'Da Myli essenziale a Myli full optional con tetto panoramico vetrato.' }
     ]
-  },,
-      { label: 'Velocità max', value: '45 km/h' },
-      { label: 'Autonomia', value: 'fino a 100 km' },
-      { label: 'Ricarica', value: 'Presa schuko domestica' },
-      { label: 'Posti', value: '2' },
-      { label: 'Età minima', value: '14 anni (patente AM)' },
-      { label: 'Garanzia', value: '2 anni veicolo · 3 anni batteria' }
+  },
+  {
+    slug: 'weibang-wb-506-scv',
+    brand: 'Weibang',
+    model: 'WB 506 SCV',
+    modelFull: 'Weibang WB 506 SCV',
+    category: 'Rasaerba semovente',
+    tagline: 'Spinta facile, taglio pulito.',
+    lead: 'Rasaerba semovente da 51 cm di taglio, telaio robusto e trasmissione progressiva. Foto del modello in arrivo.',
+    description: 'Rasaerba a spinta semovente di fascia professionale, larghezza taglio 51 cm. Pensato per giardini medio-grandi e uso intensivo. Per scheda tecnica completa, prezzo aggiornato e disponibilità, chiamaci o passa in negozio.',
+    specs: [
+      { label: 'Larghezza taglio', value: '51 cm' },
+      { label: 'Trazione', value: 'Semovente' },
+      { label: 'Categoria', value: 'Professionale' },
+      { label: 'Disponibilità', value: 'Chiamaci per info' },
+      { label: 'Assistenza', value: 'Officina interna Bazzana' },
+      { label: 'Garanzia', value: 'Standard produttore' }
     ],
     highlights: [
-      { title: 'Patente AM', value: 'Guidabile dai 14 anni con il foglio rosa: stessa abilitazione del 50 cc.' },
-      { title: 'Batteria al litio', value: 'Litio sostituibile in officina; garantita 3 anni a parte rispetto al veicolo.' },
-      { title: 'Ricarica domestica', value: 'Si attacca a una qualsiasi presa schuko: pieno di notte, come uno smartphone.' }
+      { title: 'Foto in arrivo', value: 'Sto per ricevere le foto del modello dal magazzino — chiamaci per vederlo in negozio.' },
+      { title: 'Semovente 51 cm', value: 'Larghezza di taglio adatta a giardini di media estensione.' },
+      { title: 'Service interno', value: 'Tutta la manutenzione la facciamo noi in officina, ricambi sempre disponibili.' }
+    ]
+  },
+  {
+    slug: 'weibang-wb-506-hcv',
+    brand: 'Weibang',
+    model: 'WB 506 HCV',
+    modelFull: 'Weibang WB 506 HCV',
+    category: 'Rasaerba semovente con motore Honda',
+    tagline: 'Spinta facile, motore Honda.',
+    lead: 'Rasaerba semovente da 51 cm con motore Honda. Foto del modello in arrivo.',
+    description: 'Versione con motore a 4 tempi Honda, per giardini medio-grandi e uso frequente. Per scheda tecnica completa, prezzo aggiornato e disponibilità, chiamaci o passa in negozio a Cene (BG).',
+    specs: [
+      { label: 'Larghezza taglio', value: '51 cm' },
+      { label: 'Trazione', value: 'Semovente' },
+      { label: 'Motore', value: 'Honda 4 tempi' },
+      { label: 'Disponibilità', value: 'Chiamaci per info' },
+      { label: 'Assistenza', value: 'Officina interna Bazzana' },
+      { label: 'Garanzia', value: 'Standard produttore' }
+    ],
+    highlights: [
+      { title: 'Motore Honda', value: 'Affidabilità del 4 tempi Honda con la trasmissione professionale Weibang.' },
+      { title: 'Semovente', value: 'Avanzamento autonomo: nessuno sforzo anche su pendenze leggere.' },
+      { title: 'Foto in arrivo', value: 'Foto del modello in produzione: scrivici per vederlo in negozio.' }
+    ]
+  },
+  {
+    slug: 'weibang-wb-537-scv-bbc',
+    brand: 'Weibang',
+    model: 'WB 537 SCV BBC',
+    modelFull: 'Weibang WB 537 SCV BBC',
+    category: 'Rasaerba professionale BBC',
+    tagline: 'Il professionale per giardinieri.',
+    lead: 'Rasaerba professionale 53 cm con freno lama BBC. Foto del modello in arrivo.',
+    description: 'Sistema BBC (Blade Brake Clutch): il motore resta acceso anche quando la lama è ferma, ideale per chi sposta spesso la macchina o svuota il cesto. Pensato per giardinieri professionisti. Per scheda tecnica completa e disponibilità, chiamaci.',
+    specs: [
+      { label: 'Larghezza taglio', value: '53 cm' },
+      { label: 'Trazione', value: 'Semovente' },
+      { label: 'Freno lama', value: 'BBC (Blade Brake Clutch)' },
+      { label: 'Categoria', value: 'Professionale' },
+      { label: 'Disponibilità', value: 'Chiamaci per info' },
+      { label: 'Assistenza', value: 'Officina interna Bazzana' }
+    ],
+    highlights: [
+      { title: 'Freno lama BBC', value: 'Ferma la lama senza spegnere il motore: stop e ripartenza istantanea.' },
+      { title: '53 cm taglio', value: 'Larghezza ideale per uso quotidiano da giardiniere.' },
+      { title: 'Foto in arrivo', value: 'Stiamo aspettando le foto del modello: chiama per vederlo in negozio.' }
+    ]
+  },
+  {
+    slug: 'weibang-wb-656-slcv-bbc',
+    brand: 'Weibang',
+    model: 'WB 656 SLCV BBC',
+    modelFull: 'Weibang WB 656 SLCV BBC',
+    category: 'Rasaerba professionale BBC 65 cm',
+    tagline: 'Il top di gamma a spinta.',
+    lead: 'Rasaerba professionale 65 cm con freno lama BBC. Foto del modello in arrivo.',
+    description: 'Larghezza di taglio 65 cm per coprire più superficie con meno passate. Sistema BBC (Blade Brake Clutch) per sicurezza in uso intensivo. Per scheda tecnica completa e disponibilità, chiamaci.',
+    specs: [
+      { label: 'Larghezza taglio', value: '65 cm' },
+      { label: 'Trazione', value: 'Semovente' },
+      { label: 'Freno lama', value: 'BBC (Blade Brake Clutch)' },
+      { label: 'Categoria', value: 'Professionale' },
+      { label: 'Disponibilità', value: 'Chiamaci per info' },
+      { label: 'Assistenza', value: 'Officina interna Bazzana' }
+    ],
+    highlights: [
+      { title: '65 cm taglio', value: 'Più superficie per ogni passata: meno tempo a tagliare grandi giardini.' },
+      { title: 'Freno lama BBC', value: 'Sicurezza professionale: la lama si ferma in pochi secondi.' },
+      { title: 'Foto in arrivo', value: 'Foto in produzione — vieni in negozio o chiama per vederlo dal vivo.' }
+    ]
+  },
+  {
+    slug: 'weibang-p40-bull',
+    brand: 'Weibang',
+    model: 'P40 BULL',
+    modelFull: 'Weibang P40 BULL',
+    category: 'Rasaerba a batteria professionale',
+    tagline: 'Silenzioso, zero emissioni.',
+    lead: 'Rasaerba professionale a batteria. Foto del modello in arrivo.',
+    description: 'Tagliaerba elettrico a batteria, silenzioso e senza emissioni. Per modello, autonomia e accessori disponibili, chiamaci o passa in negozio.',
+    specs: [
+      { label: 'Alimentazione', value: 'Batteria' },
+      { label: 'Categoria', value: 'Professionale silenzioso' },
+      { label: 'Disponibilità', value: 'Chiamaci per info' },
+      { label: 'Assistenza', value: 'Officina interna Bazzana' },
+      { label: 'Garanzia', value: 'Standard produttore' },
+      { label: 'Vantaggio', value: 'Zero emissioni, basso rumore' }
+    ],
+    highlights: [
+      { title: 'Zero emissioni', value: 'Niente benzina, niente fumi: ottimo in giardini residenziali e parchi.' },
+      { title: 'Silenzioso', value: 'Tagli all\'alba o al tramonto senza disturbare il vicinato.' },
+      { title: 'Foto in arrivo', value: 'Foto del modello in arrivo: scrivici per vederlo in negozio.' }
+    ]
+  },
+  {
+    slug: 'weibang-wb-1100-pro',
+    brand: 'Weibang',
+    model: 'WB 1100 PRO',
+    modelFull: 'Weibang WB 1100 PRO',
+    category: 'Trattorino tagliaerba',
+    tagline: 'Trattorino comodo per il tuo giardino.',
+    lead: 'Trattorino tagliaerba Weibang serie 1100. Foto del modello in arrivo.',
+    description: 'Trattorino tagliaerba per giardini medio-grandi. Per cilindrata, larghezza di taglio e disponibilità, chiamaci o passa in negozio a Cene (BG).',
+    specs: [
+      { label: 'Tipologia', value: 'Trattorino tagliaerba' },
+      { label: 'Categoria', value: 'Hobby / semi-pro' },
+      { label: 'Disponibilità', value: 'Chiamaci per info' },
+      { label: 'Assistenza', value: 'Officina interna Bazzana' },
+      { label: 'Garanzia', value: 'Standard produttore' },
+      { label: 'Consegna', value: 'Su appuntamento' }
+    ],
+    highlights: [
+      { title: 'Trattorino comodo', value: 'Per chi non vuole più spingere: si guida seduti, in scioltezza.' },
+      { title: 'Per giardini medi', value: 'Pensato per superfici da circa 1.500-3.000 m² con taglio frequente.' },
+      { title: 'Foto in arrivo', value: 'Foto del modello in arrivo dal magazzino — chiamaci per vederlo dal vivo.' }
     ]
   }
 ];

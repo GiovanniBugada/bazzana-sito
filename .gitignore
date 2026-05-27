@@ -5,3 +5,6 @@ Thumbs.db
 node_modules/
 *.log
 .claude/
+bazzana-sito/
+__pycache__/
+*.pyc
