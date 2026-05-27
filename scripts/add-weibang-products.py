@@ -23,29 +23,36 @@ SITEMAP = ROOT / "sitemap.xml"
 # - id_catalogo: data-product-id univoco per la card
 # - sottocategoria_catalogo: nome leggibile del <details data-cat="...">
 # - svg_categoria: filename in assets/img/placeholder-categoria/
+#
+# IMPORTANTE: tutti i modelli sono REALI del catalogo ufficiale Weibang Italia
+# (https://www.weibang-italia.it/), verificati al 2026-05-27.
+# Weibang NON produce trattorini ne' robot tagliaerba.
 CATALOG_MAP = {
-    "weibang-wb-506-scv":     ("weib1",  "Rasaerba - Semoventi",          "rasaerba-semovente"),
-    "weibang-wb-506-hcv":     ("weib2",  "Rasaerba - Semoventi",          "rasaerba-semovente"),
-    "weibang-wb-456-scv":     ("weib7",  "Rasaerba - Semoventi",          "rasaerba-semovente"),
-    "weibang-wb-537-scv":     ("weib8",  "Rasaerba - Semoventi",          "rasaerba-semovente"),
-    "weibang-wb-506-sc":      ("weib9",  "Rasaerba - A spinta",           "rasaerba-spinta"),
-    "weibang-wb-484-sbv-pro": ("weib10", "Rasaerba - Professionali",      "rasaerba-pro"),
-    "weibang-wb-537-scv-bbc": ("weib3",  "Rasaerba - Professionali BBC",  "rasaerba-pro"),
-    "weibang-wb-656-slcv-bbc":("weib4",  "Rasaerba - Professionali BBC",  "rasaerba-pro"),
-    "weibang-p40-bull":       ("weib5",  "Rasaerba - Batteria",           "rasaerba-batteria"),
-    "weibang-wb-1100-pro":    ("weib6",  "Trattorini - Rasaerba",         "trattorino"),
-    "weibang-wb-384-rb":      ("weib11", "Robot tagliaerba",              "robot"),
+    # Home Series semoventi
+    "weibang-wb-506-sc":     ("weib1",  "Rasaerba - Home semoventi",       "rasaerba-semovente"),
+    "weibang-wb-506-sc3":    ("weib2",  "Rasaerba - Home semoventi",       "rasaerba-semovente"),
+    "weibang-wb-537-sc3":    ("weib3",  "Rasaerba - Home semoventi",       "rasaerba-semovente"),
+    "weibang-wb-456-scve3":  ("weib4",  "Rasaerba - Home semoventi",       "rasaerba-semovente"),
+    # Home spinta mulching
+    "weibang-wb-466-scm":    ("weib5",  "Rasaerba - A spinta mulching",    "rasaerba-spinta"),
+    # Professional Series alluminio
+    "weibang-wb-537-scval":  ("weib6",  "Rasaerba - Professionali alluminio", "rasaerba-pro"),
+    "weibang-wb-537-scvalb": ("weib7",  "Rasaerba - Professionali alluminio", "rasaerba-pro"),
+    "weibang-wb-537-scvm":   ("weib8",  "Rasaerba - Professionali alluminio", "rasaerba-pro"),
+    # Professional Series bilama
+    "weibang-wb-778-scv3":   ("weib9",  "Rasaerba - Bilama professionale", "rasaerba-pro"),
+    # A batteria 120V
+    "weibang-wb-452-he":     ("weib10", "Rasaerba - A batteria 120V",      "rasaerba-batteria"),
+    "weibang-wb-462-sem":    ("weib11", "Rasaerba - A batteria 120V",      "rasaerba-batteria"),
 }
 
 # Ordine di display delle sottocategorie nel catalogo Weibang
 CATALOG_ORDER = [
-    "Rasaerba - Semoventi",
-    "Rasaerba - A spinta",
-    "Rasaerba - Professionali",
-    "Rasaerba - Professionali BBC",
-    "Rasaerba - Batteria",
-    "Trattorini - Rasaerba",
-    "Robot tagliaerba",
+    "Rasaerba - Home semoventi",
+    "Rasaerba - A spinta mulching",
+    "Rasaerba - Professionali alluminio",
+    "Rasaerba - Bilama professionale",
+    "Rasaerba - A batteria 120V",
 ]
 
 PLACEHOLDER_DIR = "assets/img/placeholder-categoria"
@@ -69,203 +76,255 @@ def cat_slug(cat_label: str) -> str:
     return s
 
 # (slug, model_label, category, lead, description, specs[list of (label, value)], tagline)
+# IMPORTANTE: tutti i modelli sono REALI del catalogo ufficiale Weibang Italia
+# (https://www.weibang-italia.it/), specs verificate al 2026-05-27 da
+# fonti ufficiali (sito Weibang, distributori AgriEuro, Agrotrade, Elkogarden).
 MODELS = [
-    (
-        "weibang-wb-506-scv",
-        "WB 506 SCV",
-        "Rasaerba semovente",
-        "Rasaerba semovente da 51 cm di taglio, telaio robusto e trasmissione progressiva. Foto del modello in arrivo.",
-        "Pensato per giardini medio-grandi e uso intensivo. Per scheda "
-        "tecnica completa, prezzo aggiornato e disponibilita', chiamaci o "
-        "passa in negozio a Cene (BG).",
-        [
-            ("Larghezza taglio", "51 cm"),
-            ("Trazione", "Semovente"),
-            ("Categoria", "Professionale"),
-            ("Disponibilita'", "Chiamaci per info"),
-            ("Assistenza", "Officina interna Bazzana"),
-            ("Garanzia", "Standard produttore"),
-        ],
-        "spinta facile, taglio pulito.",
-    ),
-    (
-        "weibang-wb-506-hcv",
-        "WB 506 HCV",
-        "Rasaerba semovente",
-        "Rasaerba semovente da 51 cm con motore Honda. Foto del modello in arrivo.",
-        "Versione con motore a 4 tempi Honda, per giardini medio-grandi e uso frequente. "
-        "Per scheda tecnica completa, prezzo aggiornato e disponibilita', chiamaci o "
-        "passa in negozio a Cene (BG).",
-        [
-            ("Larghezza taglio", "51 cm"),
-            ("Trazione", "Semovente"),
-            ("Motore", "Honda 4 tempi"),
-            ("Disponibilita'", "Chiamaci per info"),
-            ("Assistenza", "Officina interna Bazzana"),
-            ("Garanzia", "Standard produttore"),
-        ],
-        "spinta facile, motore Honda.",
-    ),
-    (
-        "weibang-wb-537-scv-bbc",
-        "WB 537 SCV BBC",
-        "Rasaerba professionale BBC",
-        "Rasaerba professionale 53 cm con freno lama BBC. Foto del modello in arrivo.",
-        "Sistema BBC (Blade Brake Clutch): il motore resta acceso anche quando la "
-        "lama e' ferma, ideale per chi sposta spesso la macchina o svuota il cesto. "
-        "Per scheda tecnica completa e disponibilita', chiamaci.",
-        [
-            ("Larghezza taglio", "53 cm"),
-            ("Trazione", "Semovente"),
-            ("Freno lama", "BBC (Blade Brake Clutch)"),
-            ("Categoria", "Professionale"),
-            ("Disponibilita'", "Chiamaci per info"),
-            ("Assistenza", "Officina interna Bazzana"),
-        ],
-        "il professionale per giardinieri.",
-    ),
-    (
-        "weibang-wb-656-slcv-bbc",
-        "WB 656 SLCV BBC",
-        "Rasaerba professionale BBC",
-        "Rasaerba professionale 65 cm con freno lama BBC. Foto del modello in arrivo.",
-        "Larghezza di taglio 65 cm per coprire piu' superficie con meno passate. "
-        "Sistema BBC (Blade Brake Clutch) per sicurezza in uso intensivo. "
-        "Per scheda tecnica completa e disponibilita', chiamaci.",
-        [
-            ("Larghezza taglio", "65 cm"),
-            ("Trazione", "Semovente"),
-            ("Freno lama", "BBC (Blade Brake Clutch)"),
-            ("Categoria", "Professionale"),
-            ("Disponibilita'", "Chiamaci per info"),
-            ("Assistenza", "Officina interna Bazzana"),
-        ],
-        "il top di gamma a spinta.",
-    ),
-    (
-        "weibang-p40-bull",
-        "P40 BULL",
-        "Rasaerba a batteria",
-        "Rasaerba professionale a batteria. Foto del modello in arrivo.",
-        "Tagliaerba elettrico a batteria, silenzioso e senza emissioni. "
-        "Per modello, autonomia e accessori disponibili, chiamaci o passa in negozio.",
-        [
-            ("Alimentazione", "Batteria"),
-            ("Categoria", "Professionale silenzioso"),
-            ("Disponibilita'", "Chiamaci per info"),
-            ("Assistenza", "Officina interna Bazzana"),
-            ("Garanzia", "Standard produttore"),
-            ("Vantaggio", "Zero emissioni, basso rumore"),
-        ],
-        "silenzioso, zero emissioni.",
-    ),
-    (
-        "weibang-wb-1100-pro",
-        "WB 1100 PRO",
-        "Trattorino tagliaerba",
-        "Trattorino tagliaerba Weibang serie 1100. Foto del modello in arrivo.",
-        "Trattorino tagliaerba per giardini medio-grandi. "
-        "Per cilindrata, larghezza di taglio e disponibilita', chiamaci o passa "
-        "in negozio a Cene (BG).",
-        [
-            ("Tipologia", "Trattorino tagliaerba"),
-            ("Categoria", "Hobby / semi-pro"),
-            ("Disponibilita'", "Chiamaci per info"),
-            ("Assistenza", "Officina interna Bazzana"),
-            ("Garanzia", "Standard produttore"),
-            ("Consegna", "Su appuntamento"),
-        ],
-        "trattorino comodo per il tuo giardino.",
-    ),
-    (
-        "weibang-wb-456-scv",
-        "WB 456 SCV",
-        "Rasaerba semovente compatto",
-        "Rasaerba semovente compatto 46 cm. Foto del modello in arrivo.",
-        "Versione compatta da 46 cm di taglio, ideale per giardini fino a "
-        "800 m². Trasmissione semovente, leggero e maneggevole. Per scheda "
-        "tecnica e disponibilita', chiamaci o passa in negozio.",
-        [
-            ("Larghezza taglio", "46 cm"),
-            ("Trazione", "Semovente"),
-            ("Categoria", "Hobby evoluto"),
-            ("Area consigliata", "Fino a 800 m²"),
-            ("Disponibilita'", "Chiamaci per info"),
-            ("Assistenza", "Officina interna Bazzana"),
-        ],
-        "compatto, agile, semovente.",
-    ),
-    (
-        "weibang-wb-537-scv",
-        "WB 537 SCV",
-        "Rasaerba semovente",
-        "Rasaerba semovente 53 cm versione standard. Foto del modello in arrivo.",
-        "Versione standard della famiglia 537 (senza freno lama BBC), pensata "
-        "per chi cerca un semovente serio senza il sovrapprezzo del sistema "
-        "professionale. Per disponibilita' e prezzo, chiamaci.",
-        [
-            ("Larghezza taglio", "53 cm"),
-            ("Trazione", "Semovente"),
-            ("Categoria", "Semi-pro"),
-            ("Area consigliata", "1000 - 2000 m²"),
-            ("Disponibilita'", "Chiamaci per info"),
-            ("Assistenza", "Officina interna Bazzana"),
-        ],
-        "il semovente serio, senza fronzoli.",
-    ),
+    # ============================================================
+    # HOME SERIES - SEMOVENTI
+    # ============================================================
     (
         "weibang-wb-506-sc",
         "WB 506 SC",
-        "Rasaerba a spinta",
-        "Rasaerba a spinta 51 cm versione economica. Foto del modello in arrivo.",
-        "Versione a spinta (non semovente) del WB 506, indicata per giardini "
-        "piccoli e medi e per chi preferisce avere controllo manuale del "
-        "ritmo di taglio. Per disponibilita', chiamaci.",
+        "Rasaerba semovente Home Series",
+        "Tagliaerba semovente da 50 cm con motore Loncin 159 cc, ideale per superfici fino a 1.000 m².",
+        "Rasaerba a scoppio semovente della serie Home, motore Loncin 1P65FE-2 da "
+        "159 cc 6 HP a 4 tempi. Scocca in acciaio con triplo strato di vernice "
+        "Komaxit anti-corrosione, ruote 8\"/9\". Funzione mulching incluso. "
+        "Per prezzo aggiornato e disponibilita', chiamaci o passa in negozio.",
         [
-            ("Larghezza taglio", "51 cm"),
+            ("Larghezza taglio", "50 cm"),
+            ("Motore", "Loncin 1P65FE-2 · 159 cc · 6 HP"),
+            ("Trazione", "Semovente · 1 velocita'"),
+            ("Altezza taglio", "20-70 mm (8 posizioni)"),
+            ("Capacita' cesto", "60 L"),
+            ("Peso", "40,3 kg"),
+            ("Superficie consigliata", "Fino a 1.000 m²"),
+            ("Funzioni", "Raccolta · Mulching"),
+        ],
+        "semovente Home, motore Loncin.",
+    ),
+    (
+        "weibang-wb-506-sc3",
+        "WB 506 SC3",
+        "Rasaerba semovente Home 3in1",
+        "Tagliaerba 50 cm semovente 3in1: raccolta, mulching, scarico laterale. Motore Loncin 159 cc.",
+        "Versione 3in1 (raccolta + mulching + scarico laterale) del WB506SC, "
+        "motore Loncin 1P65FE-2 da 159 cc 6 HP, coppia 8,9 Nm. Scocca acciaio "
+        "Komaxit, 8 livelli di taglio. Ideale per giardini 400-1.000 m².",
+        [
+            ("Larghezza taglio", "50 cm"),
+            ("Motore", "Loncin 1P65FE-2 · 159 cc · 6 HP · 8,9 Nm"),
+            ("Trazione", "Semovente · 1 velocita'"),
+            ("Altezza taglio", "20-70 mm (8 posizioni)"),
+            ("Capacita' cesto", "60 L"),
+            ("Peso", "41,3 kg"),
+            ("Superficie consigliata", "400 - 1.000 m²"),
+            ("Funzioni", "3in1: Raccolta · Mulching · Scarico laterale"),
+        ],
+        "semovente 3in1, tre modi di tagliare.",
+    ),
+    (
+        "weibang-wb-537-sc3",
+        "WB 537 SC3",
+        "Rasaerba semovente Home 53 cm 3in1",
+        "Tagliaerba semovente 53 cm 3in1, motore Weibang 196 cc 7 HP, per giardini 1.000-3.000 m².",
+        "Step superiore rispetto al WB506SC3, larghezza taglio 53 cm e motore "
+        "proprietario Weibang 1P70FC da 196 cc 7 HP con coppia 10,9 Nm. "
+        "Distribuzione OHV, regolazione aria automatica, bobina elettronica per "
+        "avviamento facilitato.",
+        [
+            ("Larghezza taglio", "53 cm"),
+            ("Motore", "Weibang 1P70FC · 196 cc · 7 HP · 10,9 Nm"),
+            ("Trazione", "Semovente"),
+            ("Altezza taglio", "20-85 mm (6 posizioni)"),
+            ("Funzioni", "3in1: Raccolta · Mulching · Scarico laterale"),
+            ("Superficie consigliata", "1.000 - 3.000 m²"),
+            ("Avviamento", "A strappo, regolazione aria automatica"),
+            ("Serbatoio", "1,7 L benzina"),
+        ],
+        "motore Weibang 196 cc, 53 cm.",
+    ),
+    (
+        "weibang-wb-456-scve3",
+        "WB 456 SCVE3",
+        "Rasaerba semovente Home 46 cm 3in1",
+        "Tagliaerba compatto 46 cm semovente 3in1 della Home Series Weibang.",
+        "Versione compatta della Home Series, 46 cm di taglio per giardini "
+        "medio-piccoli. Sistema 3in1 (raccolta, mulching, scarico laterale). "
+        "Per cilindrata, peso e prezzo aggiornati, chiamaci.",
+        [
+            ("Larghezza taglio", "46 cm"),
+            ("Trazione", "Semovente"),
+            ("Funzioni", "3in1: Raccolta · Mulching · Scarico laterale"),
+            ("Serie", "Home Series"),
+            ("Categoria", "Hobby evoluto"),
+            ("Disponibilita'", "Chiamaci per scheda completa"),
+            ("Assistenza", "Officina interna Bazzana"),
+        ],
+        "compatto, agile, 3in1.",
+    ),
+
+    # ============================================================
+    # HOME SERIES - SPINTA MULCHING
+    # ============================================================
+    (
+        "weibang-wb-466-scm",
+        "WB 466 SCM",
+        "Rasaerba mulching a spinta",
+        "Tagliaerba 46 cm a spinta dedicato al mulching: erba sminuzzata e ridistribuita come concime naturale.",
+        "Rasaerba a spinta della Home Series, motore a benzina ~166 cc, scocca "
+        "in acciaio con trattamento anti-corrosione e regolazione centralizzata "
+        "altezza. Funzione mulching dedicata: tritura finemente l'erba per "
+        "ridistribuirla come nutrimento naturale del prato.",
+        [
+            ("Larghezza taglio", "46 cm"),
+            ("Motore", "Benzina 4T · ~166 cc"),
             ("Trazione", "Spinta manuale"),
-            ("Categoria", "Hobby"),
-            ("Area consigliata", "Fino a 1000 m²"),
-            ("Disponibilita'", "Chiamaci per info"),
-            ("Assistenza", "Officina interna Bazzana"),
+            ("Funzione", "Mulching dedicato"),
+            ("Scocca", "Acciaio anti-corrosione"),
+            ("Superficie consigliata", "400 - 1.000 m²"),
+            ("Vantaggio", "Niente raccolta sacchi: l'erba diventa concime"),
         ],
-        "il classico a spinta, fatto bene.",
+        "mulching puro, niente sacchi da svuotare.",
     ),
+
+    # ============================================================
+    # PROFESSIONAL SERIES - ALLUMINIO
+    # ============================================================
     (
-        "weibang-wb-484-sbv-pro",
-        "WB 484 SBV PRO",
-        "Rasaerba professionale",
-        "Rasaerba professionale 48 cm con telaio in acciaio. Foto del modello in arrivo.",
-        "Telaio in acciaio rinforzato e trasmissione professionale, pensato "
-        "per giardinieri che cercano un 48 cm capace di lavorare ore senza "
-        "scaldarsi. Per scheda completa e disponibilita', chiamaci.",
+        "weibang-wb-537-scval",
+        "WB 537 SCVAL",
+        "Rasaerba professionale alluminio 53 cm",
+        "Tagliaerba professionale 53 cm in alluminio, trasmissione cardanica a 3 velocita'.",
+        "Della Professional Series Weibang. Scocca in alluminio (piu' leggera, "
+        "non arrugginisce, dura nel tempo). Trasmissione cardanica con 3 "
+        "velocita' selezionabili. Per peso e dotazioni specifiche, chiamaci.",
         [
-            ("Larghezza taglio", "48 cm"),
-            ("Telaio", "Acciaio rinforzato"),
-            ("Trazione", "Semovente variabile"),
+            ("Larghezza taglio", "53 cm"),
+            ("Scocca", "Alluminio"),
+            ("Trasmissione", "Cardanica · 3 velocita'"),
+            ("Serie", "Professional Series"),
             ("Categoria", "Professionale"),
-            ("Disponibilita'", "Chiamaci per info"),
-            ("Assistenza", "Officina interna Bazzana"),
+            ("Vantaggio", "Niente ruggine, durata superiore"),
+            ("Disponibilita'", "Chiamaci per scheda completa"),
         ],
-        "telaio in acciaio, lavoro continuo.",
+        "alluminio, cardano, 3 marce.",
     ),
     (
-        "weibang-wb-384-rb",
-        "WB 384 RB",
-        "Robot tagliaerba",
-        "Robot tagliaerba Weibang. Foto del modello in arrivo.",
-        "Robot tagliaerba con perimetrale, programmazione automatica e ritorno "
-        "in base. Per area massima coperta, autonomia e disponibilita', "
-        "chiamaci o passa in negozio.",
+        "weibang-wb-537-scvalb",
+        "WB 537 SCVALB",
+        "Professionale alluminio con freno lama",
+        "Tagliaerba professionale 53 cm in alluminio con frizione freno lama (BBC). 70 L cesto, 196 cc, 65 kg.",
+        "Top di gamma della Professional Series con frizione freno lama (BBC): "
+        "il motore resta in moto anche quando la lama e' ferma, ideale per "
+        "spostamenti e svuotamento cesto frequente. Scocca alluminio + "
+        "trasmissione cardanica 3 velocita' + mulching.",
         [
-            ("Tipologia", "Robot tagliaerba"),
-            ("Alimentazione", "Batteria + base ricarica"),
-            ("Installazione", "Inclusa, dal nostro tecnico"),
-            ("Disponibilita'", "Chiamaci per info"),
-            ("Assistenza", "Officina interna Bazzana"),
-            ("Garanzia", "Standard produttore"),
+            ("Larghezza taglio", "53 cm"),
+            ("Motore", "Weibang · 196 cc"),
+            ("Scocca", "Alluminio"),
+            ("Trasmissione", "Cardanica · 3 velocita'"),
+            ("Freno lama", "BBC (frizione freno lama)"),
+            ("Altezza taglio", "25-76 mm (7 posizioni)"),
+            ("Capacita' cesto", "70 L"),
+            ("Peso", "65 kg"),
+            ("Mulching", "Si'"),
+            ("Superficie consigliata", "1.000 - 3.000 m²"),
         ],
-        "il prato si fa da solo.",
+        "alluminio + freno lama: il top a spinta.",
+    ),
+    (
+        "weibang-wb-537-scvm",
+        "WB 537 SCVM",
+        "Professionale mulching 53 cm",
+        "Tagliaerba professionale Weibang 53 cm dedicato al mulching, Professional Series.",
+        "Versione mulching-dedicated della Professional Series 537, pensata per "
+        "chi vuole solo la funzione mulching senza il cesto di raccolta. "
+        "Restituisce alla terra l'erba come fertilizzante naturale, riducendo "
+        "rifiuti e tempi di lavoro.",
+        [
+            ("Larghezza taglio", "53 cm"),
+            ("Serie", "Professional Series"),
+            ("Funzione", "Mulching dedicato (no raccolta)"),
+            ("Trasmissione", "Semovente"),
+            ("Categoria", "Professionale"),
+            ("Disponibilita'", "Chiamaci per scheda completa"),
+            ("Vantaggio", "Concime naturale, zero svuotamenti"),
+        ],
+        "mulching pro: l'erba diventa concime.",
+    ),
+
+    # ============================================================
+    # PROFESSIONAL SERIES - BILAMA
+    # ============================================================
+    (
+        "weibang-wb-778-scv3",
+        "WB 778 SCV3",
+        "Bilama professionale 77 cm 3in1",
+        "Tagliaerba bilama 77 cm con motore 300 cc, trasmissione meccanica 3 velocita'. Pulisce fino a 3.000 m².",
+        "Top assoluto della Professional Series Weibang: due lame di forma "
+        "diversa per coprire 77 cm in una sola passata. Motore 300 cc, "
+        "trasmissione meccanica a 3 velocita', mulching incluso, sacco da "
+        "90 L. Pensato per giardinieri professionisti su grandi superfici.",
+        [
+            ("Larghezza taglio", "77 cm (bilama)"),
+            ("Motore", "300 cc"),
+            ("Trasmissione", "Meccanica · 3 velocita'"),
+            ("Mulching", "Si'"),
+            ("Capacita' cesto", "90 L"),
+            ("Peso", "97 kg"),
+            ("Altezza taglio", "15-129 mm (regolabile)"),
+            ("Superficie", "Fino a 3.000 m²"),
+            ("Funzioni", "3in1: Raccolta · Mulching · Scarico"),
+        ],
+        "bilama 77 cm, 3 velocita', 300 cc.",
+    ),
+
+    # ============================================================
+    # BATTERIA 120V
+    # ============================================================
+    (
+        "weibang-wb-452-he",
+        "WB 452 HE",
+        "Rasaerba a batteria 120V",
+        "Tagliaerba a batteria 45 cm, sistema 120V 4Ah, sacco 50 L, peso 34,2 kg.",
+        "Rasaerba elettrico a batteria Litio Li-Ion 120V/4Ah, larghezza taglio "
+        "45 cm. Silenzioso, zero emissioni, ideale per giardini residenziali "
+        "fino a 400 m². Altezza di taglio regolabile in 8 posizioni. "
+        "Batteria e caricatore originali Weibang inclusi.",
+        [
+            ("Larghezza taglio", "45 cm"),
+            ("Alimentazione", "Batteria Litio Li-Ion 120V · 4 Ah"),
+            ("Altezza taglio", "20-70 mm (8 posizioni)"),
+            ("Capacita' cesto", "50 L"),
+            ("Peso", "34,2 kg"),
+            ("Superficie consigliata", "Fino a 400 m²"),
+            ("Trazione", "Spinta manuale"),
+            ("Inclusi", "Batteria 120V/4Ah + caricatore rapido"),
+        ],
+        "elettrico 120V, silenzioso, zero emissioni.",
+    ),
+    (
+        "weibang-wb-462-sem",
+        "WB 462 SEM",
+        "Rasaerba a batteria semovente 120V",
+        "Tagliaerba semovente a batteria 46 cm, 120V 4Ah, trazione posteriore. Fino a 1.100 m².",
+        "Versione semovente del sistema batteria Weibang 120V: trazione "
+        "posteriore, larghezza 46 cm, mulching dedicato (senza cesto di "
+        "raccolta). Autonomia variabile da 367 a 1.100 m² in base alle "
+        "condizioni d'uso.",
+        [
+            ("Larghezza taglio", "46 cm"),
+            ("Alimentazione", "Batteria 120V · 4 Ah"),
+            ("Trazione", "Semovente · ruote posteriori"),
+            ("Altezza taglio", "18-65 mm (7 posizioni)"),
+            ("Funzione", "Mulching dedicato (no raccolta)"),
+            ("Peso", "39,8 kg"),
+            ("Superficie", "367 - 1.100 m²"),
+            ("Inclusi", "Batteria + caricatore Weibang"),
+        ],
+        "semovente a batteria, fino a 1.100 m².",
     ),
 ]
 
