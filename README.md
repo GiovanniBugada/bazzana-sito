@@ -44,14 +44,29 @@ Rivenditore ufficiale **Stihl** + officina autorizzata a **Cene (BG)** — Apert
 
 ```
 bazzana_v2/
-├── index.html              🏠 Home cinematic (11 sezioni)
-├── officina.html           🔧 Timeline 4 step + brand grid + 3 stats
-├── prodotti.html           🛒 Catalogo 650 SKU con modal scheda
-├── foto.html               📸 Gallery 129 foto + lightbox
-├── storia.html             📖 6 chapter sticky scroll
-├── contatti.html           ✉️  Form GDPR + mappa OSM
-├── note.html               📝 Blog (12 articoli manutenzione)
-├── privacy.html · 404.html · admin-rotate.html
+│
+├── 🏠 PAGINE PUBBLICHE (URL del sito)
+│   ├── index.html              Home cinematic (11 sezioni)
+│   ├── officina.html           Timeline 4 step + brand grid + 3 stats
+│   ├── prodotti.html           Catalogo 650 SKU con modal scheda
+│   ├── foto.html               Gallery 129 foto + lightbox
+│   ├── storia.html             6 chapter sticky scroll
+│   ├── contatti.html           Form GDPR + mappa OSM
+│   ├── note.html               Blog (12 articoli manutenzione)
+│   ├── privacy.html            Privacy policy GDPR
+│   └── 404.html                Pagina errore
+│
+├── 🔍 SEO / CRAWLER (root obbligatorio)
+│   ├── robots.txt              Direttive crawler (blocca admin/scripts/docs)
+│   ├── sitemap.xml             Sitemap pubblico
+│   └── favicon.ico             Favicon multi-res 16/32/48
+│
+├── 📋 DOCUMENTAZIONE (in root, standard GitHub)
+│   ├── README.md               Questo file
+│   └── LICENSE.txt             Licenza MIT
+│
+├── 🔐 admin/
+│   └── admin-rotate.html       Tool admin per ruotare foto galleria
 │
 ├── prodotti/               🏷️  22 schede detail (MSI-style)
 │   ├── stihl-*.html        (4: MS 251, FS 131, BG 86, iMow)
@@ -102,25 +117,34 @@ bazzana_v2/
 │   ├── awwwards.js photo-rich.js storia-pro.js …
 │   └── site-fx.js extras.js wow-fx.js
 │
-├── scripts/                🐍 Tool Python
-│   ├── build-search-index.py     Rigenera search-index.js
-│   ├── compress-heavy-images.py  Comprime foto > 500KB
-│   ├── compress-catalog-images.py
-│   ├── reencode-quality.py       Re-encode q=88 + WebP
-│   ├── install-weibang-photos.py
-│   ├── generate-favicon.py
-│   ├── audit-deep.py             Audit completo sito
-│   └── import-all-photos.py
+├── scripts/                🐍 Tool Python attivi
+│   ├── build-search-index.py        Rigenera search-index.js
+│   ├── compress-heavy-images.py     Comprime foto > 500KB
+│   ├── compress-catalog-images.py   Comprime PNG catalog
+│   ├── reencode-quality.py          Re-encode q=88 + WebP
+│   ├── install-weibang-photos.py    Pattern per installare foto fornitore
+│   ├── generate-favicon.py          Genera set favicon da logo
+│   ├── import-all-photos.py         Import iniziale foto bazzana
+│   ├── add-*-products.py            Pattern aggiunta nuovo marchio
+│   ├── build-blog.py                Build articoli blog
+│   ├── rewrite-footer.py            Sync footer su tutte le pagine
+│   ├── convert-to-webp.py           Genera WebP companion
+│   ├── webp-rebuild-bazzana.py
+│   └── _archive/                    Script audit one-off già usati
 │
 └── docs/
-    ├── foto-da-fornire.txt       📋 LISTA FOTO da fornire (138)
-    ├── idea-progetto.md
-    ├── business-brief.md
-    ├── studio-fattibilita.md
-    ├── roadmap.md
-    ├── deploy.md
-    ├── aggiungere-un-marchio.md
-    └── feasibility_study/
+    ├── README.md                Index documentazione
+    ├── CHANGELOG.md             Cronologia rilasci
+    ├── foto-da-fornire.txt      📋 LISTA 138 FOTO da fornire
+    ├── idea-progetto.md         Brainstorm iniziale
+    ├── business-brief.md        Obiettivi, target, KPI
+    ├── studio-fattibilita.md    Studio fattibilità
+    ├── roadmap.md               Roadmap future features
+    ├── deploy.md                Come pubblicare il sito
+    ├── aggiungere-un-marchio.md Pattern aggiunta brand
+    ├── requirements.md          Requisiti tecnici
+    ├── economy_finance/         Budget + Gantt
+    └── fattibilità/             Studio di fattibilità .docx
 ```
 
 ---
