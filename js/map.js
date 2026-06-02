@@ -158,11 +158,20 @@
       io.observe(el);
     }
 
-    // Riallinea su resize finestra
+    // Riallinea su resize finestra + ricentra sul marker
     let rt;
+    const recenterMap = () => {
+      map.invalidateSize();
+      // Ricentra sul marker così non esce dal viewport ridimensionato
+      map.setView([lat, lng], map.getZoom(), { animate: false });
+    };
     window.addEventListener('resize', () => {
       clearTimeout(rt);
-      rt = setTimeout(() => map.invalidateSize(), 200);
+      rt = setTimeout(recenterMap, 150);
+    }, { passive: true });
+    // Anche su orientation change (mobile)
+    window.addEventListener('orientationchange', () => {
+      setTimeout(recenterMap, 300);
     }, { passive: true });
   }
 

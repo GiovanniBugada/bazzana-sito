@@ -12,20 +12,23 @@
 }
 
 /* ——— FIX TILE SEAM Leaflet durante zoom ———
-   Problema noto Leaflet: durante l'animazione di zoom appare una linea
-   bianca / "riga in mezzo" fra le tile adiacenti per sub-pixel rendering.
-   Workaround: GPU compositing + outline trasparente che copre i gap. */
+   Approccio v2: il precedente outline 0.5px diventava visibile come
+   griglia grigia su alcuni browser/DPI. Usiamo invece:
+   - background sotto le tile dello stesso colore (no più white gap)
+   - GPU compositing pulito senza outline */
+.bzn-map .leaflet-tile-pane,
+.contact__map .leaflet-tile-pane {
+  background: #aad3df;  /* stesso colore di OSM water/mare di sfondo */
+}
 .bzn-map .leaflet-tile-container,
 .bzn-map .leaflet-layer,
 .contact__map .leaflet-tile-container,
 .contact__map .leaflet-layer {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  will-change: transform;
 }
 .bzn-map .leaflet-tile,
 .contact__map .leaflet-tile {
-  outline: 0.5px solid transparent;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
