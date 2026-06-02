@@ -186,9 +186,14 @@
       if (!el || !el.closest) return '';
       const target = el.closest(INTERACTIVE_SEL);
       if (!target) return '';
-      // Esplicito da attributo
+      // Esplicito da attributo data-cursor
       if (target.dataset.cursor) return target.dataset.cursor;
-      // Default contestuali
+      // Aria-label come fallback (le close button hanno aria-label="Chiudi")
+      const aria = target.getAttribute('aria-label') || '';
+      const cls = target.className && typeof target.className === 'string' ? target.className : '';
+      const title = target.getAttribute('title') || '';
+
+      // Default contestuali per <a>
       if (target.tagName === 'A') {
         const href = target.getAttribute('href') || '';
         if (href.startsWith('tel:')) return 'Chiama';
@@ -198,7 +203,19 @@
         if (target.classList.contains('h3-card')) return 'Vedi';
         return 'Vai';
       }
-      if (target.tagName === 'BUTTON') return 'Apri';
+      // Default contestuali per <button> — distingui close/prev/next/menu/etc
+      if (target.tagName === 'BUTTON' || target.getAttribute('role') === 'button') {
+        // Close button: testo "×" o classe *close* o aria-label Chiudi
+        if (/close|chiud/i.test(cls + ' ' + aria + ' ' + title)) return 'Chiudi';
+        if (/prev|prec/i.test(cls + ' ' + aria + ' ' + title)) return 'Indietro';
+        if (/next|succ/i.test(cls + ' ' + aria + ' ' + title)) return 'Avanti';
+        if (/menu-toggle|hamburger/i.test(cls)) return 'Menu';
+        if (/rotate|ruot/i.test(cls + ' ' + aria + ' ' + title)) return 'Ruota';
+        if (/top|torna su/i.test(cls + ' ' + aria + ' ' + title)) return 'Su';
+        // Se ha aria-label sensato, mostralo invece di default "Apri"
+        if (aria && aria.length < 18) return aria;
+        return 'Apri';
+      }
       return '';
     };
 
