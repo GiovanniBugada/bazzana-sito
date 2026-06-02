@@ -168,46 +168,46 @@ window.BAZZANA_PRODUCTS = [
   {
     slug: 'active-4860',
     brand: 'Active',
-    model: '4860 SH',
-    modelFull: 'Active 4860 SH 4in1',
-    category: 'Rasaerba semovente 4 in 1',
+    model: '4860 SA',
+    modelFull: 'Active 4860 SA Semovente',
+    category: 'Rasaerba semovente',
     tagline: 'Made in Italy.',
-    lead: 'Progettato e assemblato in provincia di Bergamo. Quattro funzioni, una scocca, ruote larghe per i terreni veri.',
-    description: 'Motore Briggs & Stratton 750 EXi (161 cc) con starter facilitato e senza primer. Telaio in acciaio verniciato, regolazione altezza centralizzata a 7 posizioni (25-75 mm), manubrio ergonomico ripiegabile a doppia altezza. Quattro funzioni standard: raccolta in cesto 65 L, mulching, scarico posteriore, scarico laterale. Trazione semovente. Per giardini fino a circa 1.500 m², chi cerca un Made in Italy serio e ricambi facili da reperire.',
+    lead: 'Progettato e assemblato in Italia. Tre funzioni, scocca in acciaio, ruote larghe per i terreni veri.',
+    description: 'Motore Active 139 cc con avviamento facilitato. Telaio in acciaio verniciato, regolazione altezza centralizzata a 7 posizioni (25-75 mm), manubrio ergonomico ripiegabile a doppia altezza. Tre funzioni standard: raccolta in cesto 55 L, mulching, scarico posteriore. Trazione semovente. Per giardini fino a circa 1.500 m², chi cerca un Made in Italy serio e ricambi facili da reperire.',
     specs: [
-      { label: 'Motore', value: 'B&S 750 EXi · 161 cc' },
+      { label: 'Motore', value: 'Active 139 cc' },
       { label: 'Larghezza taglio', value: '48 cm' },
-      { label: 'Funzioni', value: '4 in 1 (raccolta · mulching · scarico post./lat.)' },
+      { label: 'Funzioni', value: 'Raccolta · Mulching · Scarico posteriore' },
       { label: 'Trazione', value: 'Semovente' },
-      { label: 'Capacità cesto', value: '65 L' },
+      { label: 'Capacità cesto', value: '55 L' },
       { label: 'Altezza taglio', value: '25 — 75 mm (7 pos.)' },
       { label: 'Garanzia', value: '2 anni' }
     ],
     highlights: [
-      { title: '4 funzioni standard', value: 'Mulching e scarico laterale di serie, non optional come su altri.' },
-      { title: 'Made in Italy', value: 'Progettato e assemblato in provincia di Bergamo: ricambi sempre reperibili.' },
-      { title: 'Motore B&S EXi', value: 'Starter senza primer, parte al primo strappo anche dopo mesi di fermo.' }
+      { title: 'Tre funzioni di serie', value: 'Mulching incluso, niente kit opzionali da pagare a parte.' },
+      { title: 'Made in Italy', value: 'Progettato e assemblato in Italia: ricambi sempre reperibili.' },
+      { title: 'Motore Active 139 cc', value: 'Motore proprio Active, manutenzione semplice e ricambi facili.' }
     ]
   },
   {
     slug: 'active-mz-cm',
     brand: 'Active',
-    model: 'MZ CM',
-    modelFull: 'Active MZ CM con Honda GP 160',
+    model: 'AC900',
+    modelFull: 'Active AC900 motozappa',
     category: 'Motozappa a benzina',
     tagline: 'L’orto preparato in mezza mattina.',
-    lead: 'Motore Honda GP 160 — il riferimento per chi vuole sicurezza di partenza anche a marzo, dopo l’inverno fermo.',
-    description: 'Motozappa con frese in acciaio temprato e larghezza di lavoro regolabile fino a 80 cm. Trasmissione a bagno d’olio con marcia avanti e retromarcia per uscire dai filari senza dover sollevare la macchina. Stegole regolabili in altezza e lateralmente, per non camminare nel solco appena fatto. Motore Honda GP 160 (163 cc) a 4 tempi a benzina: leggero, affidabile, costo gestione basso. Per orti familiari medi e piccoli appezzamenti.',
+    lead: 'Motore Active 196 cc — coppia generosa per terreni difficili, partenza facile anche dopo l’inverno fermo.',
+    description: 'Motozappa con frese in acciaio temprato e larghezza di lavoro regolabile fra 60 e 90 cm. Trasmissione a bagno d’olio con due marce avanti e retromarcia per uscire dai filari senza dover sollevare la macchina. Stegole regolabili in altezza e lateralmente, per non camminare nel solco appena fatto. Motore Active 196 cc a 4 tempi a benzina: coppia generosa, manutenzione semplice. Per orti familiari medi e piccoli appezzamenti.',
     specs: [
-      { label: 'Motore', value: 'Honda GP 160 · 163 cc' },
-      { label: 'Larghezza lavoro', value: 'fino a 80 cm' },
+      { label: 'Motore', value: 'Active 196 cc' },
+      { label: 'Larghezza lavoro', value: '60 — 90 cm' },
       { label: 'Profondità', value: 'regolabile via timone' },
-      { label: 'Cambio', value: '1 AV + 1 RM' },
+      { label: 'Cambio', value: '2 AV + 1 RM' },
       { label: 'Frese', value: 'Acciaio temprato' },
       { label: 'Garanzia', value: '2 anni' }
     ],
     highlights: [
-      { title: 'Motore Honda GP 160', value: 'Avviamento sicuro dopo soste lunghe: parte anche a fine inverno.' },
+      { title: 'Motore Active 196 cc', value: 'Coppia generosa e avviamento sicuro anche dopo soste lunghe.' },
       { title: 'Stegole regolabili', value: 'Altezza e laterale: si lavora fuori dal solco appena dissodato.' },
       { title: 'Retromarcia', value: 'Esce dai filari senza dover sollevare 60 kg di macchina.' }
     ]

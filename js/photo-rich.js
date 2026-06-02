@@ -84,15 +84,32 @@
     const progress = document.querySelector('.hscroll__progress-bar');
     if (!section || !track) return;
 
-    // Su mobile (track collassa verticale via CSS): rimuove altezza fissa
-    if (innerWidth < 900) {
-      section.style.height = 'auto';
+    /* Su mobile il CSS ribalta il track in colonna verticale.
+       Ripuliamo qualunque inline-style residuo (height/transform) e
+       NON registriamo listener: lo scroll resta nativo. */
+    const isMobile = () => innerWidth < 900;
+    const resetMobile = () => {
+      section.style.height = '';
+      track.style.transform = '';
+      if (progress) progress.style.width = '';
+    };
+    if (isMobile()) {
+      resetMobile();
+      // Re-init solo se l'utente ruota / ridimensiona oltre 900px
+      const ro = () => {
+        if (!isMobile()) {
+          removeEventListener('resize', ro);
+          initHScroll();
+        }
+      };
+      addEventListener('resize', ro, { passive: true });
       return;
     }
 
     // Calcola altezza ideale: viewport + scroll orizzontale necessario
     let maxTranslate = 0;
     const calcHeight = () => {
+      if (isMobile()) { resetMobile(); return; }
       maxTranslate = Math.max(0, track.scrollWidth - innerWidth);
       const idealH = innerHeight + maxTranslate + innerHeight * 0.1; // 10% di "rest" finale
       section.style.height = idealH + 'px';
@@ -102,6 +119,7 @@
     let lastP = -1;
 
     const update = () => {
+      if (isMobile()) { ticking = false; return; }
       const r = section.getBoundingClientRect();
       const totalScroll = section.offsetHeight - innerHeight;
       const scrolled = -r.top;
@@ -124,8 +142,8 @@
       if (!ticking) { requestAnimationFrame(update); ticking = true; }
     }, { passive: true });
     addEventListener('resize', () => {
-      if (innerWidth < 900) {
-        section.style.height = 'auto';
+      if (isMobile()) {
+        resetMobile();
         return;
       }
       calcHeight();

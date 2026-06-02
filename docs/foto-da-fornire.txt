@@ -1,0 +1,245 @@
+FOTO PRODOTTI DA FORNIRE — MOTOR GARDEN BAZZANA
+============================================================
+
+Sito vetrina sito www.motorgardenbazzana.it
+Cene (BG) - rivenditore Stihl + 7 altri marchi
+
+In totale servono 138 foto.
+Sono separate in 2 gruppi:
+  A. 8 foto schede prodotto detail (PRIORITA ALTA)
+  B. 130 foto catalogo (priorita normale)
+
+FORMATO: foto del prodotto isolato, sfondo neutro/bianco,
+almeno 800x800 px, formato JPG o PNG.
+Per le 8 schede A: anche foto in negozio vanno bene.
+
+============================================================
+A. SCHEDE DETAIL — 8 FOTO (PRIORITA ALTA)
+============================================================
+
+Queste sono le 8 schede che si aprono dai link "Scopri"
+della home + dal catalogo. Servono per prime.
+
+   1. Active AC900  (Motozappa)
+   2. Honda EU22i  (Generatore inverter)
+   3. Honda HRN 536  (Rasaerba mulching)
+   4. Ligier Myli  (Microcar elettrica)
+   5. Stihl BG 86  (Soffiatore)
+   6. Stihl FS 131  (Decespugliatore)
+   7. Stihl iMow 6 EVO  (Robot tagliaerba)
+   8. Stihl MS 251  (Motosega)
+
+============================================================
+B. CATALOGO COMPLETO — 130 FOTO
+============================================================
+
+Sono prodotti del listino raggruppati per marchio/categoria.
+Possono arrivare a gradino, NON c'e fretta — il catalogo
+mostra un placeholder generico finche la foto non e disponibile.
+
+
+--- Active  (3 foto totali) ---
+
+  Decespugliatori - Attrezzi per Decespugliatore  (3)
+    - Testa Decespugliatore Evo
+    - Asta Prolunga Evo
+    - Testa Tagliasiepi Evo
+
+--- Ligier  (19 foto totali) ---
+
+  Microcar - Cargo Van L6e  (1)
+    - Pulse 3
+
+  Microcar - Elettrica L6e  (6)
+    - Myli Active
+    - Myli Dynamic
+    - Myli Vibe
+    - JS50 Elec Club
+    - JS50 Elec Sport
+    - JS50 Elec Premium
+
+  Microcar - Termica L6e  (7)
+    - JS50 Club
+    - JS50 Sport Ultimate
+    - JS50 Premium
+    - JS50 Initial
+    - JS50 Heritage
+    - JS50 L Initial
+    - JS50 L Sport
+
+  Quadriciclo - 4 posti L7e  (1)
+    - Pulse 4
+
+  Quadriciclo - Termico L7e  (4)
+    - JS60 Club
+    - JS60 Sport
+    - JS60 Lounge
+    - JS60 L Sport
+
+--- Shindaiwa  (1 foto totali) ---
+
+  Oli miscela, lubrificanti e taniche  (1)
+    - Olio Miscela 2T
+
+--- Stihl  (107 foto totali) ---
+
+  Decespugliatori - A Batteria  (7)
+    - FSA 30
+    - FSA 45
+    - FSA 57
+    - FSA 60 R
+    - FSA 80 R
+    - FSA 90 R
+    - FSA 135 R
+
+  Decespugliatori - A Benzina  (15)
+    - FS 38
+    - FS 40
+    - FS 56
+    - FS 70
+    - FS 80
+    - FS 91
+    - FS 111
+    - FS 131
+    - FS 240
+    - FS 260
+    - FS 311
+    - FS 411
+    - FS 461
+    - FS 511
+    - FS 561
+
+  Decespugliatori - A Zaino  (4)
+    - FR 130 T
+    - FR 235
+    - FR 410 C-EF
+    - FR 460 TC-EFM
+
+  Idropulitrici  (3)
+    - RE 90
+    - RE 110
+    - RE 130
+
+  Motoseghe - A Batteria  (8)
+    - MSA 60
+    - MSA 120 C
+    - MSA 140 C
+    - MSA 160 T
+    - MSA 200 C
+    - MSA 220 T
+    - MSA 300
+    - MSA 300 C
+
+  Motoseghe - Da Bosco  (13)
+    - MS 162
+    - MS 170
+    - MS 180
+    - MS 181
+    - MS 211
+    - MS 231
+    - MS 251
+    - MS 261
+    - MS 271
+    - MS 291
+    - MS 311
+    - MS 362
+    - MS 391
+
+  Motoseghe - Da Potatura  (5)
+    - MS 150 T
+    - MS 151 T
+    - MS 192 T
+    - MS 194 T
+    - MS 201 T
+
+  Motoseghe - Professionali  (3)
+    - MS 462
+    - MS 500i
+    - MS 661
+
+  Potatori - A Batteria  (2)
+    - HTA 50
+    - HTA 86
+
+  Potatori - Asta  (3)
+    - HT 56 C-E
+    - HT 105
+    - HT 133
+
+  Rasaerba - A Batteria  (6)
+    - RMA 235
+    - RMA 248
+    - RMA 339
+    - RMA 443
+    - RMA 448
+    - RMA 545
+
+  Rasaerba - A Benzina  (7)
+    - RM 248
+    - RM 253
+    - RM 443
+    - RM 448
+    - RM 545
+    - RM 655
+    - RM 756
+
+  Robot Tagliaerba  (4)
+    - iMow 5
+    - iMow 6
+    - iMow 6 EVO
+    - iMow 7
+
+  Soffiatori - A Batteria  (5)
+    - BGA 45
+    - BGA 57
+    - BGA 60
+    - BGA 86
+    - BGA 200
+
+  Soffiatori - A Benzina  (2)
+    - BG 56
+    - BG 86
+
+  Soffiatori - A Zaino  (5)
+    - BR 200
+    - BR 350
+    - BR 450 C-EF
+    - BR 700
+    - BR 800 C-E
+
+  Soffiatori - Aspiratori  (1)
+    - SH 86
+
+  Tagliasiepi - A Batteria  (6)
+    - HSA 26
+    - HSA 50
+    - HSA 56
+    - HSA 66
+    - HSA 86
+    - HSA 94 R
+
+  Tagliasiepi - A Benzina  (4)
+    - HS 45
+    - HS 56
+    - HS 82 R
+    - HS 87 R
+
+  Trattorini  (4)
+    - RT 4082
+    - RT 5097
+    - RT 5112 Z
+    - RT 6112 C
+
+============================================================
+COME MANDARLE
+============================================================
+
+Foto su WhatsApp al numero 346 4156981 (Bazzana)
+oppure email a bazzanamotorgarden@gmail.com
+
+Nomina ogni foto col nome del modello, es.:
+  "Stihl MS 170.jpg"
+  "Honda EU22i.jpg"
+  "Ligier Myli.jpg"
+
+Se inviate insieme, raggruppale in cartelle per marchio.

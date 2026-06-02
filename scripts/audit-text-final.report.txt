@@ -1,0 +1,53 @@
+==============================================================================
+AUDIT TESTUALE — bazzana_v2 — 44 pagine HTML
+==============================================================================
+Totale issue: 37  |  CRITICAL=18  HIGH=2  MEDIUM=17  LOW=0
+
+------------------------------------------------------------------------------
+[CRITICAL]  18 issue
+------------------------------------------------------------------------------
+  prodotti/weibang-wb-452-he.html:88  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'Capacita' cesto'
+  prodotti/weibang-wb-506-sc.html:87  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'Semovente · 1 velocita''
+  prodotti/weibang-wb-506-sc.html:89  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'Capacita' cesto'
+  prodotti/weibang-wb-506-sc3.html:87  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'Semovente · 1 velocita''
+  prodotti/weibang-wb-506-sc3.html:89  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'Capacita' cesto'
+  prodotti/weibang-wb-537-scval.html:82  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'Tagliaerba professionale 53 cm in alluminio, trasmissione cardanica a 3 velocita'
+  prodotti/weibang-wb-537-scval.html:83  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'Della Professional Series Weibang. Scocca in alluminio (piu' leggera, non arrugg'
+  prodotti/weibang-wb-537-scval.html:83  (TYPO)  Apostrofo ASCII al posto di 'ù' in 'piu\'' → 'più' — frammento: 'Della Professional Series Weibang. Scocca in alluminio (piu' leggera, non arrugg'
+  prodotti/weibang-wb-537-scval.html:87  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'Cardanica · 3 velocita''
+  prodotti/weibang-wb-537-scvalb.html:83  (TYPO)  Encoding/refuso: "e' " — corretto "è " — frammento: 'Top di gamma della Professional Series con frizione freno lama (BBC): il motore '
+  prodotti/weibang-wb-537-scvalb.html:83  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'Top di gamma della Professional Series con frizione freno lama (BBC): il motore '
+  prodotti/weibang-wb-537-scvalb.html:88  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'Cardanica · 3 velocita''
+  prodotti/weibang-wb-537-scvalb.html:91  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'Capacita' cesto'
+  prodotti/weibang-wb-778-scv3.html:81  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'bilama 77 cm, 3 velocita', 300 cc.'
+  prodotti/weibang-wb-778-scv3.html:82  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'Tagliaerba bilama 77 cm con motore 300 cc, trasmissione meccanica 3 velocita'. P'
+  prodotti/weibang-wb-778-scv3.html:83  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'Top assoluto della Professional Series Weibang: due lame di forma diversa per co'
+  prodotti/weibang-wb-778-scv3.html:87  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'Meccanica · 3 velocita''
+  prodotti/weibang-wb-778-scv3.html:89  (TYPO)  Apostrofo ASCII al posto di 'à' su parola tronca (es. 'velocita\'' → 'velocità') — frammento: 'Capacita' cesto'
+
+------------------------------------------------------------------------------
+[HIGH]  2 issue
+------------------------------------------------------------------------------
+  404.html:0  (STRUCT)  Nessun <h1> trovato nella pagina
+  prodotti/dettaglio.html:0  (STRUCT)  Nessun <h1> trovato nella pagina
+
+------------------------------------------------------------------------------
+[MEDIUM]  17 issue
+------------------------------------------------------------------------------
+  note.html:6  (META)  <title> > 70 char (76): 'Blog — Note dal banco · Guide, manutenzione, consigli · Motor Garden Bazzana'
+  note/generatore-avr-inverter-sinusoidale.html:6  (META)  <title> > 70 char (79): 'Generatore: AVR, inverter, sinusoidale? — Note dal banco · Motor Garden Bazzana'
+  note/soffiatore-zaino-mano-batteria.html:6  (META)  <title> > 70 char (78): 'Soffiatore: zaino, a mano, o batteria? — Note dal banco · Motor Garden Bazzana'
+  note/tagliasiepi-benzina-vs-batteria.html:6  (META)  <title> > 70 char (72): 'Tagliasiepi: benzina o batteria? — Note dal banco · Motor Garden Bazzana'
+  prodotti.html:0  (CONSISTENCY)  Numero prodotti '50 prodott' incoerente con atteso 650
+  prodotti/weibang-wb-456-scve3.html:6  (META)  <title> > 70 char (80): 'Weibang WB 456 SCVE3 — Rasaerba semovente Home 46 cm 3in1 · Motor Garden Bazzana'
+  prodotti/weibang-wb-462-sem.html:6  (META)  <title> > 70 char (78): 'Weibang WB 462 SEM — Rasaerba a batteria semovente 120V · Motor Garden Bazzana'
+  prodotti/weibang-wb-506-sc.html:6  (META)  <title> > 70 char (73): 'Weibang WB 506 SC — Rasaerba semovente Home Series · Motor Garden Bazzana'
+  prodotti/weibang-wb-506-sc3.html:6  (META)  <title> > 70 char (72): 'Weibang WB 506 SC3 — Rasaerba semovente Home 3in1 · Motor Garden Bazzana'
+  prodotti/weibang-wb-537-sc3.html:6  (META)  <title> > 70 char (78): 'Weibang WB 537 SC3 — Rasaerba semovente Home 53 cm 3in1 · Motor Garden Bazzana'
+  prodotti/weibang-wb-537-scval.html:6  (META)  <title> > 70 char (84): 'Weibang WB 537 SCVAL — Rasaerba professionale alluminio 53 cm · Motor Garden Baz'
+  prodotti/weibang-wb-537-scval.html:83  (TYPO)  Accento mancante: 'piu' — corretto 'più' — frammento: 'Della Professional Series Weibang. Scocca in alluminio (piu' leggera, non arrugg'
+  prodotti/weibang-wb-537-scvalb.html:6  (META)  <title> > 70 char (85): 'Weibang WB 537 SCVALB — Professionale alluminio con freno lama · Motor Garden Ba'
+  prodotti/weibang-wb-537-scvm.html:6  (META)  <title> > 70 char (73): 'Weibang WB 537 SCVM — Professionale mulching 53 cm · Motor Garden Bazzana'
+  prodotti/weibang-wb-778-scv3.html:6  (META)  <title> > 70 char (76): 'Weibang WB 778 SCV3 — Bilama professionale 77 cm 3in1 · Motor Garden Bazzana'
+  storia.html:0  (CONSISTENCY)  Numero prodotti '500+ prodott' incoerente con atteso 650
+  storia.html:6  (META)  <title> > 70 char (71): 'Storia — Motor Garden Bazzana, aperti nel 2026 con esperienza decennale'

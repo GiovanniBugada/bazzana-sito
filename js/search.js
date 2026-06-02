@@ -201,6 +201,22 @@
       if (!wrap.contains(e.target)) closeDropdown();
     });
 
+    /* Mobile overlay: tap sul backdrop scuro fuori dal box → chiudi tutto.
+       Evita il "ghost click" che farebbe cliccare l'elemento sottostante
+       una volta richiuso l'overlay (es. una card prodotto sotto la search). */
+    wrap.addEventListener('click', (e) => {
+      if (!wrap.classList.contains('is-mobile-open')) return;
+      const box = wrap.querySelector('.nav-search__box');
+      const dd = wrap.querySelector('.nav-search__dropdown');
+      if (box && box.contains(e.target)) return;
+      if (dd && dd.contains(e.target)) return;
+      // siamo sul backdrop: ferma propagation così non clicchiamo nulla sotto
+      e.preventDefault();
+      e.stopPropagation();
+      input.blur();
+      if (wrap._closeMobile) wrap._closeMobile();
+    });
+
     // ESC → chiudi e leva focus
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isOpen()) {
@@ -228,10 +244,61 @@
       </svg>
     `;
     headerActions.insertBefore(mobileTrigger, headerActions.firstChild);
-    mobileTrigger.addEventListener('click', () => {
+
+    /* Body-lock per overlay mobile: salviamo scrollY e usiamo position:fixed
+       sul body così la pagina sotto non scorre quando l'overlay è aperto.
+       Su iOS il solo `overflow: hidden` non basta (rubber-band). */
+    let savedY = 0;
+    const lockBody = () => {
+      savedY = window.scrollY || 0;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${savedY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+    };
+    const unlockBody = () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      window.scrollTo(0, savedY);
+    };
+
+    /* Reparent dell'overlay: la .site-header ha mix-blend-mode: difference,
+       e siccome il wrap è suo figlio l'overlay "blenda" contro la pagina
+       sotto (effetto trasparente sovrapposto). Mentre è aperto, lo spostiamo
+       come figlio diretto del body, e in chiusura lo rimettiamo a posto. */
+    const originalParent = wrap.parentElement;
+    const originalNext = wrap.nextElementSibling;
+    const reparentToBody = () => {
+      if (wrap.parentElement !== document.body) document.body.appendChild(wrap);
+    };
+    const reparentBack = () => {
+      if (wrap.parentElement === document.body) {
+        if (originalNext && originalNext.parentElement === originalParent) {
+          originalParent.insertBefore(wrap, originalNext);
+        } else {
+          originalParent.appendChild(wrap);
+        }
+      }
+    };
+
+    const openMobile = () => {
+      reparentToBody();
       wrap.classList.add('is-mobile-open');
+      lockBody();
       setTimeout(() => input.focus(), 80);
-    });
+    };
+    const closeMobile = () => {
+      wrap.classList.remove('is-mobile-open');
+      closeDropdown();
+      unlockBody();
+      reparentBack();
+    };
+
+    mobileTrigger.addEventListener('click', openMobile);
 
     // Inietta il bottone chiusura "mobile" anche dentro il box
     const mClose = document.createElement('button');
@@ -240,10 +307,10 @@
     mClose.setAttribute('aria-label', 'Chiudi ricerca');
     mClose.textContent = '×';
     wrap.querySelector('.nav-search__box').appendChild(mClose);
-    mClose.addEventListener('click', () => {
-      wrap.classList.remove('is-mobile-open');
-      closeDropdown();
-    });
+    mClose.addEventListener('click', closeMobile);
+
+    // Esponi chiusura per il backdrop handler
+    wrap._closeMobile = closeMobile;
   }
 
   function isOpen() { return dropdown && !dropdown.hidden; }

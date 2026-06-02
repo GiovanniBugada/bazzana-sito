@@ -168,6 +168,25 @@
     trans.setAttribute('aria-hidden', 'true');
     document.body.appendChild(trans);
 
+    // Reset stato curtain (es. da back button browser / bfcache)
+    const resetCurtain = () => {
+      trans.classList.remove('is-entering', 'is-leaving');
+      try { sessionStorage.removeItem('mgb-pt-leaving'); } catch (e) {}
+    };
+
+    // BACK BUTTON FIX: quando il browser ripristina la pagina (bfcache o navigazione
+    // normale back/forward), `pageshow` viene chiamato con event.persisted=true
+    // per il bfcache. Resettiamo lo stato perché il curtain era "is-entering" quando
+    // siamo usciti dalla pagina — bfcache lo riporta com'era e blocca la pagina.
+    window.addEventListener('pageshow', (e) => {
+      resetCurtain();
+      if (e.persisted) {
+        // bfcache: rimuovi anche eventuali loader rimasti attivi
+        const loader = document.querySelector('.loader');
+        if (loader) loader.classList.add('is-done');
+      }
+    });
+
     // Se arriviamo da una navigazione interna → curtain in posizione coperta
     // poi sale verso l'alto rivelando la nuova pagina.
     try {
@@ -198,6 +217,12 @@
       try { sessionStorage.setItem('mgb-pt-leaving', '1'); } catch (err) {}
       trans.classList.add('is-entering');
       setTimeout(() => { window.location.href = href; }, 360);
+    });
+
+    // Se l'utente naviga via tastiera back-forward, resetta il curtain
+    window.addEventListener('popstate', () => {
+      // Browser sta per navigare via back/forward
+      try { sessionStorage.removeItem('mgb-pt-leaving'); } catch (e) {}
     });
   }
 

@@ -164,15 +164,33 @@
     const targets = document.querySelectorAll('[data-lightbox], .img-marquee__item img, .gallery-img');
     if (!targets.length) return;
     let box = document.getElementById('lightbox');
+    let savedY = 0;
+    const lock = () => {
+      savedY = window.scrollY || 0;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${savedY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+    };
+    const unlock = () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      window.scrollTo(0, savedY);
+    };
+    const close = () => { box.classList.remove('is-open'); unlock(); };
     if (!box) {
       box = document.createElement('div');
       box.id = 'lightbox';
       box.className = 'lightbox';
       box.innerHTML = '<button class="lightbox__close" aria-label="Chiudi">×</button><img class="lightbox__img" alt="">';
       document.body.appendChild(box);
-      box.querySelector('.lightbox__close').addEventListener('click', () => box.classList.remove('is-open'));
-      box.addEventListener('click', (e) => { if (e.target === box) box.classList.remove('is-open'); });
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') box.classList.remove('is-open'); });
+      box.querySelector('.lightbox__close').addEventListener('click', close);
+      box.addEventListener('click', (e) => { if (e.target === box) close(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && box.classList.contains('is-open')) close(); });
     }
     const img = box.querySelector('.lightbox__img');
     targets.forEach(t => {
@@ -184,6 +202,7 @@
         img.src = src;
         img.alt = alt;
         box.classList.add('is-open');
+        lock();
       });
     });
   }

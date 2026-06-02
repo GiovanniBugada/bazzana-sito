@@ -111,6 +111,29 @@
   /* Lightbox cinematic */
   let lightbox = null;
   let currentIdx = 0;
+  /* Body-lock robusto: salviamo scrollY e usiamo position:fixed sul body.
+     Su iOS Safari il solo `overflow: hidden` non blocca lo scroll della
+     pagina sottostante (il "rubber-band"). Con position:fixed + restore
+     dello scrollY all'uscita ricreiamo il comportamento corretto. */
+  let savedScrollY = 0;
+  function lockBody() {
+    savedScrollY = window.scrollY || window.pageYOffset || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${savedScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+  }
+  function unlockBody() {
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    document.body.style.overflow = '';
+    window.scrollTo(0, savedScrollY);
+  }
   function getLightbox() {
     if (lightbox) return lightbox;
     lightbox = document.createElement('div');
@@ -139,6 +162,36 @@
       else if (e.key === 'ArrowRight') nextPhoto();
       else if (isAdmin && e.key.toLowerCase() === 'r') rotateCurrent();
     });
+
+    /* Swipe touch: sx → next, dx → prev, swipe verticale verso il basso → close.
+       Threshold 50px per evitare falsi positivi su micro-movimenti. */
+    let tStartX = 0, tStartY = 0, tStartT = 0, tracking = false;
+    lightbox.addEventListener('touchstart', (e) => {
+      if (e.touches.length !== 1) { tracking = false; return; }
+      const t = e.touches[0];
+      tStartX = t.clientX;
+      tStartY = t.clientY;
+      tStartT = Date.now();
+      tracking = true;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', (e) => {
+      if (!tracking) return;
+      tracking = false;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - tStartX;
+      const dy = t.clientY - tStartY;
+      const dt = Date.now() - tStartT;
+      if (dt > 700) return; // troppo lento, non è uno swipe
+      const absX = Math.abs(dx);
+      const absY = Math.abs(dy);
+      const TH = 50;
+      if (absX > TH && absX > absY * 1.3) {
+        if (dx < 0) nextPhoto();
+        else prevPhoto();
+      } else if (dy > 80 && absY > absX * 1.3) {
+        closeLightbox();
+      }
+    }, { passive: true });
     return lightbox;
   }
   function openLightbox(idx) {
@@ -146,11 +199,11 @@
     currentIdx = idx;
     updateLightboxImg();
     lb.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
+    lockBody();
   }
   function closeLightbox() {
     if (lightbox) lightbox.classList.remove('is-open');
-    document.body.style.overflow = '';
+    unlockBody();
   }
   function updateLightboxImg() {
     if (!lightbox) return;

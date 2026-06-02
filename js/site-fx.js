@@ -11,9 +11,14 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hover = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
+  /* Touch device: niente cursor custom (lo nascondiamo proprio dal DOM).
+     Lo verifichiamo qui per evitare anche solo l'iniezione dell'elemento
+     e qualsiasi listener attaccato successivamente. */
+  const isTouchOnly = !hover || matchMedia('(pointer: coarse)').matches;
+
   /* ——— Auto-inject cursor + scroll bar ——— */
   function injectChrome() {
-    if (!document.getElementById('cur')) {
+    if (!isTouchOnly && !document.getElementById('cur')) {
       const cur = document.createElement('div');
       cur.id = 'cur';
       cur.className = 'cur';
@@ -47,8 +52,7 @@
      - label letta da [data-cursor] sull'elemento o default per role
   */
   function initCursor() {
-    if (reduced || !hover) return;
-    if (matchMedia('(pointer: coarse)').matches) return;
+    if (reduced || isTouchOnly) return;
     const cur = document.getElementById('cur');
     if (!cur) return;
     const label = cur.querySelector('.cur__label');

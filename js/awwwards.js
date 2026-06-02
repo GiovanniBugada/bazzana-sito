@@ -66,9 +66,12 @@
 
   /* ============================================================
      3 · SCROLL-BOUND PARALLAX — un solo rAF tick, will-change
+     Su mobile (touch) il parallax è imperceptibile e costoso:
+     forza GPU layer su molte img + getBoundingClientRect() per
+     ogni frame durante lo scroll. Lo saltiamo del tutto.
      ============================================================ */
   function initParallax() {
-    if (reduced) return;
+    if (reduced || touch || !hover) return;
     const layers = [];
 
     // Forte: immersive + product hero

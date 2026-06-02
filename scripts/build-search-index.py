@@ -77,7 +77,7 @@ EXTRA_DB = [
     {"brand": "Honda",  "name": "HRN 536",     "cat": "Rasaerba mulching",            "img": "assets/img/prodotti/rasaerba-honda-hr-fronte.jpg", "slug": "honda-hrn"},
     {"brand": "Honda",  "name": "EU22i",       "cat": "Generatore inverter portatile","img": PH, "slug": "honda-eu22i"},
     {"brand": "Geotech","name": "Tritone Sprint","cat": "Biotrituratore a benzina",   "img": PH, "slug": "cippatore-tritone"},
-    {"brand": "Ligier", "name": "Myli",        "cat": "Microcar elettrica L6e",       "img": "assets/img/prodotti/microcar-ligier-jsbluepass-frontale.jpg", "slug": "ligier-myli"},
+    {"brand": "Ligier", "name": "Myli",        "cat": "Microcar elettrica L6e",       "img": PH, "slug": "ligier-myli"},
 ]
 
 # Per le card del catalogo, prova a matchare uno slug per i 2 prodotti già nel DB
