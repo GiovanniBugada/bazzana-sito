@@ -128,10 +128,67 @@
     input.addEventListener('input', debounce(apply, 160));
   }
 
-  /* ——— COOKIE BANNER GDPR ——— */
+  /* ——— COOKIE BANNER GDPR ———
+     Salva consenso in:
+     1. localStorage (persiste tra sessioni)
+     2. document.cookie con max-age 1 anno (visibile in DevTools > Application > Cookies)
+     3. sessionStorage come fallback rapido
+     Se UNO dei tre è già impostato, il banner non riappare.
+  */
   const COOKIE_KEY = 'bzn_cookies_v1';
+  const COOKIE_NAME = 'bzn_cookies_v1';
+
+  function readConsent() {
+    try {
+      const ls = localStorage.getItem(COOKIE_KEY);
+      if (ls) return JSON.parse(ls);
+    } catch (e) {}
+    // Fallback: leggi document.cookie
+    const m = document.cookie.match(new RegExp('(?:^|; )' + COOKIE_NAME + '=([^;]*)'));
+    if (m) {
+      try { return JSON.parse(decodeURIComponent(m[1])); } catch (e) { return { accepted: 'essential', ts: 0 }; }
+    }
+    try {
+      const ss = sessionStorage.getItem(COOKIE_KEY);
+      if (ss) return JSON.parse(ss);
+    } catch (e) {}
+    return null;
+  }
+
+  function saveConsent(action) {
+    const data = { accepted: action, ts: Date.now() };
+    const json = JSON.stringify(data);
+    // 1. localStorage (1 anno persistente)
+    try { localStorage.setItem(COOKIE_KEY, json); } catch (e) {}
+    // 2. document.cookie (1 anno, visibile in DevTools)
+    try {
+      const maxAge = 60 * 60 * 24 * 365; // 365 giorni in secondi
+      const isSecure = location.protocol === 'https:';
+      document.cookie = COOKIE_NAME + '=' + encodeURIComponent(json) +
+        '; max-age=' + maxAge +
+        '; path=/' +
+        '; SameSite=Lax' +
+        (isSecure ? '; Secure' : '');
+    } catch (e) {}
+    // 3. sessionStorage (sessione corrente)
+    try { sessionStorage.setItem(COOKIE_KEY, json); } catch (e) {}
+    return data;
+  }
+
+  // Esponi API globale per debug/testing
+  window.bznCookies = {
+    get: readConsent,
+    accept: () => saveConsent('accept'),
+    reset: () => {
+      try { localStorage.removeItem(COOKIE_KEY); } catch (e) {}
+      try { sessionStorage.removeItem(COOKIE_KEY); } catch (e) {}
+      document.cookie = COOKIE_NAME + '=; max-age=0; path=/';
+      location.reload();
+    }
+  };
+
   function initCookieBanner() {
-    if (localStorage.getItem(COOKIE_KEY)) return;
+    if (readConsent()) return;  // già salvato — non mostrare banner
     const banner = document.createElement('div');
     banner.className = 'cookie-banner';
     banner.setAttribute('role', 'dialog');
@@ -143,8 +200,8 @@
           <p>Usiamo cookie tecnici per il funzionamento del sito. Nessun tracker pubblicitario, nessuna profilazione. Vedi la <a href="/privacy.html" tabindex="0">Privacy Policy</a>.</p>\
         </div>\
         <div class="cookie-banner__actions">\
-          <button class="cookie-banner__btn cookie-banner__btn--primary" data-act="accept">Accetta</button>\
-          <button class="cookie-banner__btn" data-act="essential">Solo tecnici</button>\
+          <button class="cookie-banner__btn cookie-banner__btn--primary" data-act="accept" aria-label="Accetta tutti i cookie">Accetta</button>\
+          <button class="cookie-banner__btn" data-act="essential" aria-label="Accetta solo cookie tecnici">Solo tecnici</button>\
         </div>\
       </div>';
     document.body.appendChild(banner);
@@ -152,7 +209,7 @@
     banner.querySelectorAll('[data-act]').forEach(b => {
       b.addEventListener('click', () => {
         const a = b.getAttribute('data-act');
-        try { localStorage.setItem(COOKIE_KEY, JSON.stringify({ accepted: a, ts: Date.now() })); } catch (e) {}
+        saveConsent(a);
         banner.classList.remove('is-in');
         setTimeout(() => banner.remove(), 500);
       });
