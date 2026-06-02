@@ -8,6 +8,32 @@
    ========================================================= */
 
 /* ============================================================
+   Z. ELEMENTI INVISIBILI NON CLICCABILI
+   I .reveal e i FAB nascosti hanno opacity:0 ma sono ancora
+   click-target. Aggiungiamo pointer-events:none finché non
+   sono visibili — UX più pulita, no tap su zone vuote.
+   ============================================================ */
+.reveal:not(.in):not(.is-in):not(.is-in-view) {
+  pointer-events: none;
+}
+.fab-stack:not(.is-visible) .fab-stack__btn {
+  pointer-events: none;
+}
+/* Foto galleria: opacity 0 finché IntersectionObserver mette .is-visible */
+.foto__item:not(.is-visible) {
+  pointer-events: none;
+}
+/* Loader is-done deve smettere di intercettare i click anche se
+   l'animazione di fade-out è ancora in corso */
+.loader.is-done {
+  pointer-events: none !important;
+}
+/* Page transition: solo durante transition intercetta */
+.page-trans:not(.is-entering):not(.is-leaving) {
+  pointer-events: none !important;
+}
+
+/* ============================================================
    0. SAFETY BELT — niente overflow orizzontale a livello documento.
    Previene horizontal scroll causato da tile Leaflet, marquee
    estesi o iframe esterni che escono dal viewport.
