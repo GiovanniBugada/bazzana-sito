@@ -325,6 +325,40 @@ html, body {
     font-size: 0.82rem !important;
     padding: 6px 8px !important;
   }
+  /* Spinge header-actions (cerca + tel + menu) a destra, lontano dal logo */
+  .site-header__inner .header-actions {
+    margin-left: auto !important;
+    justify-self: end !important;
+  }
+  /* Riduce gap tra trigger lente + tel + menu nella barra azioni */
+  .header-actions {
+    gap: 0.4rem !important;
+  }
+  /* Stacco generoso tra logo e barra azioni */
+  .nav-search__mobile-trigger {
+    margin-right: 0.4rem !important;
+    margin-left: 1.2rem !important;
+  }
+}
+
+/* Su viewport stretti (≤480px) confermiamo lo stacco */
+@media (max-width: 480px) {
+  .nav-search__mobile-trigger {
+    margin-left: 1.5rem !important;
+  }
+}
+
+/* Su viewport ancora più stretti (≤360px) per iPhone SE */
+@media (max-width: 360px) {
+  .nav-search__mobile-trigger {
+    margin-left: 1rem !important;
+    width: 36px !important;
+    height: 36px !important;
+  }
+  .tel-link {
+    font-size: 0.72rem !important;
+    padding: 4px 5px !important;
+  }
 }
 
 /* ============================================================
