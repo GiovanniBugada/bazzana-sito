@@ -81,19 +81,23 @@
   const menuOverlay = document.querySelector('.menu-overlay');
   const menuClose = document.querySelector('.menu-overlay__close');
   if (menuToggle && menuOverlay) {
+    const closeMenu = () => {
+      menuOverlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+    };
     menuToggle.addEventListener('click', () => {
       menuOverlay.classList.add('is-open');
       document.body.style.overflow = 'hidden';
     });
-    if (menuClose) menuClose.addEventListener('click', () => {
-      menuOverlay.classList.remove('is-open');
-      document.body.style.overflow = '';
-    });
+    if (menuClose) menuClose.addEventListener('click', closeMenu);
     menuOverlay.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        menuOverlay.classList.remove('is-open');
-        document.body.style.overflow = '';
-      });
+      a.addEventListener('click', closeMenu);
+    });
+    /* a11y: ESC chiude il menu mobile */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menuOverlay.classList.contains('is-open')) {
+        closeMenu();
+      }
     });
   }
 
