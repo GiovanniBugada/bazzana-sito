@@ -119,22 +119,32 @@ html, body {
     gap: 1.6rem !important;
   }
 
-  /* Mappa: aspect-ratio adeguato, no taglio strano.
-     overflow:hidden + contain:layout nasconde le tile Leaflet che
-     escono dal container e causavano horizontal scroll. */
+  /* Mappa: niente aspect-ratio che tagliasse il contenuto interno.
+     La mappa Leaflet interna ha min-height: 360px (CSS bzn-map):
+     senza aspect-ratio il wrap segue la mappa, senza taglio.
+     Aggiungiamo margin-bottom per separarla da orari/contatti. */
   .contact__map {
-    aspect-ratio: 4/3 !important;
-    min-height: 280px;
+    aspect-ratio: auto !important;
+    height: auto !important;
+    min-height: 360px;
     max-height: 70vh;
     border-radius: 8px;
     overflow: hidden !important;
     contain: layout paint;
+    margin-bottom: 1.5rem;
   }
   .contact__map .bzn-map,
   .contact__map .bzn-map__canvas,
   .contact__map .leaflet-container {
     max-width: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 360px !important;
     overflow: hidden !important;
+  }
+  /* Riduci gap del grid contatti mobile (era 64px → 32px) */
+  .contact__main {
+    gap: 2rem !important;
   }
 
   /* Channels: tap target generoso, font size leggibile */
